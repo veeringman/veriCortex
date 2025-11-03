@@ -1,13 +1,22 @@
-```mermaid
-...diagram...
-  flowchart LR
-    Client[Client / Agent / dApp] --> API[VeriCortex API / SDK]
-    API --> Runtime[Deterministic Runtime\n(WASM Warm Pool)]
-    Runtime --> Trace[Execution Trace Capture]
-    Trace --> Proof[Proof Generator\n(ZK / crypto proofs)]
-    Proof --> Verifier[Verifier Service]
-    Verifier --> BlockDAG[On-chain Verifier / Block-DAG]
-    BlockDAG --> Explorer[Dashboard / Explorer]
-    BlockDAG --> dApps[Verified Apps / Agents]
+flowchart LR
+    subgraph Off-Chain
+        Client[Client / dApp / Agent]
+        API[VeriCortex SDK / API]
+        Runtime[WASM Runtime Pool]
+        Trace[Trace Capture]
+        Proof[ZK / Crypto Proof Engine]
+    end
 
-    ModelRegistry[(Model Registry)] --> BlockDAG
+    subgraph On-Chain
+        Verifier[VeriCortex Verifier Contract]
+        BlockDAG[BlockDAG Network]
+        ModelRegistry[(Model & Proof Registry)]
+        Explorer[Explorer / Dashboard]
+        VerifiedApps[Verified dApps / Agents]
+    end
+
+    Client --> API --> Runtime --> Trace --> Proof --> Verifier --> BlockDAG
+    BlockDAG --> Explorer
+    BlockDAG --> ModelRegistry
+    BlockDAG --> VerifiedApps
+    VerifiedApps --> Client
