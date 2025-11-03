@@ -1,86 +1,40 @@
-🧠 VeriCortex
-Trust Layer for AI — Verifiable Intelligence on BlockDAG
+```mermaid
+flowchart LR
+  subgraph ClientLayer["Client / dApp / Agent"]
+    C[Client / Agent]
+  end
 
-VeriCortex is a modular AI verification and trust framework designed to run on BlockDAG networks.
-It enables applications to prove AI outputs, secure autonomous agents, and build verifiable compute pipelines.
+  subgraph RuntimeLayer["VeriCortex Runtime"]
+    R1[Request API / SDK]
+    R2[WASM Warm Pool<br/>(Deterministic Instances)]
+    R3[Deterministic Trace Recorder]
+    R4[Proof Generator<br/>(ZK or Crypto)]
+  end
 
-We bring cryptographic trust to AI by validating computation proofs, inference attestations, and execution integrity signals.
+  subgraph VerificationLayer["Verification & Settlement"]
+    V1[On-chain Verifier<br/>(BlockDAG)]
+    V2[Proof Verifier Service<br/>(Off-chain)]
+    Registry[Model Registry<br/>(model_id → model_hash)]
+  end
 
-Whether AI is running locally, in a cloud, in a smart agent swarm, or on a decentralized compute network — VeriCortex allows users to verify what really happened, not just trust claims.
+  subgraph AppLayer["Consumers"]
+    D[Dashboard / Explorer]
+    App[Verified dApp Logic]
+  end
 
-🎯 Mission
+  C --> R1
+  R1 --> R2
+  R2 --> R3
+  R3 --> R4
+  R4 --> V2
+  V2 --> V1
+  V1 --> D
+  V1 --> App
+  Registry --> V1
+  style RuntimeLayer fill:#0A102A,stroke:#19D3E0,color:#fff
+  style VerificationLayer fill:#07102a,stroke:#7A5CFF,color:#fff
+  style ClientLayer fill:#0f1b2d,stroke:#00E5D4,color:#fff
+  style AppLayer fill:#091025,stroke:#88FFE3,color:#fff
 
-To make AI provable, trustworthy, and censorship-resistant — enabling secure autonomous systems and transparent on-chain intelligence.
-
-🧩 Key Concepts
-Concept	Description
-Verifiable AI	Confirm AI outputs are correct & untampered
-AI Proof Layer	Verify proofs of execution & inference integrity
-On-chain Verifier	Minimal smart-contract verifier on BlockDAG
-Off-chain Runtime	Secure WASM execution & proof pipeline
-Proof Adaptors	Supports cryptographic proofs & attestations
-⚙️ What VeriCortex Does
-
-✅ Accepts attested AI inference results
-✅ Verifies proofs or execution logs on-chain
-✅ Bridges trust between AI agents ↔ blockchain apps
-✅ Modular pipeline for different proof formats
-
-🚀 Why It Matters
-
-Modern AI systems cannot be blindly trusted.
-VeriCortex enables:
-
-Trustable AI agents
-
-Cross-chain AI verifiers
-
-Transparent and auditable pipelines
-
-Fraud-proof inference for Web3 and enterprise
-
-🔧 Architecture Overview
-
-Public high-level abstraction — internal architecture not disclosed.
-
-AI Model/Agent
-   ↓
-Proof/Attestation Layer
-   ↓
-VeriCortex Runtime (WASM executor + adapters)
-   ↓
-BlockDAG Smart Contract Verifier
-   ↓
-DApps / Trustable Agent Systems
-
-🧠 Who Is This For?
-Group	Benefits
-Developers	Build secure autonomous AI apps
-Web3 Teams	Trustable AI oracles & agents
-Enterprises	Auditable & compliant AI inference
-Researchers	Experiment with proof-of-inference models
-🛠️ Project Modules
-Module	Description
-Runtime	WASM-based proof pipeline
-Verifier	On-chain proof verification contracts
-SDK	Tools for developers to submit & validate proofs
-Examples	Demo & reference applications
-
-Technical specs & internals in private docs until launch.
-
-🏗️ Roadmap
-Stage	Description
-Phase 1	On-chain verifier + proof interface
-Phase 2	Runtime & SDK release
-Phase 3	Cross-chain proof expansion
-Phase 4	Full AI Proof Layer rollout
-🤝 Contributing
-
-Open to contributions after initial Buildathon milestone.
-Early collaborators: open an issue or contact the team via project page.
-
-📎 Status
-
-🚧 Active development — Buildathon Edition
-🔒 Core research & internals private until release
-🌍 Public release roadmap in progress
+  classDef smallFont font-size:12px;
+  class R2,R3,R4,V1,V2,Registry smallFont;
