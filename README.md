@@ -1,7 +1,7 @@
 # 🧠 veriCortex  
 **Trust Layer for AI — Verifiable Intelligence on BlockDAG**
 
-VeriCortex is a **modular AI verification and trust framework** designed to run on **BlockDAG** networks.  
+veriCortex is a **modular AI verification and trust framework** designed to run on **BlockDAG** networks.  
 It enables applications to **prove AI outputs**, **secure autonomous agents**, and **build verifiable compute pipelines**.
 
 We bring **cryptographic trust to AI** by validating computation proofs, inference attestations, and execution integrity signals.
@@ -29,7 +29,7 @@ To make **AI provable, trustworthy, and censorship-resistant** — enabling secu
 ---
 
 ## 🛠️ Overview
-VeriCortex bridges **AI computation** and **decentralized trust layers** by providing:
+veriCortex bridges **AI computation** and **decentralized trust layers** by providing:
 - Proofs of AI inference integrity  
 - Verifiable execution across distributed nodes  
 - Compatibility with cryptographic proof systems and attestations  
@@ -51,4 +51,4 @@ Stay tuned for contribution guidelines and module specifications.
 
 ---
 
-**VeriCortex — Making AI Verifiable.**
+**veriCortex — Making AI Verifiable.**
