@@ -1,6 +1,7 @@
 <p align="center">
   <img src="A704DC66-E773-49F7-8129-9EB250D6E9DD.jpeg" alt="VeriCortex Logo" width="160" />
 </p>
+
 # 🧠 veriCortex  
 **Trust Layer for AI — Verifiable Intelligence on BlockDAG**
 
