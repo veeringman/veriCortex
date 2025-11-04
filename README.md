@@ -1,4 +1,4 @@
-# 🧠 VeriCortex  
+# 🧠 veriCortex  
 **Trust Layer for AI — Verifiable Intelligence on BlockDAG**
 
 VeriCortex is a **modular AI verification and trust framework** designed to run on **BlockDAG** networks.  
