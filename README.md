@@ -45,11 +45,6 @@ To empower a new generation of **provable AI systems** where:
 
 ---
 
-### 📄 License
-*(Add your preferred license here — e.g., MIT, Apache 2.0, etc.)*
-
----
-
 ### 🤝 Contributing
 We welcome contributions from developers, researchers, and builders in AI, cryptography, and decentralized systems.  
 Stay tuned for contribution guidelines and module specifications.
