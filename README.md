@@ -11,9 +11,9 @@ Whether AI is running locally, in a cloud, in a smart agent swarm, or on a decen
 To make AI provable, trustworthy, and censorship-resistant — enabling secure autonomous systems and transparent on-chain intelligence.
 
 🧩 Key Concepts
-Concept	Description
-Verifiable AI	Confirm AI outputs are correct & untampered
-AI Proof Layer	Verify proofs of execution & inference integrity
-On-chain Verifier	Minimal smart-contract verifier on BlockDAG
-Off-chain Runtime	Secure WASM execution & proof pipeline
-Proof Adaptors	Supports cryptographic proofs & attestations
+
+Verifiable AI	- Confirm AI outputs are correct & untampered
+AI Proof Layer	- Verify proofs of execution & inference integrity
+On-chain Verifier	- Minimal smart-contract verifier on BlockDAG
+Off-chain Runtime	- Secure WASM execution & proof pipeline
+Proof Adaptors	- Supports cryptographic proofs & attestations
