@@ -2,7 +2,6 @@
   <img src="A704DC66-E773-49F7-8129-9EB250D6E9DD.jpeg" alt="VeriCortex Logo" width="160" />
 </p>
 
-## 🧠 VeriCortex  
 **Trust Layer for AI — Verifiable Intelligence on BlockDAG**
 
 veriCortex is a **modular AI verification and trust framework** designed to run on **BlockDAG** networks.  
