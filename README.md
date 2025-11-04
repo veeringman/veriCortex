@@ -54,4 +54,4 @@ Stay tuned for contribution guidelines and module specifications.
 
 ---
 
-**veriCortex — Making AI Verifiable.**
+**VeriCortex — Making AI Verifiable.**
