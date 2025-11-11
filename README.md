@@ -115,7 +115,7 @@ The architecture can be viewed in three main layers:
 
 Below is the architecture schematic illustrating the data flow across these layers:
 <p align="left">
-  <img src="assets/veriCortex.png" alt="VeriCortex Arch" width=400/>
+  <img src="assets/veriCortex.png" alt="VeriCortex Arch"/>
 </p>
 
 ---
