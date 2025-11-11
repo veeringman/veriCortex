@@ -87,6 +87,49 @@ BlockDAG provides the **parallel, verifiable, and low-latency substrate** needed
 
 ---
 
+## 🏗️ Architecture Outline
+
+The **VeriCortex architecture** is designed to bridge the gap between *AI inference* and *on-chain verifiability*.  
+It leverages a **modular, scalable pipeline** that ensures deterministic execution, trace generation, and proof verification — all anchored on the **BlockDAG network**.
+
+The architecture can be viewed in three main layers:
+
+### 🧠 1. Off-Chain AI Runtime
+- Executes inference tasks deterministically using WASM-based isolated environments.
+- Captures execution traces and generates cryptographic or ZK proofs of correctness.
+- Interfaces with the VeriCortex API for job orchestration and proof submission.
+
+### ⚙️ 2. Verification Layer (On-Chain)
+- Receives proofs from off-chain nodes and validates them via verifier smart agents.
+- Anchors results onto the BlockDAG ledger, maintaining causal ordering.
+- Supports concurrent submissions, minimizing latency and maximizing throughput.
+
+### 🌐 3. Access & Integration Layer
+- Provides APIs, SDKs, and dashboard explorers for dApps, agents, and model registries.
+- Enables seamless integration into decentralized applications or data markets.
+- Displays verified inference activity in real-time through the Explorer interface.
+
+---
+
+### 📊 Visual: VeriCortex System Architecture
+
+Below is the architecture schematic illustrating the data flow across these layers:
+
+![VeriCortex Architecture Outline](assets/vericortex_higharch.png)
+
+---
+
+### 🔍 Key Highlights
+
+- **Parallel proof verification** through BlockDAG concurrency  
+- **Deterministic execution trace capture** via WASM runtimes  
+- **Composable APIs** for model developers and inference agents  
+- **Secure audit trail** with cryptographic proof anchoring  
+- **Future-ready scalability** for AI x Blockchain ecosystems  
+
+---
+
+
 ### 🤝 Contributing
 We welcome contributions from developers, researchers, and builders in AI, cryptography, and decentralized systems.  
 Stay tuned for contribution guidelines and module specifications.
