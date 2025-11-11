@@ -20,6 +20,69 @@ Whether AI is running locally, in the cloud, within smart agent swarms, or acros
 To make **AI provable, trustworthy, and censorship-resistant** — enabling secure autonomous systems and transparent on-chain intelligence.
 
 ---
+## 🧩 Why BlockDAG for VeriCortex?
+
+Traditional blockchains are sequential — every block must wait for the previous one to finalize.  
+This linear structure introduces **latency**, **bottlenecks**, and **limited parallelism**, making them unsuitable for **real-time AI verification** and **distributed inference proofs**.
+
+**BlockDAG (Directed Acyclic Graph-based architecture)** changes that.
+
+---
+
+### ⚙️ Why it’s the perfect foundation for VeriCortex
+
+| **Challenge** | **How BlockDAG Solves It** | **Impact on VeriCortex** |
+|----------------|----------------------------|---------------------------|
+| **Sequential validation in L1 chains** | Parallel block propagation and DAG-based finality | Enables high-throughput proof verification |
+| **Limited concurrency for proof submissions** | DAG allows multiple proofs to be appended asynchronously | Many models or nodes can submit proofs in real-time |
+| **Network latency during validation** | Blocks don’t compete for a single head — they co-exist | Reduces latency for inference confirmations |
+| **Scalability constraints** | BlockDAG scales horizontally with node count | Supports massive AI inference traffic |
+| **Security-trust gap for off-chain AI** | DAG topology maintains verifiable ordering of computation | Guarantees integrity between inference & proof submission |
+
+---
+
+### 🚀 In VeriCortex Context
+
+In the **VeriCortex ecosystem**, BlockDAG acts as the **trust backbone** for the Proof-of-Inference (PoI) layer:
+
+1. **Off-chain runtimes** (WASM warm pools) execute AI inference deterministically.  
+2. **Proofs** of these inferences (e.g., ZK or crypto attestations) are generated.  
+3. **Verifier nodes** anchored on the BlockDAG validate and timestamp these proofs in parallel.  
+4. Multiple verifiers can commit results without waiting on a single chain head — ensuring real-time trust for decentralized AI.
+
+---
+
+### 🧠 Why this matters
+
+VeriCortex doesn’t just record computation — it *proves* it.  
+BlockDAG provides the **parallel, verifiable, and low-latency substrate** needed to make proof-based AI verifiable **at scale**.
+
+> **In essence:**  
+> 🕸️ **BlockDAG = Proof Infrastructure for the AI Age.**
+
+---
+
+### 📊 (Optional) Visual: VeriCortex + BlockDAG Flow
+
+```mermaid
+flowchart LR
+    subgraph OffChain["Off-chain AI Runtime"]
+        A1[Deterministic Execution (WASM)] --> A2[Inference Trace Capture]
+        A2 --> A3[Proof Generator (ZK / Crypto)]
+    end
+
+    subgraph OnChain["BlockDAG Layer"]
+        B1[Verifier Nodes] --> B2[Proof Commit DAG]
+        B2 --> B3[Finality & Consensus]
+    end
+
+    subgraph Access["Client / dApp Layer"]
+        C1[Client / Agent / Model] --> C2[VeriCortex API]
+        C2 --> A1
+        B3 --> C3[Dashboard / Explorer]
+    end
+
+    A3 --> B1
 
 ## 🧩 Key Concepts
 
