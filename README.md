@@ -20,6 +20,35 @@ Whether AI is running locally, in the cloud, within smart agent swarms, or acros
 To make **AI provable, trustworthy, and censorship-resistant** — enabling secure autonomous systems and transparent on-chain intelligence.
 
 ---
+
+## 🧩 Key Concepts
+
+| Concept | Description |
+|----------|--------------|
+| **Verifiable AI** | Confirm AI outputs are correct &amp; untampered |
+| **AI Proof Layer** | Verify proofs of execution &amp; inference integrity |
+| **On-chain Verifier** | Minimal smart-contract verifier on BlockDAG |
+| **Off-chain Runtime** | Secure WASM execution &amp; proof pipeline |
+| **Proof Adaptors** | Supports cryptographic proofs &amp; attestations |
+
+---
+
+## 🛠️ Overview
+veriCortex bridges **AI computation** and **decentralized trust layers** by providing:
+- Proofs of AI inference integrity  
+- Verifiable execution across distributed nodes  
+- Compatibility with cryptographic proof systems and attestations  
+- Extensible adaptors for on-chain and off-chain environments  
+
+---
+
+## 🌐 Vision
+To empower a new generation of **provable AI systems** where:
+- Outputs can be **verified** instead of **assumed**  
+- AI agents are **accountable**, **transparent**, and **trust-minimized**  
+- The infrastructure for intelligence is **open**, **secure**, and **censorship-resistant**
+
+---
 ## 🧩 Why BlockDAG for VeriCortex?
 
 Traditional blockchains are sequential — every block must wait for the previous one to finalize.  
@@ -50,44 +79,11 @@ In the **VeriCortex ecosystem**, BlockDAG acts as the **trust backbone** for the
 3. **Verifier nodes** anchored on the BlockDAG validate and timestamp these proofs in parallel.  
 4. Multiple verifiers can commit results without waiting on a single chain head — ensuring real-time trust for decentralized AI.
 
----
-
-### 🧠 Why this matters
-
 VeriCortex doesn’t just record computation — it *proves* it.  
 BlockDAG provides the **parallel, verifiable, and low-latency substrate** needed to make proof-based AI verifiable **at scale**.
 
 > **In essence:**  
 > 🕸️ **BlockDAG = Proof Infrastructure for the AI Age.**
-
----
-
-## 🧩 Key Concepts
-
-| Concept | Description |
-|----------|--------------|
-| **Verifiable AI** | Confirm AI outputs are correct &amp; untampered |
-| **AI Proof Layer** | Verify proofs of execution &amp; inference integrity |
-| **On-chain Verifier** | Minimal smart-contract verifier on BlockDAG |
-| **Off-chain Runtime** | Secure WASM execution &amp; proof pipeline |
-| **Proof Adaptors** | Supports cryptographic proofs &amp; attestations |
-
----
-
-## 🛠️ Overview
-veriCortex bridges **AI computation** and **decentralized trust layers** by providing:
-- Proofs of AI inference integrity  
-- Verifiable execution across distributed nodes  
-- Compatibility with cryptographic proof systems and attestations  
-- Extensible adaptors for on-chain and off-chain environments  
-
----
-
-## 🌐 Vision
-To empower a new generation of **provable AI systems** where:
-- Outputs can be **verified** instead of **assumed**  
-- AI agents are **accountable**, **transparent**, and **trust-minimized**  
-- The infrastructure for intelligence is **open**, **secure**, and **censorship-resistant**
 
 ---
 
