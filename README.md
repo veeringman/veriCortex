@@ -114,8 +114,9 @@ The architecture can be viewed in three main layers:
 ### 📊 Visual: VeriCortex System Architecture
 
 Below is the architecture schematic illustrating the data flow across these layers:
-
-![VeriCortex Architecture Outline](assets/vericortex_higharch.png)
+<p align="left">
+  <img src="assets/vericortex_higharch.jpeg" alt="VeriCortex Arch" width=150 />
+</p>
 
 ---
 
