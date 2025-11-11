@@ -62,28 +62,6 @@ BlockDAG provides the **parallel, verifiable, and low-latency substrate** needed
 
 ---
 
-### 📊 (Optional) Visual: VeriCortex + BlockDAG Flow
-
-```mermaid
-flowchart LR
-    subgraph OffChain["Off-chain AI Runtime"]
-        A1[Deterministic Execution (WASM)] --> A2[Inference Trace Capture]
-        A2 --> A3[Proof Generator (ZK / Crypto)]
-    end
-
-    subgraph OnChain["BlockDAG Layer"]
-        B1[Verifier Nodes] --> B2[Proof Commit DAG]
-        B2 --> B3[Finality & Consensus]
-    end
-
-    subgraph Access["Client / dApp Layer"]
-        C1[Client / Agent / Model] --> C2[VeriCortex API]
-        C2 --> A1
-        B3 --> C3[Dashboard / Explorer]
-    end
-
-    A3 --> B1
-
 ## 🧩 Key Concepts
 
 | Concept | Description |
