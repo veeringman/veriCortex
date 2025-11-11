@@ -1,0 +1,8 @@
+{
+  "name": "@vericortex/sdk",
+  "version": "0.1.0",
+  "description": "TypeScript SDK for VeriCortex Proof System",
+  "main": "dist/index.js",
+  "scripts": { "build": "tsc" },
+  "license": "MIT"
+}
