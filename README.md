@@ -87,7 +87,7 @@ BlockDAG provides the **parallel, verifiable, and low-latency substrate** needed
 
 ---
 
-## Architecture Outline
+### Architecture Outline
 
 The **VeriCortex architecture** is designed to bridge the gap between *AI inference* and *on-chain verifiability*.  
 It leverages a **modular, scalable pipeline** that ensures deterministic execution, trace generation, and proof verification — all anchored on the **BlockDAG network**.
