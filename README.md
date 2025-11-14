@@ -87,7 +87,7 @@ BlockDAG provides the **parallel, verifiable, and low-latency substrate** needed
 
 ---
 
-### Architecture Outline
+## Architecture Outline
 
 The **VeriCortex architecture** is designed to bridge the gap between *AI inference* and *on-chain verifiability*.  
 It leverages a **modular, scalable pipeline** that ensures deterministic execution, trace generation, and proof verification — all anchored on the **BlockDAG network**.
@@ -99,7 +99,7 @@ The architecture can be viewed in three main layers:
 - Captures execution traces and generates cryptographic or ZK proofs of correctness.
 - Interfaces with the VeriCortex API for job orchestration and proof submission.
 
-### ⚙️ 2. Verification Layer (On-Chain)
+### 2. Verification Layer (On-Chain)
 - Receives proofs from off-chain nodes and validates them via verifier smart agents.
 - Anchors results onto the BlockDAG ledger, maintaining causal ordering.
 - Supports concurrent submissions, minimizing latency and maximizing throughput.
@@ -111,7 +111,7 @@ The architecture can be viewed in three main layers:
 
 ---
 
-### Visual: VeriCortex System Architecture
+## VeriCortex System Architecture
 
 Below is the architecture schematic illustrating the data flow across these layers:
 <p align="left">
@@ -119,7 +119,6 @@ Below is the architecture schematic illustrating the data flow across these laye
 </p>
 
 ---
-
 ### Key Highlights
 
 - **Parallel proof verification** through BlockDAG concurrency  
@@ -131,10 +130,10 @@ Below is the architecture schematic illustrating the data flow across these laye
 ---
 
 
-### Contributing
+## Contributing
 We welcome contributions from developers, researchers, and builders in AI, cryptography, and decentralized systems.  
 Stay tuned for contribution guidelines and module specifications.
 
----
+
 **VeriCortex — Making AI Verifiable.**
 ---
