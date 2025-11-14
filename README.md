@@ -16,12 +16,12 @@ Whether AI is running locally, in the cloud, within smart agent swarms, or acros
 
 ---
 
-## 🎯 Mission
+## Mission
 To make **AI provable, trustworthy, and censorship-resistant** — enabling secure autonomous systems and transparent on-chain intelligence.
 
 ---
 
-## 🧩 Key Concepts
+## Key Concepts
 
 | Concept | Description |
 |----------|--------------|
@@ -33,7 +33,7 @@ To make **AI provable, trustworthy, and censorship-resistant** — enabling secu
 
 ---
 
-## 🛠️ Overview
+## Overview
 veriCortex bridges **AI computation** and **decentralized trust layers** by providing:
 - Proofs of AI inference integrity  
 - Verifiable execution across distributed nodes  
@@ -42,14 +42,14 @@ veriCortex bridges **AI computation** and **decentralized trust layers** by prov
 
 ---
 
-## 🌐 Vision
+## Vision
 To empower a new generation of **provable AI systems** where:
 - Outputs can be **verified** instead of **assumed**  
 - AI agents are **accountable**, **transparent**, and **trust-minimized**  
 - The infrastructure for intelligence is **open**, **secure**, and **censorship-resistant**
 
 ---
-## 🧩 Why BlockDAG for VeriCortex?
+## Why BlockDAG for VeriCortex?
 
 Traditional blockchains are sequential — every block must wait for the previous one to finalize.  
 This linear structure introduces **latency**, **bottlenecks**, and **limited parallelism**, making them unsuitable for **real-time AI verification** and **distributed inference proofs**.
@@ -58,7 +58,7 @@ This linear structure introduces **latency**, **bottlenecks**, and **limited par
 
 ---
 
-### ⚙️ Why it’s the perfect foundation for VeriCortex
+### Why it’s the perfect foundation for VeriCortex
 
 | **Challenge** | **How BlockDAG Solves It** | **Impact on VeriCortex** |
 |----------------|----------------------------|---------------------------|
@@ -70,7 +70,7 @@ This linear structure introduces **latency**, **bottlenecks**, and **limited par
 
 ---
 
-### 🚀 In VeriCortex Context
+### In VeriCortex Context
 
 In the **VeriCortex ecosystem**, BlockDAG acts as the **trust backbone** for the Proof-of-Inference (PoI) layer:
 
@@ -87,14 +87,14 @@ BlockDAG provides the **parallel, verifiable, and low-latency substrate** needed
 
 ---
 
-## 🏗️ Architecture Outline
+## Architecture Outline
 
 The **VeriCortex architecture** is designed to bridge the gap between *AI inference* and *on-chain verifiability*.  
 It leverages a **modular, scalable pipeline** that ensures deterministic execution, trace generation, and proof verification — all anchored on the **BlockDAG network**.
 
 The architecture can be viewed in three main layers:
 
-### 🧠 1. Off-Chain AI Runtime
+### 1. Off-Chain AI Runtime
 - Executes inference tasks deterministically using WASM-based isolated environments.
 - Captures execution traces and generates cryptographic or ZK proofs of correctness.
 - Interfaces with the VeriCortex API for job orchestration and proof submission.
@@ -104,14 +104,14 @@ The architecture can be viewed in three main layers:
 - Anchors results onto the BlockDAG ledger, maintaining causal ordering.
 - Supports concurrent submissions, minimizing latency and maximizing throughput.
 
-### 🌐 3. Access & Integration Layer
+### 3. Access & Integration Layer
 - Provides APIs, SDKs, and dashboard explorers for dApps, agents, and model registries.
 - Enables seamless integration into decentralized applications or data markets.
 - Displays verified inference activity in real-time through the Explorer interface.
 
 ---
 
-### 📊 Visual: VeriCortex System Architecture
+### Visual: VeriCortex System Architecture
 
 Below is the architecture schematic illustrating the data flow across these layers:
 <p align="left">
@@ -120,7 +120,7 @@ Below is the architecture schematic illustrating the data flow across these laye
 
 ---
 
-### 🔍 Key Highlights
+### Key Highlights
 
 - **Parallel proof verification** through BlockDAG concurrency  
 - **Deterministic execution trace capture** via WASM runtimes  
@@ -131,10 +131,10 @@ Below is the architecture schematic illustrating the data flow across these laye
 ---
 
 
-### 🤝 Contributing
+### Contributing
 We welcome contributions from developers, researchers, and builders in AI, cryptography, and decentralized systems.  
 Stay tuned for contribution guidelines and module specifications.
 
 ---
-
 **VeriCortex — Making AI Verifiable.**
+---
