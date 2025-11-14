@@ -111,7 +111,7 @@ The architecture can be viewed in three main layers:
 
 ---
 
-## VeriCortex System Architecture
+### VeriCortex System Architecture
 
 Below is the architecture schematic illustrating the data flow across these layers:
 <p align="left">
@@ -135,5 +135,6 @@ We welcome contributions from developers, researchers, and builders in AI, crypt
 Stay tuned for contribution guidelines and module specifications.
 
 
+---
 **VeriCortex — Making AI Verifiable.**
 ---
