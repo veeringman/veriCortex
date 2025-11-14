@@ -49,6 +49,17 @@ To empower a new generation of **provable AI systems** where:
 - The infrastructure for intelligence is **open**, **secure**, and **censorship-resistant**
 
 ---
+## Who VeriCortex Is For
+
+VeriCortex is designed for teams and ecosystems that rely on **trust, auditability, and transparency in AI**:
+
+- **AI/ML Product Teams** – needing verifiable, deterministic model outputs for deployment and compliance.  
+- **Enterprises & Regulated Sectors** – BFSI, healthcare, insurance, telecom, and government systems requiring auditable AI decisions.  
+- **Web3 dApps & Agent Frameworks** – integrating AI inference with on-chain proof verification for trustless automation.  
+- **Security, Risk & Compliance Teams** – validating AI pipeline integrity, preventing tampering, and ensuring traceability.  
+- **Platform & Tooling Builders** – creating SDKs, agent systems, or inference platforms that require interoperable verification rails.
+
+---
 ## Why BlockDAG for VeriCortex?
 
 Traditional blockchains are sequential — every block must wait for the previous one to finalize.  
