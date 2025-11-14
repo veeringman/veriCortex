@@ -139,7 +139,56 @@ Below is the architecture schematic illustrating the data flow across these laye
 - **Future-ready scalability** for AI x Blockchain ecosystems  
 
 ---
+## Post-Buildathon Roadmap
 
+After the Buildathon submission, VeriCortex will transition from a functional prototype into a production-grade, multi-layer verification stack. The following roadmap outlines the key phases:
+
+### **1. Expand Deterministic Runtime (WASM)**
+- Integrate multi-model support (LLMs, vision, tabular models).  
+- Add optimized execution layers with caching, SIMD, and sandboxing.  
+- Introduce multi-language WASM bindings (Python, JS, Rust).
+
+### **2. Full Verifier Engine (Off-Chain & On-Chain)**
+- Upgrade proof format to support richer trace checkpoints.  
+- Integrate SNARK/STARK proof experiments for long-term trustlessness.  
+- Add multi-chain compatibility beyond BlockDAG (EVM & non-EVM).
+
+### **3. Build Developer Tools & SDK Ecosystem**
+- Release fully documented SDKs for JS/TS, Rust, Python, Go.  
+- Provide templates for dApps, backend services, and AI agents.  
+- Add automated CI workflows for verification workflows.
+
+### **4. Expanding API Platform**
+- Hosted API for model registration, verification pipelines, and proof retrieval.  
+- Tiered access: free tier (open verification), enterprise tier (SLA, audit mode).  
+- Telemetry & analytics dashboard for usage insights.
+
+### **5. Model Registry & Trust Layer**
+- Support model versioning, provenance, and supply-chain metadata.  
+- Add permissioned vs public registry options.  
+- Optional encryption layer for confidential model verification.
+
+### **6. Productization & Enterprise Integration**
+- Plugins for existing AI stacks:  
+  - LangChain / LlamaIndex  
+  - Kubernetes & serverless backends  
+  - MLOps platforms (MLflow, Sagemaker, Vertex AI)  
+- Compliance toolkit (GDPR, RBI guidelines, HIPAA-ready logs).  
+
+### **7. Community & Ecosystem Growth**
+- Open-source governance model.  
+- Community challenges for building verified AI agents.  
+- Integration with the broader BlockDAG ecosystem (DEX tools, bridges, infra).
+
+### **8. Move Toward Full Layer-1 Design Exploration**
+- Experiment with a dedicated execution layer optimized for verifiable compute.  
+- Study hybrid rollup + DAG-ordering models.  
+- Prototype a domain-specific L1/rollup built for deterministic AI execution.
+
+
+This roadmap ensures VeriCortex grows from a Buildathon showcase into a complete **Verifiable AI Infrastructure Layer** powering trust in decentralized and traditional systems.
+
+---
 
 ## Contributing
 We welcome contributions from developers, researchers, and builders in AI, cryptography, and decentralized systems.  
