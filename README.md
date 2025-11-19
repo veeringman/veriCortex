@@ -1,5 +1,9 @@
 <p align="left">
-  <img src="assets/IMG_0950.jpeg" alt="VeriCortex Logo" />
+  <picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/IMG_0950.jpeg">
+  <source media="(prefers-color-scheme: light)" srcset="assets/IMG_0948.jpeg">
+  <img alt="ProofCortex Logo" src="assets/IMG_0948.jpeg" width="300">
+</picture>
 </p>
 
 **Trust Layer for AI — Verifiable Intelligence on BlockDAG**
