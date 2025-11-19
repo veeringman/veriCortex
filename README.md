@@ -4,9 +4,9 @@
 
 **Trust Layer for AI — Verifiable Intelligence on BlockDAG**
 
-> **⚠️ Project Notice:** At appropriate time, this project will be renamed to **ProofCortex**.
+> **⚠️ Project Notice:**This project will be renamed to **ProofCortex**.
 
-VeriCortex is a **modular AI verification and trust framework** designed to run first on **BlockDAG** networks.  
+ProofCortex is a **modular AI verification and trust framework** designed to run first on **BlockDAG** networks.  
 It enables applications to **prove AI outputs**, **secure autonomous agents**, and **build verifiable compute pipelines**.
 
 We bring **cryptographic trust to AI** by validating computation proofs, inference attestations, and execution integrity signals.
@@ -14,7 +14,7 @@ We bring **cryptographic trust to AI** by validating computation proofs, inferen
 Whether AI is running locally, in the cloud, within smart agent swarms, or across decentralized compute networks —  
 **VeriCortex allows users to verify what really happened, not just trust claims.**
 
-> Visit the full documentation at [**VeriCortex Wiki →**](https://github.com/veeringman/veriCortex/wiki)
+> Visit the full documentation at [**ProofCortex Wiki →**](https://github.com/veeringman/veriCortex/wiki)
 
 ---
 
@@ -36,7 +36,7 @@ To make **AI provable, trustworthy, and censorship-resistant** — enabling secu
 ---
 
 ## Overview
-veriCortex bridges **AI computation** and **decentralized trust layers** by providing:
+ProofCortex bridges **AI computation** and **decentralized trust layers** by providing:
 - Proofs of AI inference integrity  
 - Verifiable execution across distributed nodes  
 - Compatibility with cryptographic proof systems and attestations  
@@ -51,9 +51,9 @@ To empower a new generation of **provable AI systems** where:
 - The infrastructure for intelligence is **open**, **secure**, and **censorship-resistant**
 
 ---
-## Who VeriCortex Is For
+## Who ProofCortex Is For
 
-VeriCortex is designed for teams and ecosystems that rely on **trust, auditability, and transparency in AI**:
+ProofCortex is designed for teams and ecosystems that rely on **trust, auditability, and transparency in AI**:
 
 - **AI/ML Product Teams** – needing verifiable, deterministic model outputs for deployment and compliance.  
 - **Enterprises & Regulated Sectors** – BFSI, healthcare, insurance, telecom, and government systems requiring auditable AI decisions.  
@@ -62,7 +62,7 @@ VeriCortex is designed for teams and ecosystems that rely on **trust, auditabili
 - **Platform & Tooling Builders** – creating SDKs, agent systems, or inference platforms that require interoperable verification rails.
 
 ---
-## Why BlockDAG for VeriCortex?
+## Why BlockDAG for ProofCortex?
 
 Traditional blockchains are sequential — every block must wait for the previous one to finalize.  
 This linear structure introduces **latency**, **bottlenecks**, and **limited parallelism**, making them unsuitable for **real-time AI verification** and **distributed inference proofs**.
