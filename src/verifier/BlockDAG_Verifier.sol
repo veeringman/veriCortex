@@ -1,64 +1,107 @@
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
 
-/// @title VeriCortexVerifier
-/// @notice Stores results of off-chain verification proofs submitted via CLI
-/// @dev Designed for integration with BlockDAG's EVM-compatible layer.
-contract VeriCortexVerifier {
+/// @title ProofCortexVerifier
+/// @notice On-chain anchor for off-chain AI inference proofs
+/// @dev Designed for BlockDAG’s EVM layer – lightweight & auditable.
+contract ProofCortexVerifier {
+
     struct ProofRecord {
-        string modelId;          // Identifier for the model being verified
-        bytes32 proofHash;       // Hash of full proof data (input/output, etc.)
-        address submitter;       // Off-chain verifier/agent submitting this proof
-        bool valid;              // Verification result
-        uint256 timestamp;       // On-chain timestamp when submitted
+        string modelId;
+        string version;          // Model version or commit
+        bytes32 inputHash;       // Hash of input to the model
+        bytes32 outputHash;      // Hash of model output
+        bytes32 traceHash;       // Trace/Merkle root of execution steps
+        bytes32 proofHash;       // Combined proof bundle hash
+        address submitter;       // Off-chain verifier service
+        bool valid;              // Off-chain validation result
+        uint256 timestamp;       // Anchor time
+        bool locked;             // Prevent further updates
     }
 
-    mapping(bytes32 => ProofRecord) public proofs;  // proofId => record
-    event ProofSubmitted(bytes32 indexed proofId, address indexed submitter, string modelId, bool valid);
-    event ProofUpdated(bytes32 indexed proofId, bool valid, uint256 timestamp);
+    mapping(bytes32 => ProofRecord) public proofs;
 
-    /// @notice Submit a verified proof result to chain (off-chain verifier already validated it)
-    /// @param proofHash Hash of the verified proof
-    /// @param modelId Model identifier (matches off-chain verifier input)
-    /// @param valid Whether the proof passed verification off-chain
-    /// @return proofId A unique on-chain proof identifier
-    function submitProof(
-        bytes32 proofHash,
-        string calldata modelId,
+    // Optional: enterprise setups can restrict who may post proofs
+    address public trustedSubmitter;
+
+    event ProofSubmitted(
+        bytes32 indexed proofId,
+        address indexed submitter,
+        string modelId,
         bool valid
-    ) external returns (bytes32 proofId) {
-        proofId = keccak256(abi.encodePacked(proofHash, modelId, msg.sender));
-        require(proofs[proofId].submitter == address(0), "Proof already exists");
+    );
+
+    event ProofUpdated(bytes32 indexed proofId, bool valid, uint256 timestamp);
+    event ProofAnchored(bytes32 indexed proofId, bytes32 proofHash, uint256 time);
+
+    constructor(address _trustedSubmitter) {
+        trustedSubmitter = _trustedSubmitter;
+    }
+
+    modifier onlyTrusted() {
+        require(msg.sender == trustedSubmitter, "Not authorized");
+        _;
+    }
+
+    function submitProof(
+        string calldata modelId,
+        string calldata version,
+        bytes32 inputHash,
+        bytes32 outputHash,
+        bytes32 traceHash,
+        bytes32 proofHash,
+        bool valid
+    ) external onlyTrusted returns (bytes32 proofId) {
+
+        proofId = keccak256(
+            abi.encodePacked(modelId, version, proofHash, msg.sender)
+        );
+
+        require(proofs[proofId].submitter == address(0), "Proof exists");
 
         proofs[proofId] = ProofRecord({
             modelId: modelId,
+            version: version,
+            inputHash: inputHash,
+            outputHash: outputHash,
+            traceHash: traceHash,
             proofHash: proofHash,
             submitter: msg.sender,
             valid: valid,
-            timestamp: block.timestamp
+            timestamp: block.timestamp,
+            locked: false
         });
 
         emit ProofSubmitted(proofId, msg.sender, modelId, valid);
+        emit ProofAnchored(proofId, proofHash, block.timestamp);
     }
 
-    /// @notice Allows proof owner or trusted oracle to update result (optional extension)
-    function updateProofResult(bytes32 proofId, bool newValidity) external {
-        ProofRecord storage record = proofs[proofId];
-        require(record.submitter != address(0), "Proof not found");
-        require(msg.sender == record.submitter, "Only submitter can update");
+    function updateProofResult(bytes32 proofId, bool newValidity)
+        external
+        onlyTrusted
+    {
+        ProofRecord storage p = proofs[proofId];
+        require(p.submitter != address(0), "Not found");
+        require(!p.locked, "Immutable");
 
-        record.valid = newValidity;
-        record.timestamp = block.timestamp;
+        p.valid = newValidity;
+        p.timestamp = block.timestamp;
 
-        emit ProofUpdated(proofId, newValidity, record.timestamp);
+        emit ProofUpdated(proofId, newValidity, block.timestamp);
     }
 
-    /// @notice Get details of any proof
-    function getProof(bytes32 proofId) external view returns (ProofRecord memory) {
+    function lockProof(bytes32 proofId) external onlyTrusted {
+        proofs[proofId].locked = true;
+    }
+
+    function getProof(bytes32 proofId)
+        external
+        view
+        returns (ProofRecord memory)
+    {
         return proofs[proofId];
     }
 
-    /// @notice Returns whether a proof has been verified valid
     function isProofValid(bytes32 proofId) external view returns (bool) {
         return proofs[proofId].valid;
     }
