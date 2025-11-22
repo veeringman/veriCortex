@@ -1,9 +1,4 @@
-Got it — here is the same content rewritten strictly in raw .md markup, no borders, no overflowing boxes, no special containers.
-You can copy-paste this directly into a README.md.
-
-⸻
-
-VeriCortex Public API Server
+***VeriCortex Public API Server
 
 A lightweight Rust (Axum) backend exposing public APIs to interact with the VeriCortexVerifier smart contract deployed on BlockDAG’s EVM-compatible network.
 
