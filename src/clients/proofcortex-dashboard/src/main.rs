@@ -1,3 +1,7 @@
+use dioxus::prelude::*;
+mod app;
+
 fn main() {
-    println!("Hello, world!");
+    // bootstrap for web
+    dioxus_web::launch(app::app);
 }
