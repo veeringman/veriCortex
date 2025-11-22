@@ -1,6 +1,6 @@
 # Verifier Offchain (Demo)
 
-This crate implements a **starter off-chain verifier** for VeriCortex Buildathon demo.
+This crate implements a **starter off-chain verifier** for ProofCortex Buildathon demo.
 
 Features:
 - Local recompute & verification of a proof JSON (`tests/sample_proof.json`)
