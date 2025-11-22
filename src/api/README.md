@@ -1,91 +1,94 @@
-VeriCortex Public API Server
+# VeriCortex Public API Server
 
-A lightweight Rust (Axum) backend exposing public APIs to interact with the VeriCortexVerifier smart contract deployed on BlockDAG’s EVM-compatible network.
+A lightweight Rust (Axum) backend exposing public APIs to interact with the
+VeriCortexVerifier smart contract deployed on BlockDAG’s EVM-compatible network.
 
 This API allows off-chain agents, dApps, platforms, and CLI clients to:
-	•	Submit verification proofs
-	•	Fetch proof metadata
-	•	Check proof validity
-	•	List proofs per submitter
-	•	Retrieve global verification statistics
+- Submit verification proofs
+- Fetch proof metadata
+- Check proof validity
+- List proofs per submitter
+- Retrieve global verification statistics
 
-⸻
+---
 
-Project Structure
+## Project structure
 
 vericortex-api/
-  src/
-    main.rs
-    routes.rs
-    handlers/
-      submit.rs
-      get_proof.rs
-      is_valid.rs
-      list_by_submitter.rs
-      stats.rs
-    abi/
-      VeriCortexVerifier.json
-    contract.rs
-    config.rs
-  Cargo.toml
-  README.md
+```
+src/
+  main.rs
+  routes.rs
+  handlers/
+    submit.rs
+    get_proof.rs
+    is_valid.rs
+    list_by_submitter.rs
+    stats.rs
+  abi/
+    VeriCortexVerifier.json
+  contract.rs
+  config.rs
+Cargo.toml
+README.md
+```
 
+---
 
-⸻
-
-Running Locally
+## Getting started / Running locally
 
 1. Install Rust
-
+```sh
 curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+```
 
 2. Build the project
-
+```sh
 cargo build
+```
 
-3. Create .env
-
+3. Create a `.env` file with the following variables:
+```
 RPC_URL=https://mainnet.blockdag.network
 PRIVATE_KEY=your_private_key_here
 CONTRACT_ADDRESS=0xYourContractAddress
 PORT=8080
+```
 
-4. Start server
-
+4. Start the server
+```sh
 cargo run
+```
 
+---
 
-⸻
+## API Documentation
 
-API Documentation
+Base URL: `http://localhost:<PORT>` (default PORT is 8080)
 
-1. Submit Proof
-
-POST /proofs/submit
-
-Request Body
-
+### 1) Submit Proof
+- Method: POST
+- Endpoint: `/proofs/submit`
+- Request JSON:
+```json
 {
   "proofHash": "0xabc123...",
   "modelId": "model-v1",
   "valid": true
 }
-
-Response
-
+```
+- Response JSON:
+```json
 {
   "proofId": "0x92fae1..."
 }
+```
 
-
-⸻
-
-2. Get Proof
-
-GET /proofs/{proofId}
-
-Response
-
+### 2) Get Proof
+- Method: GET
+- Endpoint: `/proofs/{proofId}`
+- Response JSON:
+```json
 {
   "modelId": "model-v1",
   "proofHash": "0xabc123...",
@@ -93,29 +96,23 @@ Response
   "valid": true,
   "timestamp": 1732302100
 }
+```
 
-
-⸻
-
-3. Check Validity
-
-GET /proofs/{proofId}/valid
-
-Response
-
+### 3) Check Validity
+- Method: GET
+- Endpoint: `/proofs/{proofId}/valid`
+- Response JSON:
+```json
 {
   "valid": true
 }
+```
 
-
-⸻
-
-4. List Proofs by Submitter
-
-GET /proofs/submitter/{address}
-
-Response
-
+### 4) List Proofs by Submitter
+- Method: GET
+- Endpoint: `/proofs/submitter/{address}`
+- Response JSON:
+```json
 {
   "submitter": "0x1A2b...",
   "proofs": [
@@ -126,28 +123,26 @@ Response
     }
   ]
 }
+```
 
-
-⸻
-
-5. Global Stats
-
-GET /stats
-
-Response
-
+### 5) Global Stats
+- Method: GET
+- Endpoint: `/stats`
+- Response JSON:
+```json
 {
   "totalProofs": 120,
   "validProofs": 110,
   "invalidProofs": 10,
   "uniqueSubmitters": 23
 }
+```
 
+---
 
-⸻
+## Contract loader example (Rust)
 
-Contract Loader Example (Rust)
-
+```rust
 use ethers::prelude::*;
 use std::sync::Arc;
 
@@ -166,42 +161,44 @@ pub async fn load_contract() -> Result<VeriCortexVerifier<Provider<Http>>, Contr
     let abi = include_bytes!("./abi/VeriCortexVerifier.json");
     Ok(VeriCortexVerifier::new(address, client, abi)?)
 }
+```
 
+---
 
-⸻
+## Testing with curl
 
-Testing with Curl
-
-Submit a proof
-
+Submit a proof:
+```sh
 curl -X POST http://localhost:8080/proofs/submit \
   -H "Content-Type: application/json" \
   -d '{"proofHash":"0xaaa","modelId":"test","valid":true}'
+```
 
-Fetch proof details
-
+Fetch proof details:
+```sh
 curl http://localhost:8080/proofs/0x123
+```
 
-Check validity
-
+Check validity:
+```sh
 curl http://localhost:8080/proofs/0x123/valid
+```
 
+---
 
-⸻
+## Future extensibility
+- Multi-chain support
+- Event-driven proof ingestion
+- JWT-authenticated endpoints
+- SDK integrations (Python, Rust, JS)
+- Dioxus-based web dashboard
+- Container packaging
+- Off-chain computation workers
 
-Future Extensibility
-	•	Multi-chain support
-	•	Event-driven proof ingestion
-	•	JWT-authenticated endpoints
-	•	SDK integrations (Python, Rust, JS)
-	•	Dioxus-based web dashboard
-	•	Container packaging
-	•	Off-chain computation workers
+---
 
-⸻
-
-Requirements
-	•	Rust installed
-	•	RPC URL (BlockDAG)
-	•	A deployer private key
-	•	Contract address
+## Requirements
+- Rust (installed)
+- RPC URL (BlockDAG)
+- A deployer private key
+- Contract address
