@@ -1,7 +1,7 @@
-# VeriCortex Public API Server
+# ProofCortex Public API Server
 
-A lightweight Rust (Axum) backend exposing public APIs to interact with the
-VeriCortexVerifier smart contract deployed on BlockDAG’s EVM-compatible network.
+A lightweight Rust backend exposing public APIs to interact with the
+ProofCortex Ob Chain Verifier smart contract deployed on BlockDAG’s EVM-compatible network.
 
 This API allows off-chain agents, dApps, platforms, and CLI clients to:
 - Submit verification proofs
@@ -14,7 +14,7 @@ This API allows off-chain agents, dApps, platforms, and CLI clients to:
 
 ## Project structure
 
-vericortex-api/
+proofcortex-api/
 ```
 src/
   main.rs
