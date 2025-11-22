@@ -1,4 +1,4 @@
-***VeriCortex Public API Server
+VeriCortex Public API Server
 
 A lightweight Rust (Axum) backend exposing public APIs to interact with the VeriCortexVerifier smart contract deployed on BlockDAG’s EVM-compatible network.
 
@@ -158,7 +158,6 @@ pub async fn load_contract() -> Result<VeriCortexVerifier<Provider<Http>>, Contr
         .parse::<LocalWallet>()?;
     let client = SignerMiddleware::new(provider, wallet.with_chain_id(1993));
     let client = Arc::new(client);
-
     let address: Address = std::env::var("CONTRACT_ADDRESS")
         .unwrap()
         .parse()
@@ -190,7 +189,7 @@ curl http://localhost:8080/proofs/0x123/valid
 
 ⸻
 
-Extensibility
+Future Extensibility
 	•	Multi-chain support
 	•	Event-driven proof ingestion
 	•	JWT-authenticated endpoints
@@ -206,14 +205,3 @@ Requirements
 	•	RPC URL (BlockDAG)
 	•	A deployer private key
 	•	Contract address
-
-⸻
-
-If you’d like, I can now generate:
-	•	Full Axum server source code
-	•	Dockerfile
-	•	OpenAPI/Swagger spec
-	•	GitHub wiki version
-	•	Dioxus frontend skeleton
-
-Just say Next.
