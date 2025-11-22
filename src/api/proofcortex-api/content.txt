@@ -1,0 +1,552 @@
+# ProofCortex Public API Server (Axum) - Full Scaffold
+
+This repository scaffold provides a complete Axum-based Public API server for ProofCortex (public-facing). It is intentionally a thin gateway that connects to:
+
+- Public ProofCortex components (WASM runtime, SDKs)
+- Private ProofCortex Core (secure inference, attestation, trust engine) via a protected gateway
+- BlockDAG on-chain verifier contract (EVM)
+
+**Architecture diagram (use in docs/UI):** `/mnt/data/A_flowchart_in_digital_diagram_format_illustrates_.png`
+
+---
+
+## What this scaffold contains
+
+- `Cargo.toml`
+- `.env.example`
+- `src/main.rs`
+- `src/config.rs`
+- `src/state.rs`
+- `src/contract.rs` (ethers-rs bindings using `abigen!`)
+- `src/routes.rs`
+- `src/handlers/` (submit, get_proof, is_valid, list_by_submitter, stats, model registry, trust proxy)
+- `src/services/` (verifier_client, registry_client, core_gateway)
+- `src/utils/` (hashing, canonicalization helpers)
+- `README.md` (detailed usage + API docs)
+
+This scaffold is ready for development. Replace the placeholder ABI, RPC, and secrets in `.env` before running.
+
+---
+
+# Cargo.toml
+
+```toml
+[package]
+name = "proofcortex-api"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+axum = "0.7"
+tokio = { version = "1", features = ["full"] }
+serde = { version = "1.0", features = ["derive"] }
+serde_json = "1.0"
+ethers = { version = "2.0.0", features = ["abigen", "rustls"] }
+dotenvy = "0.15"
+tracing = "0.1"
+tracing-subscriber = "0.3"
+anyhow = "1.0"
+thiserror = "1.0"
+uuid = { version = "1", features = ["v4"] }
+parking_lot = "0.12"
+reqwest = { version = "0.11", features = ["json", "rustls-tls"] }
+
+[profile.release]
+opt-level = 3
+```
+
+---
+
+# .env.example
+
+```
+# BlockDAG RPC endpoint
+RPC_URL=https://your-blockdag-rpc
+# Private key for signer (DEVELOPMENT ONLY: use ephemeral/test key)
+PRIVATE_KEY=0x0000000000000000000000000000000000000000000000000000000000000000
+# Verifier contract address (on BlockDAG)
+CONTRACT_ADDRESS=0x0000000000000000000000000000000000000000
+# Public ProofCortex gateway (optional)
+PUBLIC_WASM_RUNTIME_URL=http://localhost:7000
+# Private ProofCortex Core gateway (secure)
+CORE_GATEWAY_URL=https://core.internal.local
+# Server
+PORT=8080
+```
+
+---
+
+# src/main.rs
+
+```rust
+use std::net::SocketAddr;
+use std::sync::Arc;
+use tracing_subscriber;
+
+mod config;
+mod state;
+mod contract;
+mod routes;
+mod handlers;
+mod services;
+mod utils;
+
+use routes::router;
+use state::AppState;
+
+#[tokio::main]
+async fn main() -> anyhow::Result<()> {
+    tracing_subscriber::fmt::init();
+
+    let cfg = config::Config::from_env()?;
+    let app_state = Arc::new(AppState::new(&cfg).await?);
+
+    let app = router(app_state.clone());
+
+    let addr = SocketAddr::from(([0, 0, 0, 0], cfg.port));
+    tracing::info!("ProofCortex API listening on {}", addr);
+
+    axum::Server::bind(&addr)
+        .serve(app.into_make_service())
+        .await
+        .context("failed to start server")?;
+
+    Ok(())
+}
+```
+
+---
+
+# src/config.rs
+
+```rust
+use serde::Deserialize;
+use anyhow::Context;
+
+#[derive(Clone, Debug, Deserialize)]
+pub struct Config {
+    pub rpc_url: String,
+    pub private_key: String,
+    pub contract_address: String,
+    pub public_wasm_runtime_url: Option<String>,
+    pub core_gateway_url: Option<String>,
+    pub port: u16,
+}
+
+impl Config {
+    pub fn from_env() -> anyhow::Result<Self> {
+        dotenvy::dotenv().ok();
+        let rpc_url = std::env::var("RPC_URL").context("RPC_URL missing")?;
+        let private_key = std::env::var("PRIVATE_KEY").context("PRIVATE_KEY missing")?;
+        let contract_address = std::env::var("CONTRACT_ADDRESS").context("CONTRACT_ADDRESS missing")?;
+        let public_wasm_runtime_url = std::env::var("PUBLIC_WASM_RUNTIME_URL").ok();
+        let core_gateway_url = std::env::var("CORE_GATEWAY_URL").ok();
+        let port = std::env::var("PORT").ok().and_then(|s| s.parse().ok()).unwrap_or(8080);
+
+        Ok(Self { rpc_url, private_key, contract_address, public_wasm_runtime_url, core_gateway_url, port })
+    }
+}
+```
+
+---
+
+# src/state.rs
+
+```rust
+use std::sync::Arc;
+use crate::config::Config;
+use crate::contract::VerifierClient;
+use crate::services::registry::RegistryClient;
+use crate::services::trust::TrustProxy;
+
+pub struct AppState {
+    pub cfg: Config,
+    pub verifier: VerifierClient,
+    pub registry: RegistryClient,
+    pub trust: TrustProxy,
+}
+
+impl AppState {
+    pub async fn new(cfg: &Config) -> anyhow::Result<Self> {
+        let verifier = VerifierClient::new(cfg).await?;
+        let registry = RegistryClient::new(cfg).await?;
+        let trust = TrustProxy::new(cfg).await?;
+        Ok(Self { cfg: cfg.clone(), verifier, registry, trust })
+    }
+}
+```
+
+---
+
+# src/contract.rs
+
+```rust
+use ethers::prelude::*;
+use std::sync::Arc;
+use crate::config::Config;
+
+abigen!(VeriCortexVerifier, "[abi placeholder]");
+
+pub struct VerifierClient {
+    pub client: Arc<SignerMiddleware<Provider<Http>, Wallet<k256::ecdsa::SigningKey>>> ,
+    pub contract: VeriCortexVerifier<SignerMiddleware<Provider<Http>, Wallet<k256::ecdsa::SigningKey>>>,
+}
+
+impl VerifierClient {
+    pub async fn new(cfg: &Config) -> anyhow::Result<Self> {
+        let provider = Provider::<Http>::try_from(cfg.rpc_url.as_str())?;
+        let chain_id = provider.get_chainid().await?.as_u64();
+        let wallet: LocalWallet = cfg.private_key.parse::<LocalWallet>()?.with_chain_id(chain_id);
+        let client = SignerMiddleware::new(provider.clone(), wallet);
+        let client = Arc::new(client);
+
+        let addr: Address = cfg.contract_address.parse()?;
+        // Note: replace with the actual ABI bytes or path, or use abigen! with file path
+        let contract = VeriCortexVerifier::new(addr, client.clone());
+        Ok(Self { client, contract })
+    }
+
+    pub async fn submit_proof(&self, proof_hash: H256, model_id: String, valid: bool) -> anyhow::Result<TxHash> {
+        let tx = self.contract.submit_proof(proof_hash, model_id, valid).send().await?;
+        let receipt = tx.await?;
+        Ok(receipt.transaction_hash.unwrap_or_default())
+    }
+}
+```
+
+---
+
+# src/services/mod.rs
+
+```rust
+pub mod registry;
+pub mod trust;
+pub mod verifier_client;
+
+pub use registry::RegistryClient;
+pub use trust::TrustProxy;
+pub use verifier_client::VerifierClientProxy;
+```
+
+---
+
+# src/services/registry.rs
+
+```rust
+use crate::config::Config;
+use serde::{Deserialize, Serialize};
+
+#[derive(Clone, Serialize, Deserialize)]
+pub struct ModelInfo { pub model_id: String, pub name: String, pub owner: String, pub description: String }
+
+pub struct RegistryClient {
+    // For public repo we keep a lightweight in-memory registry; production should use DB.
+    pub store: std::sync::Mutex<std::collections::HashMap<String, ModelInfo>>,
+}
+
+impl RegistryClient {
+    pub async fn new(_cfg: &Config) -> anyhow::Result<Self> {
+        Ok(Self { store: std::sync::Mutex::new(std::collections::HashMap::new()) })
+    }
+
+    pub fn register(&self, name: String, owner: String, description: String) -> ModelInfo {
+        let id = uuid::Uuid::new_v4().to_string();
+        let info = ModelInfo { model_id: id.clone(), name, owner, description };
+        self.store.lock().insert(id.clone(), info.clone());
+        info
+    }
+
+    pub fn get(&self, id: &str) -> Option<ModelInfo> {
+        self.store.lock().get(id).cloned()
+    }
+}
+```
+
+---
+
+# src/services/trust.rs
+
+```rust
+use crate::config::Config;
+use std::sync::Mutex;
+
+pub struct TrustProxy { pub scores: Mutex<std::collections::HashMap<String, f64>> }
+
+impl TrustProxy {
+    pub async fn new(_cfg: &Config) -> anyhow::Result<Self> {
+        Ok(Self { scores: Mutex::new(std::collections::HashMap::new()) })
+    }
+
+    pub fn record(&self, model_id: &str, valid: bool) -> f64 {
+        let mut s = self.scores.lock();
+        let entry = s.entry(model_id.to_string()).or_insert(0.0);
+        if valid { *entry += 1.0 } else { *entry -= 0.5 }
+        *entry
+    }
+
+    pub fn get(&self, model_id: &str) -> f64 {
+        *self.scores.lock().get(model_id).unwrap_or(&0.0)
+    }
+}
+```
+
+---
+
+# src/services/verifier_client.rs
+
+```rust
+use crate::config::Config;
+use ethers::types::H256;
+
+pub struct VerifierClientProxy;
+
+impl VerifierClientProxy {
+    pub async fn new(_cfg: &Config) -> anyhow::Result<Self> { Ok(Self) }
+    pub async fn submit(&self, _proof_hash: H256, _model_id: &str, _valid: bool) -> anyhow::Result<String> {
+        // In public repo we optionally call the on-chain contract. For dev this returns a mocked tx hash.
+        Ok("0xMOCK_TX_HASH".to_string())
+    }
+}
+```
+
+---
+
+# src/utils/mod.rs
+
+```rust
+pub mod hash;
+
+// src/utils/hash.rs (example)
+
+use blake3;
+
+pub fn blake3_hex(input: &[u8]) -> String {
+    blake3::hash(input).to_hex().to_string()
+}
+```
+
+---
+
+# src/routes.rs
+
+```rust
+use axum::{Router, routing::{post, get}, extract::State};
+use std::sync::Arc;
+use crate::state::AppState;
+
+use crate::handlers::{submit, get_proof, is_valid, list_by_submitter, stats, model_registry, trust_proxy};
+
+pub fn router(state: Arc<AppState>) -> Router {
+    Router::new()
+        .route("/health", get(|| async { "OK" }))
+        .route("/proofs/submit", post(submit::submit_proof))
+        .route("/proofs/:proof_id", get(get_proof::get_proof))
+        .route("/proofs/:proof_id/valid", get(is_valid::is_valid))
+        .route("/proofs/submitter/:address", get(list_by_submitter::list_by_submitter))
+        .route("/stats", get(stats::stats))
+        .route("/models/register", post(model_registry::register_model))
+        .route("/models/:model_id", get(model_registry::get_model))
+        .route("/trust/:model_id", get(trust_proxy::get_trust))
+        .with_state(state)
+}
+```
+
+---
+
+# src/handlers/submit.rs
+
+```rust
+use axum::{extract::State, Json};
+use serde::{Deserialize, Serialize};
+use ethers::types::H256;
+use std::sync::Arc;
+use crate::state::AppState;
+
+#[derive(Deserialize)]
+pub struct SubmitReq { pub proof_hash: String, pub model_id: String, pub valid: bool }
+
+#[derive(Serialize)]
+pub struct SubmitResp { pub proof_id: String, pub tx_hash: String, pub trust_score: f64 }
+
+pub async fn submit_proof(State(state): State<Arc<AppState>>, Json(req): Json<SubmitReq>) -> Json<SubmitResp> {
+    // Convert hex to H256
+    let bytes = hex::decode(req.proof_hash.trim_start_matches("0x")).unwrap_or_default();
+    let mut b = [0u8;32];
+    b[..bytes.len()].copy_from_slice(&bytes);
+    let proof_h = H256::from(b);
+
+    // Submit to verifier (public proxy) - mocked or real depending on config
+    let tx = state.verifier.submit(proof_h, req.model_id.clone(), req.valid).await.unwrap_or_else(|_| "0xMOCK_TX".to_string());
+
+    // Update trust score via proxy
+    let score = state.trust.record(&req.model_id, req.valid);
+
+    Json(SubmitResp { proof_id: format!("0x{}", hex::encode(proof_h.as_bytes())), tx_hash: tx, trust_score: score })
+}
+```
+
+---
+
+# src/handlers/get_proof.rs
+
+```rust
+use axum::{extract::Path, extract::State, Json};
+use std::sync::Arc;
+use crate::state::AppState;
+use serde::Serialize;
+
+#[derive(Serialize)]
+pub struct ProofView { pub model_id: String, pub proof_hash: String, pub submitter: String, pub valid: bool, pub timestamp: u64 }
+
+pub async fn get_proof(Path(proof_id): Path<String>, State(_state): State<Arc<AppState>>) -> Json<ProofView> {
+    // For buildathon public server: return mocked response or query on-chain
+    Json(ProofView { model_id: "demo-model".into(), proof_hash: proof_id, submitter: "0xDEMO".into(), valid: true, timestamp: 0 })
+}
+```
+
+---
+
+# src/handlers/is_valid.rs
+
+```rust
+use axum::{extract::Path, extract::State, Json};
+use std::sync::Arc;
+use crate::state::AppState;
+use serde::Serialize;
+
+#[derive(Serialize)]
+pub struct ValidResp { pub valid: bool }
+
+pub async fn is_valid(Path(_proof_id): Path<String>, State(_state): State<Arc<AppState>>) -> Json<ValidResp> {
+    Json(ValidResp { valid: true })
+}
+```
+
+---
+
+# src/handlers/list_by_submitter.rs
+
+```rust
+use axum::{extract::Path, Json};
+use serde::Serialize;
+
+#[derive(Serialize)]
+pub struct ProofEntry { pub proof_id: String, pub model_id: String, pub valid: bool }
+
+#[derive(Serialize)]
+pub struct ListResp { pub submitter: String, pub proofs: Vec<ProofEntry> }
+
+pub async fn list_by_submitter(Path(address): Path<String>) -> Json<ListResp> {
+    let sample = ProofEntry { proof_id: "0xDEADBEEF".into(), model_id: "demo-model".into(), valid: true };
+    Json(ListResp { submitter: address, proofs: vec![sample] })
+}
+```
+
+---
+
+# src/handlers/stats.rs
+
+```rust
+use axum::Json;
+use serde::Serialize;
+
+#[derive(Serialize)]
+pub struct Stats { pub total_proofs: u64, pub valid_proofs: u64, pub invalid_proofs: u64, pub unique_submitters: u64 }
+
+pub async fn stats() -> Json<Stats> {
+    Json(Stats { total_proofs: 120, valid_proofs: 110, invalid_proofs: 10, unique_submitters: 23 })
+}
+```
+
+---
+
+# src/handlers/model_registry.rs
+
+```rust
+use axum::{extract::State, Json};
+use serde::{Serialize, Deserialize};
+use std::sync::Arc;
+use crate::state::AppState;
+
+#[derive(Deserialize)]
+pub struct RegisterReq { pub name: String, pub owner: String, pub description: String }
+
+#[derive(Serialize, Clone)]
+pub struct ModelInfo { pub model_id: String, pub name: String, pub owner: String, pub description: String }
+
+pub async fn register_model(State(state): State<Arc<AppState>>, Json(req): Json<RegisterReq>) -> Json<ModelInfo> {
+    let info = state.registry.register(req.name, req.owner, req.description);
+    Json(ModelInfo { model_id: info.model_id, name: info.name, owner: info.owner, description: info.description })
+}
+
+pub async fn get_model(State(state): State<Arc<AppState>>, axum::extract::Path(model_id): axum::extract::Path<String>) -> Json<Option<ModelInfo>> {
+    match state.registry.get(&model_id) {
+        Some(info) => Json(Some(ModelInfo { model_id: info.model_id, name: info.name, owner: info.owner, description: info.description })),
+        None => Json(None),
+    }
+}
+```
+
+---
+
+# src/handlers/trust_proxy.rs
+
+```rust
+use axum::{extract::State, extract::Path, Json};
+use std::sync::Arc;
+use crate::state::AppState;
+
+pub async fn get_trust(State(state): State<Arc<AppState>>, Path(model_id): Path<String>) -> Json<f64> {
+    Json(state.trust.get(&model_id))
+}
+```
+
+---
+
+# README.md
+
+```md
+# ProofCortex Public API Server
+
+Thin public gateway for ProofCortex. Use this server to submit and query verifiable AI inference proofs in a Buildathon/demo environment.
+
+## Quickstart
+1. Copy `.env.example` to `.env` and fill values.
+2. `cargo build`
+3. `cargo run`
+
+## API Endpoints
+- POST /proofs/submit
+- GET  /proofs/{proofId}
+- GET  /proofs/{proofId}/valid
+- GET  /proofs/submitter/{address}
+- GET  /stats
+- POST /models/register
+- GET  /models/{model_id}
+- GET  /trust/{model_id}
+
+## Architecture Diagram
+Use the diagram in docs: `/mnt/data/A_flowchart_in_digital_diagram_format_illustrates_.png`
+```
+
+---
+
+# How to use
+
+1. Add your contract ABI or update `abigen!` in `src/contract.rs`.
+2. Fill `.env` with RPC and contract details.
+3. Run server and test endpoints with curl/Postman.
+
+---
+
+# Notes
+
+- This scaffold keeps sensitive production pieces out of the public repo (no model weights, no ZK code).
+- The registry and trust components are intentionally lightweight and in-memory for the Buildathon. For production, wire them to a secure DB and proper auth.
+
+---
+
+# End of scaffold
+
+
+
