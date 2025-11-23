@@ -1,4 +1,4 @@
-<p align="left" height=10%>
+<p align="left">
   <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/IMG_0950.jpeg">
   <source media="(prefers-color-scheme: light)" srcset="assets/IMG_0950.jpeg">
