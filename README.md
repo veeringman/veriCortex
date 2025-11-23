@@ -19,7 +19,7 @@ We bring **cryptographic trust to AI** by validating computation proofs, inferen
 Whether AI is running locally, in the cloud, within smart agent swarms, or across decentralized compute networks —  
 **VeriCortex allows users to verify what really happened, not just trust claims.**
 
-> Visit the full documentation at [**ProofCortex Wiki →**](https://github.com/veeringman/veriCortex/wiki)
+> Visit the full documentation at [**ProofCortex Wiki →**](https://github.com/veeringman/proifroofcortex/wiki)
 
 ---
 
