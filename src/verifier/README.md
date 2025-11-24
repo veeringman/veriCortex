@@ -27,7 +27,7 @@ Perfect for ZKML, decentralized AI agents, inference marketplaces, and trustless
 - MIT licensed – free for commercial and open-source use
 
 ## Smart Contract
-
+#### *Solidity*
 ```solidity
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.20;
@@ -126,8 +126,8 @@ contract ProofCortexVerifier {
 
 ---
 ## Deployment
-
-```Javascript
+#### *JavaScript*
+```JavaScript
 //JavaScript
 const Verifier = await ethers.getContractFactory("ProofCortexVerifier");
 const verifier = await Verifier.deploy("0xYourTrustedService"); // or address(0)
@@ -136,7 +136,7 @@ await verifier.waitForDeployment();
 ```
 ----
 ## Quick Usage
-
+#### *JavaScript*
 ```JavaScript
 //JavaScript
 await verifier.submitProof(
@@ -156,7 +156,7 @@ await verifier.lockProof(proofId);
 ---
 ## Calculate proofId off-chain
 
-### *JavaScript*
+#### *JavaScript*
 ```JavaScript
 const proofId = ethers.keccak256(
   ethers.solidityPacked(
@@ -165,7 +165,7 @@ const proofId = ethers.keccak256(
   )
 );
 ```
-### *Rust*
+#### *Rust*
 ```Rust
 use ethers::prelude::*;
 use ethers::utils::keccak256;
