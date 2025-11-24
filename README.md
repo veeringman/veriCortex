@@ -133,7 +133,7 @@ The architecture can be viewed in three main layers:
 
 Below is the architecture schematic illustrating the data flow across these layers:
 <p align="left">
-  <img src="assets/IMG_0964.jpeg" alt="ProofCortex Arch" width=66% width=80% />
+  <img src="assets/IMG_0964.jpeg" alt="ProofCortex Arch" width=72% />
 </p>
 
 ---
@@ -146,13 +146,13 @@ Below is the architecture schematic illustrating the data flow across these laye
 - **Future-ready scalability** for AI x Blockchain ecosystems  
 
 ---
-## 🏗️ Tech Stack
+## Tech Stack
 
 The **ProofCortex** ecosystem is built using a secure, high-performance, cross-platform architecture that enables cryptographic proof generation, BlockDAG consensus, and multi-platform client dashboards through Rust-powered tooling and WebAssembly interfaces.
 
 ---
 
-### 🔹 Core Platform Components
+### Core Platform Components
 
 #### **Rust (Primary Language)**
 - Memory-safe, zero-cost abstractions  
@@ -178,7 +178,7 @@ The **ProofCortex** ecosystem is built using a secure, high-performance, cross-p
 
 ---
 
-### 🔹 Cryptography & Verification
+### Cryptography & Verification
 
 #### **Hashing**
 - SHA-256  
@@ -201,7 +201,7 @@ The **ProofCortex** ecosystem is built using a secure, high-performance, cross-p
 
 ---
 
-### 🔹 User Interface & Dashboard
+### User Interface & Dashboard
 
 #### **Dioxus**
 - Rust-based unified UI framework  
@@ -221,7 +221,7 @@ The **ProofCortex** ecosystem is built using a secure, high-performance, cross-p
 
 ---
 
-### 🔹 API & Backend Services
+### API & Backend Services
 
 #### **Axum**
 - High-performance async Rust server  
@@ -240,7 +240,7 @@ The **ProofCortex** ecosystem is built using a secure, high-performance, cross-p
 
 ---
 
-### 🔹 Data & Storage
+### Data & Storage
 
 #### **PostgreSQL**
 - Canonical metadata database  
@@ -255,7 +255,7 @@ The **ProofCortex** ecosystem is built using a secure, high-performance, cross-p
 - Stores large proof artifacts  
 - SHA-256
 
-### 🔹 Security Stack
+### Security Stack
 
 - JWT / OAuth2  
 - WAF + rate limiting  
@@ -265,7 +265,7 @@ The **ProofCortex** ecosystem is built using a secure, high-performance, cross-p
 
 ---
 
-## 📦 SDKs
+## ProofCortex Client SDKs
 
 ### **Rust SDK**
 - Local proof generation  
@@ -292,6 +292,7 @@ The **ProofCortex** ecosystem is built using a secure, high-performance, cross-p
 - WASM wrapper  
 - Local cache + signing utilities
 
+---
 ---
 
 ## Post-Buildathon Roadmap
@@ -344,12 +345,14 @@ After the Buildathon submission, ProofCortex will transition from a functional p
 This roadmap ensures ProofCortex grows from a Buildathon showcase into a complete **Prooffiable AI Infrastructure Layer** powering trust in decentralized and traditional systems.
 
 ---
+---
 
 ## Contributing
 We welcome contributions from developers, researchers, and builders in AI, cryptography, and decentralized systems.  
 Stay tuned for contribution guidelines and module specifications.
 
-
+---
 ---
 *ProofCortex — Making AI Verifiable.*
+---
 ---
