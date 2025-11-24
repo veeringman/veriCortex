@@ -190,29 +190,32 @@
           </div>
         </div>
 
-        <!-- DAG Visualization -->
-        <div class="bg-white rounded-2xl shadow-xl p-8 mb-8 border border-indigo-100">
-          <h4 class="text-xl font-bold mb-6 flex items-center gap-3">
-            Live BlockDAG Structure (Last 18 Tipsets)
-          </h4>
-          <div class="mermaid overflow-x-auto bg-gray-50/50 rounded-xl p-6 border border-dashed border-indigo-200">
-            graph TD
-              A[Tip #12847<br/><small>3 proofs</small>] --> D
-              A --> E
-              B[Tip #12846<br/><small>LLM Proof #234</small>] --> D
-              C[Tip #12845<br/><small>Fraud Model</small>] --> D
-              C --> F
-              D[Tip #12844<br/><small>2 proofs</small>] --> G
-              E --> G
-              F --> G
-              G[Tip #12843<br/><small>Credit Risk</small>] --> H
-              H[Current Head<br/><small>4 proofs • 2 models</small>]
-              style A fill:#4f46e5,stroke:#6366f1,color:#fff
-              style H fill:#7c3aed,stroke:#a78bfa,color:#fff
-              classDef proof fill:#10b981,color:white
-              class B,D proof
-          </div>
-        </div>
+        <!-- DAG Graph – THIS ONE ALWAYS WORKS -->
+  <div class="bg-white rounded-2xl shadow-xl p-8 mb-8 border border-indigo-100">
+    <h4 class="text-xl font-bold mb-6 flex items-center gap-3">
+      Live BlockDAG Structure (Last 18 Tipsets)
+    </h4>
+
+    <div id="dag-graph" class="mermaid">
+      %%{init: {'theme': 'base', 'themeVariables': { 'primaryColor': '#6366f1', 'primaryBorderColor': '#4f46e5', 'lineColor': '#818cf8', 'secondaryColor': '#c084fc', 'tertiaryColor': '#e0e7ff'}}}%%
+      graph TD
+        A[Tip #12847<br/><small>3 proofs</small>] --> D
+        A --> E
+        B[Tip #12846<br/><small>LLM Proof #234</small>] --> D
+        C[Tip #12845<br/><small>Fraud Model</small>] --> D
+        C --> F
+        D[Tip #12844<br/><small>2 proofs</small>] --> G
+        E --> G
+        F --> G
+        G[Tip #12843<br/><small>Credit Risk</small>] --> H
+        H[Current Head<br/><small>4 proofs • 2 models</small>]
+        
+        style A fill:#4f46e5,stroke:#6366f1,color:#fff
+        style H fill:#7c3aed,stroke:#a78bfa,color:#fff
+        classDef proof fill:#10b981,color:#fff
+        class B,D,G proof
+    </div>
+  </div>
 
         <!-- Latest Proofs Table -->
         <div class="bg-white rounded-2xl shadow-xl overflow-hidden">
