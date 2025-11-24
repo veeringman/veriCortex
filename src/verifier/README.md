@@ -156,14 +156,52 @@ await verifier.lockProof(proofId);
 ---
 ## Calculate proofId off-chain
 
+### *JavaScript*
 ```JavaScript
-
 const proofId = ethers.keccak256(
   ethers.solidityPacked(
     ["string","string","bytes32","address"],
     [modelId, version, proofHash, submitter]
   )
 );
+```
+### *Rust*
+```Rust
+use ethers::prelude::*;
+use ethers::utils::keccak256;
+
+// Types
+type ProofId = H256; // bytes32
+
+fn compute_proof_id(
+    model_id: &str,
+    version: &str,
+    proof_hash: H256,
+    submitter: Address,
+) -> ProofId {
+    // solidityPacked packs exactly like ethers.solidityPacked(...)
+    let packed = abi::encode_packed(&[
+        abi::Token::String(model_id.to_string()),
+        abi::Token::String(version.to_string()),
+        abi::Token::FixedBytes(proof_hash.as_bytes().to_vec()),
+        abi::Token::Address(submitter),
+    ])
+    .expect("Packing failed");
+
+    // keccak256 hash of the packed bytes
+    H256::from(keccak256(packed))
+}
+
+// Example usage
+fn main() {
+    let model_id = "llama-3.1-70b";
+    let version = "v2025.08";
+    let proof_hash = H256::random();
+    let submitter = Address::random();
+
+    let proof_id = compute_proof_id(model_id, version, proof_hash, submitter);
+    println!("Proof ID: {:?}", proof_id);
+}
 ```
 ---
 
