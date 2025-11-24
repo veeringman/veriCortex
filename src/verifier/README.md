@@ -222,11 +222,10 @@ After locking, the record is forever immutable
 ---
 ## License
 
-MIT
 ```license
 MIT License
 
-Copyright (c) 2025 Your Name / Team
+Copyright (c) 2025 Vijay Sharma / Cortex Chain Team
 
 Permission is hereby granted, free of charge, to any person obtaining a copy...
 ```
