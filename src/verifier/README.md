@@ -122,3 +122,14 @@ contract ProofCortexVerifier {
         return proofs[proofId].valid;
     }
 }
+'''
+---
+## Deployment
+
+'''Java Script
+
+const Verifier = await ethers.getContractFactory("ProofCortexVerifier");
+const verifier = await Verifier.deploy("0xYourTrustedService"); // or address(0)
+await verifier.waitForDeployment();
+
+'''
