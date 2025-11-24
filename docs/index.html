@@ -23,22 +23,20 @@
   <script src="https://unpkg.com/lucide@latest"></script>
 
   <!-- Mermaid.js for DAG Graph (lightweight, no build tools) -->
-  <script src="https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.min.js"></script>
-  <script>
-    mermaid.initialize({
-      startOnLoad: true,
-      theme: 'base',
-      themeVariables: {
-        primaryColor: '#6366f1',
-        primaryTextColor: '#fff',
-        primaryBorderColor: '#4f46e5',
-        lineColor: '#818cf8',
-        secondaryColor: '#c084fc',
-        tertiaryColor: '#e0e7ff'
-      },
-      flowchart: { useMaxWidth: true, htmlLabels: true, curve: 'basis' }
-    });
-  </script>
+ <!-- Mermaid.js v10 – always renders reliably -->
+<script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+<script>
+  // Force re-render when section becomes visible
+  const observer = new MutationObserver(() => {
+    if (!document.getElementById('explorer').classList.contains('hidden')) {
+      mermaid.run();
+    }
+  });
+  observer.observe(document.body, { childList: true, subtree: true });
+
+  // Also run on page load and section change
+  document.addEventListener('DOMContentLoaded', () => mermaid.run());
+</script>
 </head>
 <body class="bg-gray-50 text-gray-900 min-h-screen flex">
 
