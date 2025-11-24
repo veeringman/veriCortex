@@ -146,6 +146,154 @@ Below is the architecture schematic illustrating the data flow across these laye
 - **Future-ready scalability** for AI x Blockchain ecosystems  
 
 ---
+## 🏗️ Tech Stack
+
+The **ProofCortex** ecosystem is built using a secure, high-performance, cross-platform architecture that enables cryptographic proof generation, BlockDAG consensus, and multi-platform client dashboards through Rust-powered tooling and WebAssembly interfaces.
+
+---
+
+### 🔹 Core Platform Components
+
+#### **Rust (Primary Language)**
+- Memory-safe, zero-cost abstractions  
+- Ideal for cryptography & parallel compute  
+- Powers the **WASM runtime**
+
+#### **BlockDAG Engine**
+- Multi-block parallelism  
+- High throughput, fast confirmation  
+- Supports all block types (not just ProofCortex proofs)  
+- Provides DAG topology for proof lineage visualization  
+
+#### **ProofCortex Engine (Private Core)**
+- Proof generation  
+- Validation  
+- Data sealing  
+- Modular plugin architecture
+
+#### **Public ProofContext API Layer**
+- Middleware between ProofCortex Engine & BlockDAG  
+- REST + GraphQL  
+- Public verification gateway & indexer
+
+---
+
+### 🔹 Cryptography & Verification
+
+#### **Hashing**
+- SHA-256  
+- Keccak-256  
+- Blake2b (internal state hashing)
+
+#### **Commitment Structures**
+- Merkle Trees  
+- Sparse Merkle Trees  
+- Multi-proof batching
+
+#### **Digital Signatures**
+- secp256k1  
+- Ed25519  
+
+#### **WASM Runtime**
+- `wasm-bindgen` for Rust → JS interaction  
+- Browser-side proof validation  
+- Wallet integration via JS glue
+
+---
+
+### 🔹 User Interface & Dashboard
+
+#### **Dioxus**
+- Rust-based unified UI framework  
+- Targets: Web, iOS, Android, Desktop  
+
+#### **TailwindCSS**
+- Responsive, component-first styling  
+
+#### **D3.js / Graphviz (WASM build)**
+- DAG visualization engine  
+- Proof lineage graph rendering  
+
+#### **Web3 Integration**
+- `ethers.js`  
+- WalletConnect / MetaMask  
+- WASM signing bridge
+
+---
+
+### 🔹 API & Backend Services
+
+#### **Axum**
+- High-performance async Rust server  
+- Public API gateway  
+- Auth + rate-limit layer
+
+#### **Tokio**
+- Async runtime  
+- Node networking & DAG synchronization
+
+#### **Serde**
+- Serialization (JSON + binary)
+
+#### **reqwest**
+- Internal & external service fetchers
+
+---
+
+### 🔹 Data & Storage
+
+#### **PostgreSQL**
+- Canonical metadata database  
+- Proof registry + query index
+
+#### **RocksDB / sled**
+- High-speed embedded state DB  
+- Optimized for parallel writes
+
+#### **Object Storage**
+- MinIO / S3 / GCS  
+- Stores large proof artifacts  
+- SHA-256
+
+### 🔹 Security Stack
+
+- JWT / OAuth2  
+- WAF + rate limiting  
+- HSM-backed key management  
+- Encrypted proof channels  
+- Anti-replay wallet signature protection  
+
+---
+
+## 📦 SDKs
+
+### **Rust SDK**
+- Local proof generation  
+- DAG event subscriptions  
+- WASM targets for browser & mobile
+
+### **TypeScript / JavaScript SDK**
+- Browser proof submission  
+- Wallet-based signing  
+- Lightweight verifier client
+
+### **Python SDK**
+- Batch verification  
+- DS/ML integrations  
+- Automation tooling
+
+### **Go SDK**
+- Backend integrations  
+- Node communication  
+- Lightweight proof validators
+
+### **Swift / Kotlin Mobile SDKs**
+- Native iOS / Android integration  
+- WASM wrapper  
+- Local cache + signing utilities
+
+---
+
 ## Post-Buildathon Roadmap
 
 After the Buildathon submission, ProofCortex will transition from a functional prototype into a production-grade, multi-layer verification stack. The following roadmap outlines the key phases:
@@ -155,7 +303,7 @@ After the Buildathon submission, ProofCortex will transition from a functional p
 - Add optimized execution layers with caching, SIMD, and sandboxing.  
 - Introduce multi-language WASM bindings (Python, JS, Rust).
 
-### **2. Full Prooffier Engine (Off-Chain & On-Chain)**
+### **2. Full Verifier Engine (Off-Chain & On-Chain)**
 - Upgrade proof format to support richer trace checkpoints.  
 - Integrate SNARK/STARK proof experiments for long-term trustlessness.  
 - Add multi-chain compatibility beyond BlockDAG (EVM & non-EVM).
