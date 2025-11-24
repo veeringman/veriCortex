@@ -353,6 +353,6 @@ Stay tuned for contribution guidelines and module specifications.
 
 ---
 ---
-*ProofCortex — Making AI Verifiable.*
+#### *ProofCortex — Making AI Verifiable.*
 ---
 ---
