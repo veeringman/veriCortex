@@ -117,7 +117,7 @@ The architecture can be viewed in three main layers:
 - Captures execution traces and generates cryptographic or ZK proofs of correctness.
 - Interfaces with the ProofCortex API for job orchestration and proof submission.
 
-### 2. Prooffication Layer (On-Chain)
+### 2. Verification Layer (On-Chain)
 - Receives proofs from off-chain nodes and validates them via verifier smart agents.
 - Anchors results onto the BlockDAG ledger, maintaining causal ordering.
 - Supports concurrent submissions, minimizing latency and maximizing throughput.
@@ -133,7 +133,7 @@ The architecture can be viewed in three main layers:
 
 Below is the architecture schematic illustrating the data flow across these layers:
 <p align="left">
-  <img src="assets/veriCortex.png" alt="ProofCortex Arch"/>
+  <img src="assets/ProoCortexArchGlow.png" alt="ProofCortex Arch"/>
 </p>
 
 ---
