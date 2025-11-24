@@ -6,7 +6,7 @@
 </picture>
 </p>
 
-**Trust Layer for AI — Prooffiable Intelligence on BlockDAG**
+**Trust Layer for AI — Verifiable Intelligence on BlockDAG**
 
 > **⚠️ Project Notice:**
 > This project is being renamed to **ProofCortex**. At few places ProofCortex and VeriCortex names may have been used interchangebly.
@@ -203,5 +203,5 @@ Stay tuned for contribution guidelines and module specifications.
 
 
 ---
-*ProofCortex — Making AI Prooffiable.*
+*ProofCortex — Making AI Verifiable.*
 ---
