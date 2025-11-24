@@ -127,8 +127,8 @@ contract ProofCortexVerifier {
 ---
 ## Deployment
 
-```Java Script
-
+```Javascript
+//JavaScript
 const Verifier = await ethers.getContractFactory("ProofCortexVerifier");
 const verifier = await Verifier.deploy("0xYourTrustedService"); // or address(0)
 await verifier.waitForDeployment();
@@ -138,7 +138,7 @@ await verifier.waitForDeployment();
 ## Quick Usage
 
 ```JavaScript
-
+//JavaScript
 await verifier.submitProof(
   "llama-3.1-70b",
   "v2025.08",
@@ -152,4 +152,43 @@ await verifier.submitProof(
 // If needed later
 await verifier.updateProofResult(proofId, false);
 await verifier.lockProof(proofId);
+```
+---
+## Calculate proofId off-chain
+
+```JavaScript
+
+const proofId = ethers.keccak256(
+  ethers.solidityPacked(
+    ["string","string","bytes32","address"],
+    [modelId, version, proofHash, submitter]
+  )
+);
+```
+---
+
+## Events
+```
+ProofSubmitted(bytes32 indexed proofId, address indexed submitter, string modelId, bool valid)
+ProofUpdated(bytes32 indexed proofId, bool valid, uint256 timestamp)
+ProofAnchored(bytes32 indexed proofId, bytes32 proofHash, uint256 time)
+```
+
+---
+## Security Notes
+
+Contract only anchors hashes – it trusts the trustedSubmitter
+Validity is mutable until lockProof() is called
+After locking, the record is forever immutable
+
+---
+## License
+
+MIT
+```
+MIT License
+
+Copyright (c) 2025 Your Name / Team
+
+Permission is hereby granted, free of charge, to any person obtaining a copy...
 ```
