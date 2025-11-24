@@ -122,14 +122,34 @@ contract ProofCortexVerifier {
         return proofs[proofId].valid;
     }
 }
-'''
+```
+
 ---
 ## Deployment
 
-'''Java Script
+```Java Script
 
 const Verifier = await ethers.getContractFactory("ProofCortexVerifier");
 const verifier = await Verifier.deploy("0xYourTrustedService"); // or address(0)
 await verifier.waitForDeployment();
 
-'''
+```
+----
+## Quick Usage
+
+```JavaScript
+
+await verifier.submitProof(
+  "llama-3.1-70b",
+  "v2025.08",
+  inputHash,
+  outputHash,
+  traceHash,
+  proofBundleHash,
+  true
+);
+
+// If needed later
+await verifier.updateProofResult(proofId, false);
+await verifier.lockProof(proofId);
+```
