@@ -32,7 +32,7 @@ To make **AI provable, trustworthy, and censorship-resistant** — enabling secu
 
 | Concept | Description |
 |----------|--------------|
-| **Prooffiable AI** | Confirm AI outputs are correct &amp; untampered |
+| **Verifiable AI** | Confirm AI outputs are correct &amp; untampered |
 | **AI Proof Layer** | Prooffy proofs of execution &amp; inference integrity |
 | **On-chain Prooffier** | Minimal smart-contract verifier on BlockDAG |
 | **Off-chain Runtime** | Secure WASM execution &amp; proof pipeline |
@@ -133,7 +133,7 @@ The architecture can be viewed in three main layers:
 
 Below is the architecture schematic illustrating the data flow across these layers:
 <p align="left">
-  <img src="assets/IMG_0964.jpeg" alt="ProofCortex Arch" width=60% />
+  <img src="assets/IMG_0964.jpeg" alt="ProofCortex Arch" width=75% width=80% />
 </p>
 
 ---
