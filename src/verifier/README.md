@@ -206,7 +206,7 @@ fn main() {
 ---
 
 ## Events
-```
+```solidity
 ProofSubmitted(bytes32 indexed proofId, address indexed submitter, string modelId, bool valid)
 ProofUpdated(bytes32 indexed proofId, bool valid, uint256 timestamp)
 ProofAnchored(bytes32 indexed proofId, bytes32 proofHash, uint256 time)
@@ -223,7 +223,7 @@ After locking, the record is forever immutable
 ## License
 
 MIT
-```
+```license
 MIT License
 
 Copyright (c) 2025 Your Name / Team
