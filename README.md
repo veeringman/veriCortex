@@ -133,7 +133,7 @@ The architecture can be viewed in three main layers:
 
 Below is the architecture schematic illustrating the data flow across these layers:
 <p align="left">
-  <img src="assets/ProoCortexArchGlow.png" alt="ProofCortex Arch" width=150px />
+  <img src="assets/ProoCortexArchGlow.png" alt="ProofCortex Arch" width=60% />
 </p>
 
 ---
