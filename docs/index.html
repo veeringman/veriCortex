@@ -153,7 +153,131 @@
       </section>
 
       <!-- OTHER SECTIONS (same pattern) -->
-      <section id="registry" class="content-section hidden"><h3 class="text-2xl font-bold">Model Registry</h3><p class="text-gray-600 mt-6">On-chain model artifacts, weights, and verification rules...</p></section>
+      <!-- MODEL REGISTRY SECTION – FLAGSHIP QUALITY -->
+<section id="registry" class="content-section hidden">
+  <div class="max-w-7xl mx-auto">
+    <div class="mb-10">
+      <h3 class="text-3xl font-bold text-gray-800">Model Registry</h3>
+      <p class="text-gray-600 mt-3 text-lg">Immutable on-chain registry of model artifacts, weights, schemas, and verification rules</p>
+    </div>
+
+    <!-- Registry Stats -->
+    <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-10">
+      <div class="bg-gradient-to-br from-indigo-500 to-purple-600 text-white rounded-2xl p-7 shadow-xl">
+        <p class="text-indigo-100 text-sm">Total Registered Models</p>
+        <p class="text-5xl font-bold mt-3">12</p>
+      </div>
+      <div class="bg-white rounded-2xl shadow-lg p-7 border border-gray-100">
+        <p class="text-gray-500 text-sm">Total Artifacts</p>
+        <p class="text-4xl font-bold text-indigo-amber-600 mt-2">47</p>
+      </div>
+      <div class="bg-white rounded-2xl shadow-lg p-7 border border-gray-100">
+        <p class="text-gray-500 text-sm">Verification Rules</p>
+        <p class="text-4xl font-bold text-emerald-600 mt-2">28</p>
+      </div>
+      <div class="bg-white rounded-2xl shadow-lg p-7 border border-gray-100">
+        <p class="text-gray-500 text-sm">Storage (IPFS)</p>
+        <p class="text-3xl font-bold text-gray-700 mt-2">2.8 TB</p>
+      </div>
+    </div>
+
+    <!-- Registry Table -->
+    <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-indigo-100">
+      <div class="px-8 py-6 bg-gradient-to-r from-indigo-600 to-purple-600 text-white flex justify-between items-center">
+        <h4 class="text-2xl font-bold">Registered Models & Artifacts</h4>
+        <button class="px-6 py-3 bg-white/20 backdrop-blur hover:bg-white/30 rounded-xl transition font-medium">
+          Register New Model
+        </button>
+      </div>
+
+      <div class="overflow-x-auto">
+        <table class="w-full">
+          <thead class="bg-gray-50 border-b">
+            <tr>
+              <th class="px-8 py-5 text-left text-sm font-semibold text-gray-700">Model</th>
+              <th class="px-8 py-5 text-center text-sm font-semibold text-gray-700">Version</th>
+              <th class="px-8 py-5 text-center text-sm font-semibold text-gray-700">Artifacts</th>
+              <th class="px-8 py-5 text-center text-sm font-semibold text-gray-700">IPFS CID</th>
+              <th class="px-8 py-5 text-center text-sm font-semibold text-gray-700">Registered</th>
+              <th class="px-8 py-5 text-center text-sm font-semibold text-gray-700">Status</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-gray-200">
+            <tr class="hover:bg-indigo-50 transition cursor-pointer">
+              <td class="px-8 py-6">
+                <div class="flex items-center gap-4">
+                  <div class="w-12 h-12 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center text-white font-bold">LLM</div>
+                  <div>
+                    <p class="font-semibold">LLM Assistant Enterprise</p>
+                    <p class="text-sm text-gray-500">70B parameter model</p>
+                  </div>
+                </div>
+              </td>
+              <td class="text-center font-mono text-sm">v2025.08.15</td>
+              <td class="text-center">Weights • Schema • WASM</td>
+              <td class="text-center font-mono text-xs text-gray-600">bafybei...x7p2</td>
+              <td class="text-center text-sm text-gray-600">Aug 15, 2025</td>
+              <td class="text-center"><span class="px-4 py-1.5 bg-emerald-100 text-emerald-800 rounded-full text-xs font-bold">VERIFIED</span></td>
+            </tr>
+
+            <tr class="hover:bg-indigo-50 transition cursor-pointer">
+              <td class="px-8 py-6">
+                <div class="flex items-center gap-4">
+                  <div class="w-12 h-12 bg-gradient-to-br from-amber-500 to-orange-600 rounded-xl flex items-center justify-center text-white font-bold">FD</div>
+                  <div>
+                    <p class="font-semibold">Transaction Fraud Detector</p>
+                    <p class="text-sm text-gray-500">XGBoost ensemble</p>
+                  </div>
+                </div>
+              </td>
+              <td class="text-center font-mono text-sm">v3.2.1</td>
+              <td class="text-center">Weights • Rules • Trace</td>
+              <td class="text-center font-mono text-xs text-gray-600">bafybei...k9m4</td>
+              <td class="text-center text-sm text-gray-600">Aug 10, 2025</td>
+              <td class="text-center"><span class="px-4 py-1.5 bg-emerald-100 text-emerald-800 rounded-full text-xs font-bold">VERIFIED</span></td>
+            </tr>
+
+            <tr class="hover:bg-indigo-50 transition cursor-pointer">
+              <td class="px-8 py-6">
+                <div class="flex items-center gap-4">
+                  <div class="w-12 h-12 bg-gradient-to-br from-teal-500 to-cyan-600 rounded-xl flex items-center justify-center text-white font-bold">CR</div>
+                  <div>
+                    <p class="font-semibold">Credit Risk Scoring v1</p>
+                    <p class="text-sm text-gray-500">Neural net + rules engine</p>
+                  </div>
+                </div>
+              </td>
+              <td class="text-center font-mono text-sm">v1.8.0</td>
+              <td class="text-center">Weights • Schema</td>
+              <td class="text-center font-mono text-xs text-gray-600">bafybei...z3q8</td>
+              <td class="text-center text-sm text-gray-600">Jul 28, 2025</td>
+              <td class="text-center"><span class="px-4 py-1.5 bg-amber-100 text-amber-800 rounded-full text-xs font-bold">PENDING</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Verification Rules Summary -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-10">
+      <div class="bg-gradient-to-br from-emerald-500 to-teal-600 text-white rounded-2xl p-8 shadow-xl">
+        <h5 class="text-xl font-bold mb-4">Active Verification Rules</h5>
+        <p class="text-4xl font-bold">28</p>
+        <p class="text-emerald-100 mt-2">Across 12 models</p>
+      </div>
+      <div class="bg-gradient-to-br from-purple-500 to-pink-600 text-white rounded-2xl p-8 shadow-xl">
+        <h5 class="text-xl font-bold mb-4">Total Weight Hashes</h5>
+        <p class="text-4xl font-bold">47</p>
+        <p class="text-purple-100 mt-2">Pinned on IPFS + Arweave</p>
+      </div>
+      <div class="bg-gradient-to-br from-indigo-500 to-blue-600 text-white rounded-2xl p-8 shadow-xl text-white rounded-2xl">
+        <h5 class="text-xl font-bold mb-4">Registry Uptime</h5>
+        <p class="text-4xl font-bold">99.99%</p>
+        <p class="text-indigo-100 mt-2">Last 90 days</p>
+      </div>
+    </div>
+  </div>
+</section>
       <section id="proofs" class="content-section hidden">
         <h3 class="text-2xl font-bold">Proof Submissions</h3>
         <div class="grid md:grid-cols-2 gap-8 mt-6">
