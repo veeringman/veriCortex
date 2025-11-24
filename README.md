@@ -2,7 +2,7 @@
   <picture>
   <source media="(prefers-color-scheme: dark)" srcset="assets/IMG_0950.jpeg">
   <source media="(prefers-color-scheme: light)" srcset="assets/IMG_0950.jpeg">
-  <img alt="ProofCortex Logo" src="assets/IMG_0948.jpeg" >
+  <img alt="ProofCortex Logo" src="assets/IMG_0948.jpeg" width=300px>
 </picture>
 </p>
 
