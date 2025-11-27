@@ -1,0 +1,21 @@
+Following updates are made during Wave 2
+
+1. Development of ProofCortex Dashboard Web Interface - Wireframes Demo Version
+
+Live at https://proofcortex.com
+
+2. Initial Draft of ProofCortex On-Chain Verifier Smart Contract for BlockDAG Network 
+
+Source Code and Documentation available at https://github.com/veeringman/ProofCortex/tree/main/packages/verifier
+
+3. ProofCortex Public APIs
+
+Starter Project at https://github.com/veeringman/ProofCortex/tree/main/packages/api 
+
+3. SDKs for ProofCortex
+
+Starter project at https://github.com/veeringman/ProofCortex/tree/main/packages/sdk
+
+4. Complete Project Documentation README covering all details including Architecture, Tech Stack.
+
+Available at https://github.com/veeringman/ProofCortex/tree/main
