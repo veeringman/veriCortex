@@ -505,7 +505,132 @@
 
       <!-- Include all other sections (proofs, wallet, settings) as before with minor spacing fixes -->
       <!-- They are already mostly responsive, just ensure no fixed widths -->
-
+      <section id="wallet" class="content-section hidden">
+        <h3 class="text-2xl font-bold">Wallet</h3>
+        <button class="mt-8 bg-indigo-600 hover:bg-indigo-700 text-white px-10 py-4 rounded-xl text-lg font-medium shadow-lg transition">
+          Connect Wallet (MetaMask / WalletConnect)
+        </button>
+      </section>
+      <section id="settings" class="content-section hidden">
+        <div class="max-w-5xl mx-auto">
+          <h3 class="text-3xl font-bold text-gray-800 mb-10">Settings</h3>
+      
+          <div class="space-y-8">
+      
+            <!-- 1. Profile & Account -->
+            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+              <div class="px-8 py-5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white">
+                <h4 class="text-xl font-bold">Account</h4>
+              </div>
+              <div class="p-8">
+                <div class="flex items-center gap-6 mb-8">
+                  <div class="w-24 h-24 rounded-2xl bg-gradient-to-br from-indigo-500 to-purple-600 flex items-center justify-center text-white text-3xl font-bold shadow-xl">
+                    VV
+                  </div>
+                  <div>
+                    <p class="text-2xl font-semibold">Veer Vijay</p>
+                    <p class="text-gray-600">veer.vijay@proofcortex.com</p>
+                    <p class="text-sm text-gray-500 mt-500 mt-1">Organization: ProofCortex Labs • Admin Role</p>
+                  </div>
+                </div>
+                <button class="px-6 py-3 bg-indigo-600 text-white rounded-xl hover:bg-indigo-700 transition shadow-md">
+                  Update Profile
+                </button>
+              </div>
+            </div>
+      
+            <!-- 2. Appearance (Theme Toggle) -->
+            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-8">
+              <h4 class="text-xl font-semibold mb-6">Appearance</h4>
+              <div class="flex items-center justify-between">
+                <div>
+                  <p class="font-medium">Dark Mode</p>
+                  <p class="text-sm text-gray-600">Reduce eye strain in low-light environments</p>
+                </div>
+                <label class="relative inline-flex items-center cursor-pointer">
+                  <input type="checkbox" id="theme-toggle" class="sr-only peer">
+                  <div class="w-14 h-8 bg-gray-300 peer-focus:outline-none rounded-full peer peer-checked:after:translate-x-full after:content-[''] after:absolute after:top-1 after:left-1 after:bg-white after:rounded-full after:h-6 after:w-6 after:transition-all peer-checked:bg-indigo-600"></div>
+                </label>
+              </div>
+            </div>
+      
+            <!-- 3. Notifications -->
+            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 p-8">
+              <h4 class="text-xl font-semibold mb-6">Notifications</h4>
+              <div class="space-y-5">
+                <label class="flex items-center justify-between cursor-pointer">
+                  <div>
+                    <p class="font-medium">New Proof Submission</p>
+                    <p class="text-sm text-gray-600">When a model submits a proof</p>
+                  </div>
+                  <input type="checkbox" checked class="w-5 h-5 text-indigo-600 rounded focus:ring-indigo-500">
+                </label>
+                <label class="flex items-center justify-between cursor-pointer">
+                  <div>
+                    <p class="font-medium">Failed Proof Alert</p>
+                    <p class="text-sm text-gray-600">Immediate alert on verification failure</p>
+                  </div>
+                  <input type="checkbox" checked class="w-5 h-5 text-red-600 rounded focus:ring-red-500">
+                </label>
+                <label class="flex items-center justify-between cursor-pointer">
+                  <div>
+                    <p class="font-medium">Model Drift Detected</p>
+                    <p class="text-sm text-gray-600">When trust score drops >3%</p>
+                  </div>
+                  <input type="checkbox" checked class="w-5 h-5 text-amber-600 rounded focus:ring-amber-500">
+                </label>
+                <label class="flex items-center justify-between cursor-pointer">
+                  <div>
+                    <p class="font-medium">Weekly Summary</p>
+                    <p class="text-sm text-gray-600">Every Monday at 9 AM</p>
+                  </div>
+                  <input type="checkbox" class="w-5 h-5 text-indigo-600 rounded focus:ring-indigo-500">
+                </label>
+              </div>
+            </div>
+      
+            <!-- 4. API Keys -->
+            <div class="bg-white rounded-2xl shadow-lg border border-gray-100 overflow-hidden">
+              <div class="px-8 py-5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white">
+                <h4 class="text-xl font-bold">API Access</h4>
+              </div>
+              <div class="p-8 space-y-6">
+                <div class="flex justify-between items-center">
+                  <div>
+                    <p class="font-medium">Production API Key</p>
+                    <p class="text-sm font-mono bg-gray-100 px-3 py-1 rounded mt-1">pk_live_************************7890</p>
+                  </div>
+                  <div class="flex gap-3">
+                    <button onclick="navigator.clipboard.writeText('pk_live_************************7890')" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition">Copy</button>
+                    <button class="px-4 py-2 bg-red-100 text-red-700 hover:bg-red-200 rounded-lg transition">Revoke</button>
+                  </div>
+                </div>
+                <hr class="border-gray-200">
+                <div class="flex justify-between items-center">
+                  <div>
+                    <p class="font-medium">Test API Key</p>
+                    <p class="text-sm font-mono bg-gray-100 px-3 py-1 rounded mt-1">sk_test_************************1234</p>
+                  </div>
+                  <button onclick="navigator.clipboard.writeText('sk_test_************************1234')" class="px-4 py-2 bg-gray-100 hover:bg-gray-200 rounded-lg transition">Copy</button>
+                </div>
+                <button class="w-full mt-6 px-6 py-3 bg-indigo-600 text-white rounded-xl hover:bg-indigo-700 transition shadow-md font-medium">
+                  Generate New Key
+                </button>
+              </div>
+            </div>
+      
+            <!-- 5. Danger Zone -->
+            <div class="bg-white rounded-2xl shadow-lg border border-red-200 p-8">
+              <h4 class="text-xl font-semibold text-red-700 mb-4">Danger Zone</h4>
+              <p class="text-gray-600 mb-6">Irreversible actions</p>
+              <button class="px-6 py-3 bg-red-600 text-white rounded-xl hover:bg-red-700 transition shadow-md">
+                Deactivate Account
+              </button>
+            </div>
+      
+          </div>
+        </div>
+      </section>  
     </main>
   </div>
 
