@@ -402,10 +402,112 @@
             <button class="bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-xl">Search</button>
           </div>
         </div>
-
+        <!-- Stats Cards -->
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-5 mb-8">
+          <div class="bg-white rounded-xl shadow p-5 text-center"><p class="text-gray-500 text-sm">Current Tipset</p><p class="text-2xl font-bold text-indigo-600">#12,847</p></div>
+          <div class="bg-white rounded-xl shadow p-5 text-center"><p class="text-gray-500 text-sm">Total Proofs</p><p class="text-2xl font-bold text-indigo-600">184</p></div>
+          <div class="bg-white rounded-xl shadow p-5 text-center"><p class="text-gray-500 text-sm">Active Models</p><p class="text-2xl font-bold text-indigo-600">12</p></div>
+          <div class="bg-white rounded-xl shadow p-5 text-center"><p class="text-gray-500 text-sm">Network Health</p><p class="text-2xl font-bold text-green-600">Healthy</p></div>
+        </div>
         <div class="bg-white rounded-2xl shadow-xl p-6 lg:p-8 border border-indigo-100 overflow-x-auto">
+           <!-- Clean Mermaid code – no init comment needed -->
           <div class="mermaid">
-            <!-- DAG unchanged -->
+            graph TD
+              A[Tip #12847<br><small>3 proofs</small>] --> D
+              A --> E
+              B[Tip #12846<br><small>LLM Proof #234</small>] --> D
+              C[Tip #12845<br><small>Fraud Model</small>] --> D
+              C --> F
+              D[Tip #12844<br><small>2 proofs</small>] --> G
+              E --> G
+              F --> G
+              G[Tip #12843<br><small>Credit Risk</small>] --> H
+              H[Current Head<br><small>4 proofs • 2 models</small>]
+      
+              style A fill:#4f46e5,stroke:#6366f1,color:#fff
+              style H fill:#7c3aed,stroke:#a78bfa,color:#fff
+              style B fill:#10b981,color:#fff
+              style D fill:#10b981,color:#fff
+              style G fill:#10b981,color:#fff
+          </div>
+        </div>
+        <!-- Latest Proofs Table – Fully Mobile Adaptive -->
+        <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-indigo-100">
+          <div class="px-6 py-5 bg-gradient-to-r from-indigo-600 to-purple-600 text-white">
+            <h4 class="text-xl font-bold">Latest On-Chain Proof Records</h4>
+          </div>
+        
+          <!-- Desktop Table (hidden on <lg screens) -->
+          <div class="hidden lg:block overflow-x-auto">
+            <table class="w-full">
+              <thead class="bg-gray-50 border-b">
+                <tr>
+                  <th class="px-6 py-4 text-left text-sm font-medium text-gray-700">Proof ID</th>
+                  <th class="px-6 py-4 text-left text-sm font-medium text-gray-700">Model</th>
+                  <th class="px-6 py-4 text-left text-sm font-medium text-gray-700">Status</th>
+                  <th class="px-6 py-4 text-left text-sm font-medium text-gray-700">Time</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-200">
+                <tr class="hover:bg-indigo-50 transition">
+                  <td class="px-6 py-4 font-mono text-sm">0x9f1a...c3f2</td>
+                  <td class="px-6 py-4">LLM Assistant</td>
+                  <td class="px-6 py-4"><span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-medium">Valid</span></td>
+                  <td class="px-6 py-4 text-sm text-gray-600">2 min ago</td>
+                </tr>
+                <tr class="hover:bg-indigo-50 transition">
+                  <td class="px-6 py-4 font-mono text-sm">0x8e2b...d9a1</td>
+                  <td class="px-6 py-4">Fraud Detector</td>
+                  <td class="px-6 py-4"><span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-medium">Valid</span></td>
+                  <td class="px-6 py-4 text-sm text-gray-600">8 min ago</td>
+                </tr>
+                <tr class="hover:bg-indigo-50 transition">
+                  <td class="px-6 py-4 font-mono text-sm">0x1f4c...7e8d</td>
+                  <td class="px-6 py-4">Credit Risk v1</td>
+                  <td class="px-6 py-4"><span class="px-3 py-1 bg-red-100 text-red-800 rounded-full text-xs font-medium">Failed</span></td>
+                  <td class="px-6 py-4 text-sm text-gray-600">15 min ago</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        
+          <!-- Mobile/Tablet Card View (visible only on <lg screens) -->
+          <div class="lg:hidden divide-y divide-gray-200">
+            <!-- Proof 1 -->
+            <div class="p-5 hover:bg-indigo-50 transition">
+              <div class="flex justify-between items-start mb-3">
+                <div class="flex-1">
+                  <p class="font-mono text-sm font-semibold text-indigo-600">0x9f1a...c3f2</p>
+                  <p class="text-gray-700 font-medium mt-1">LLM Assistant</p>
+                </div>
+                <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-bold">Valid</span>
+              </div>
+              <p class="text-xs text-gray-500">2 min ago</p>
+            </div>
+        
+            <!-- Proof 2 -->
+            <div class="p-5 hover:bg-indigo-50 transition">
+              <div class="flex justify-between items-start mb-3">
+                <div class="flex-1">
+                  <p class="font-mono text-sm font-semibold text-indigo-600">0x8e2b...d9a1</p>
+                  <p class="text-gray-700 font-medium mt-1">Fraud Detector</p>
+                </div>
+                <span class="px-3 py-1 bg-green-100 text-green-800 rounded-full text-xs font-bold">Valid</span>
+              </div>
+              <p class="text-xs text-gray-500">8 min ago</p>
+            </div>
+        
+            <!-- Proof 3 -->
+            <div class="p-5 hover:bg-indigo-50 transition">
+              <div class="flex justify-between items-start mb-3">
+                <div class="flex-1">
+                  <p class="font-mono text-sm font-semibold text-indigo-600">0x1f4c...7e8d</p>
+                  <p class="text-gray-700 font-medium mt-1">Credit Risk v1</p>
+                </div>
+                <span class="px-3 py-1 bg-red-100 text-red-800 rounded-full text-xs font-bold">Failed</span>
+              </div>
+              <p class="text-xs text-gray-500">15 min ago</p>
+            </div>
           </div>
         </div>
       </section>
