@@ -430,54 +430,126 @@
       </div>
     </div>
 
-    <!-- Model Trust Leaderboard -->
+    <!-- Model Trust Leaderboard - Fully Responsive -->
     <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-indigo-100">
-      <div class="px-8 py-6 bg-gradient-to-r from-indigo-600 to-purple-600 text-white">
-        <h4 class="text-2xl font-bold">Model Trust Leaderboard</h4>
+      <div class="px-6 py-5 sm:px-8 sm:py-6 bg-gradient-to-r from-indigo-600 to-purple-600 text-white">
+        <h4 class="text-xl sm:text-2xl font-bold">Model Trust Leaderboard</h4>
       </div>
-      <div class="overflow-x-auto -mx-6 lg:mx-0">
-          <div class="inline-block min-w-full align-middle">
-            <div class="overflow-hidden ring-1 ring-black ring-opacity-5 rounded-2xl">
-              <table class="min-w-[900px] w-full">
-              <thead class="bg-gray-50">
-                <tr>
-                  <th class="px-8 py-5 text-left text-sm font-semibold text-gray-700">Model</th>
-                  <th class="px-8 py-5 text-center text-sm font-semibold text-gray-700">Trust Score</th>
-                  <th class="px-8 py-5 text-center text-sm font-semibold text-gray-700">Proofs</th>
-                  <th class="px-8 py-5 text-center text-sm font-semibold text-gray-700">Drift</th>
-                  <th class="px-8 py-5 text-center text-sm font-semibold text-gray-700">Uptime</th>
-                  <th class="px-8 py-5 text-center text-sm font-semibold text-gray-700">Status</th>
-                </tr>
-              </thead>
-              <tbody class="divide-y divide-gray-200">
-                <tr class="hover:bg-indigo-50 transition">
-                  <td class="px-8 py-6 font-medium">LLM Assistant Enterprise</td>
-                  <td class="text-center"><span class="text-2xl font-bold text-emerald-600">98.7%</span></td>
-                  <td class="text-center text-gray-600">104</td>
-                  <td class="text-center"><span class="text-emerald-600 font-medium">None</span></td>
-                  <td class="text-center text-gray-600">99.99%</td>
-                  <td class="text-center"><span class="px-4 py-1.5 bg-emerald-100 text-emerald-800 rounded-full text-xs font-bold">HEALTHY</span></td>
-                </tr>
-                <tr class="hover:bg-indigo-50 transition">
-                  <td class="px-8 py-6 font-medium">Transaction Fraud Detector</td>
-                  <td class="text-center"><span class="text-2xl font-bold text-emerald-600">97.2%</span></td>
-                  <td class="text-center text-gray-600">68</td>
-                  <td class="text-center"><span class="text-amber-600 font-medium">Low</span></td>
-                  <td class="text-center text-gray-600">99.94%</td>
-                  <td class="text-center"><span class="px-4 py-1.5 bg-amber-100 text-amber-800 rounded-full text-xs font-bold">MONITOR</span></td>
-                </tr>
-                <tr class="hover:bg-indigo-50 transition">
-                  <td class="px-8 py-6 font-medium">Credit Risk Scoring v1</td>
-                  <td class="text-center"><span class="text-2xl font-bold text-red-600">89.1%</span></td>
-                  <td class="text-center text-gray-600">12</td>
-                  <td class="text-center"><span class="text-red-600 font-medium">High</span></td>
-                  <td class="text-center text-gray-600">98.2%</td>
-                  <td class="text-center"><span class="px-4 py-1.5 bg-red-100 text-red-800 rounded-full text-xs font-bold">ALERT</span></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
+    
+      <!-- Responsive Table Container -->
+      <div class="overflow-x-auto">
+        <div class="min-w-full align-middle">
+          <table class="min-w-full divide-y divide-gray-200">
+            <thead class="bg-gray-50">
+              <tr>
+                <th class="px-4 py-4 sm:px-6 sm:py-5 text-left text-xs sm:text-sm font-semibold text-gray-700 uppercase tracking-wider">
+                  Model
+                </th>
+                <th class="px-4 py-4 sm:px-6 text-center text-xs sm:text-sm font-semibold text-gray-700 uppercase tracking-wider hidden xs:table-cell">
+                  Trust Score
+                </th>
+                <th class="px-4 py-4 sm:px-6 text-center text-xs sm:text-sm font-semibold text-gray-700 uppercase tracking-wider hidden sm:table-cell">
+                  Proofs
+                </th>
+                <th class="px-4 py-4 sm:px-6 text-center text-xs sm:text-sm font-semibold text-gray-700 uppercase tracking-wider hidden md:table-cell">
+                  Drift
+                </th>
+                <th class="px-4 py-4 sm:px-6 text-center text-xs sm:text-sm font-semibold text-gray-700 uppercase tracking-wider hidden lg:table-cell">
+                  Uptime
+                </th>
+                <th class="px-4 py-4 sm:px-6 text-center text-xs sm:text-sm font-semibold text-gray-700 uppercase tracking-wider">
+                  Status
+                </th>
+              </tr>
+            </thead>
+            <tbody class="bg-white divide-y divide-gray-200">
+              <!-- Row 1 -->
+              <tr class="hover:bg-indigo-50 transition">
+                <td class="px-4 py-5 sm:px-6 text-sm sm:text-base font-medium text-gray-900">
+                  <div class="flex flex-col">
+                    <span class="font-semibold">LLM Assistant Enterprise</span>
+                    <!-- Mobile-only Trust Score -->
+                    <span class="text-lg font-bold text-emerald-600 mt-1 xs:hidden">98.7%</span>
+                  </div>
+                </td>
+                <td class="px-4 py-4 sm:px-6 text-center hidden xs:table-cell">
+                  <span class="text-xl sm:text-2xl font-bold text-emerald-600">98.7%</span>
+                </td>
+                <td class="px-4 py-4 sm:px-6 text-center text-gray-600 hidden sm:table-cell">104</td>
+                <td class="px-4 py-4 sm:px-6 text-center hidden md:table-cell">
+                  <span class="text-emerald-600 font-medium">None</span>
+                </td>
+                <td class="px-4 py-4 sm:px-6 text-center text-gray-600 hidden lg:table-cell">99.99%</td>
+                <td class="px-4 py-4 sm:px-6 text-center">
+                  <span class="inline-flex px-3 py-1.5 text-xs font-bold rounded-full bg-emerald-100 text-emerald-800">
+                    HEALTHY
+                  </span>
+                </td>
+              </tr>
+    
+              <!-- Row 2 -->
+              <tr class="hover:bg-indigo-50 transition">
+                <td class="px-4 py-5 sm:px-6 text-sm sm:text-base font-medium text-gray-900">
+                  <div class="flex flex-col">
+                    <span class="font-semibold">Transaction Fraud Detector</span>
+                    <span class="text-lg font-bold text-emerald-600 mt-1 xs:hidden">97.2%</span>
+                  </div>
+                </td>
+                <td class="px-4 py-4 sm:px-6 text-center hidden xs:table-cell">
+                  <span class="text-xl sm:text-2xl font-bold text-emerald-600">97.2%</span>
+                </td>
+                <td class="px-4 py-4 sm:px-6 text-center text-gray-600 hidden sm:table-cell">68</td>
+                <td class="px-4 py-4 sm:px-6 text-center hidden md:table-cell">
+                  <span class="text-amber-600 font-medium">Low</span>
+                </td>
+                <td class="px-4 py-4 sm:px-6 text-center text-gray-600 hidden lg:table-cell">99.94%</td>
+                <td class="px-4 py-4 sm:px-6 text-center">
+                  <span class="inline-flex px-3 py-1.5 text-xs font-bold rounded-full bg-amber-100 text-amber-800">
+                    MONITOR
+                  </span>
+                </td>
+              </tr>
+    
+              <!-- Row 3 -->
+              <tr class="hover:bg-indigo-50 transition">
+                <td class="px-4 py-5 sm:px-6 text-sm sm:text-base font-medium text-gray-900">
+                  <div class="flex flex-col">
+                    <span class="font-semibold">Credit Risk Scoring v1</span>
+                    <span class="text-lg font-bold text-red-600 mt-1 xs:hidden">89.1%</span>
+                  </div>
+                </td>
+                <td class="px-4 py-4 sm:px-6 text-center hidden xs:table-cell">
+                  <span class="text-xl sm:text-2xl font-bold text-red-600">89.1%</span>
+                </td>
+                <td class="px-4 py-4 sm:px-6 text-center text-gray-600 hidden sm:table-cell">12</td>
+                <td class="px-4 py-4 sm:px-6 text-center hidden md:table-cell">
+                  <span class="text-red-600 font-medium">High</span>
+                </td>
+                <td class="px-4 py-4 sm:px-6 text-center text-gray-600 hidden lg:table-cell">98.2%</td>
+                <td class="px-4 py-4 sm:px-6 text-center">
+                  <span class="inline-flex px-3 py-1.5 text-xs font-bold rounded-full bg-red-100 text-red-800">
+                    ALERT
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
+      </div>
+  </div>
+  
+
+        <!-- Optional: Add this custom class if not using Tailwind's default xs breakpoint -->
+        <style>
+          @media (min-width: 480px) {
+            .xs\\:table-cell {
+              display: table-cell !important;
+            }
+            .xs\\:hidden {
+              display: none !important;
+            }
+          }
+        </style>
       </div>
     </div>
     <!-- Trust Over Time Chart Placeholder (you can replace with Chart.js later) -->
