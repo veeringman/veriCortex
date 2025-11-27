@@ -380,7 +380,27 @@
 
       <!-- All other sections (proofs, trust, explorer, wallet, settings) follow same responsive patterns -->
       <!-- For brevity, only key responsive fixes shown. Full code below includes all. -->
-
+      <section id="proofs" class="content-section hidden">
+        <h3 class="text-2xl font-bold">Proof Submissions</h3>
+        <div class="grid md:grid-cols-2 gap-8 mt-6">
+          <div class="bg-gradient-to-br from-indigo-500 to-purple-600 text-white p-8 rounded-2xl shadow-xl">
+            <h4 class="text-xl font-bold mb-6">Submit New Proof</h4>
+            <div class="space-y-4">
+              <button class="w-full bg-white/20 hover:bg-white/30 backdrop-blur px-5 py-3 rounded-lg transition">Upload Input/Output</button>
+              <button class="w-full bg-white/20 hover:bg-white/30 backdrop-blur px-5 py-3 rounded-lg transition">Generate ZK Proof</button>
+              <button class="w-full bg-white text-indigo-600 hover:bg-gray-100 px-5 py-3 rounded-lg font-semibold transition">Submit to BlockDAG</button>
+            </div>
+          </div>
+          <div class="bg-white rounded-2xl shadow-lg p-8">
+            <h4 class="font-bold text-lg mb-4">Recent Proofs</h4>
+            <ul class="space-y-3">
+              <li class="flex justify-between"><span>Proof #234</span><span class="text-green-600 font-medium">Valid</span></li>
+              <li class="flex justify-between"><span>Proof #233</span><span class="text-green-600 font-medium">Valid</span></li>
+              <li class="flex justify-between"><span>Proof #232</span><span class="text-red-600 font-medium">Failed</span></li>
+            </ul>
+          </div>
+        </div>
+      </section>
       <!-- TRUST SCORES (example of responsive table) -->
       <section id="trust_new" class="content-section hidden">
         <!-- ... header ... -->
