@@ -410,8 +410,15 @@
           <div class="bg-white rounded-xl shadow p-5 text-center"><p class="text-gray-500 text-sm">Network Health</p><p class="text-2xl font-bold text-green-600">Healthy</p></div>
         </div>
         <div class="bg-white rounded-2xl shadow-xl p-6 lg:p-8 border border-indigo-100 overflow-x-auto">
-           <!-- Clean Mermaid code – no init comment needed -->
-          <div class="mermaid">
+          <!-- Mermaid DAG – FIXED & RESPONSIVE -->
+      <div class="bg-white rounded-2xl shadow-xl border border-indigo-100 overflow-hidden">
+        <div class="p-6 lg:p-8">
+          <h4 class="text-xl font-bold mb-6 flex items-center gap-3">
+            Live BlockDAG Structure
+          </h4>
+    
+          <!-- This div will be processed by Mermaid -->
+          <div class="mermaid w-full overflow-x-auto min-h-96">
             graph TD
               A[Tip #12847<br><small>3 proofs</small>] --> D
               A --> E
@@ -422,8 +429,8 @@
               E --> G
               F --> G
               G[Tip #12843<br><small>Credit Risk</small>] --> H
-              H[Current Head<br><small>4 proofs • 2 models</small>]
-      
+              H[Current Head<br><small>4 proofs • 2 models</small>] 
+    
               style A fill:#4f46e5,stroke:#6366f1,color:#fff
               style H fill:#7c3aed,stroke:#a78bfa,color:#fff
               style B fill:#10b981,color:#fff
