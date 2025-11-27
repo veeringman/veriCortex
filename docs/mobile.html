@@ -24,6 +24,7 @@
 
   <!-- Mermaid.js -->
   <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  
   <script>
     mermaid.initialize({
       startOnLoad: true,
@@ -35,7 +36,8 @@
         secondaryColor: '#c084fc',
         tertiaryColor: '#e0e7ff'
       },
-      flowchart: { useMaxWidth: true, htmlLabels: true, curve: 'basis' }
+      flowchart: { useMaxWidth: true, htmlLabels: true, curve: 'basis' },
+      securityLevel: 'loose'   // This is important for <br> and HTML tags to work
     });
 
     const renderDag = () => {
