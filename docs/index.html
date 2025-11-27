@@ -572,18 +572,21 @@
             }
           </style>
         </div>
-        <!-- Trust Over Time Chart Placeholder (you can replace with Chart.js later) -->
+         <!-- Trust Over Time & Drift Heatmap Charts -->
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-10">
-          <div class="bg-white rounded-2xl shadow-xl p-8 border border-indigo-100">
-            <h4 class="text-xl font-bold mb-6">Global Trust Score Trend</h4>
-            <div class="h-64 bg-gradient-to-r from-emerald-50 to-teal-50 rounded-xl flex items-center justify-center border-2 border-dashed border-emerald-200">
-              <p class="text-emerald-700 font-medium">Line chart showing 96.8% with steady upward trend</p>
+          <!-- Chart 1: Global Trust Score Trend (Line Chart) -->
+          <div class="bg-white rounded-2xl shadow-xl p-6 sm:p-8 border border-indigo-100">
+            <h4 class="text-xl font-bold text-gray-800 mb-6">Global Trust Score Trend</h4>
+            <div class="relative">
+              <canvas id="trustTrendChart" height="280"></canvas>
             </div>
           </div>
-          <div class="bg-white rounded-2xl shadow-xl p-8 border border-indigo-100">
-            <h4 class="text-xl font-bold mb-6">Drift Detection Heatmap</h4>
-            <div class="h-64 bg-gradient-to-br from-amber-50 to-red-50 rounded-xl flex items-center justify-center border-2 border-dashed border-amber-200">
-              <p class="text-amber-700 font-medium">One model showing elevated drift in last 48h</p>
+        
+          <!-- Chart 2: Model Drift Heatmap (Horizontal Bar / Heat-style) -->
+          <div class="bg-white rounded-2xl shadow-xl p-6 sm:p-8 border border-indigo-100">
+            <h4 class="text-xl font-bold text-gray-800 mb-6">Drift Detection by Model</h4>
+            <div class="relative">
+              <canvas id="driftHeatmapChart" height="280"></canvas>
             </div>
           </div>
         </div>
@@ -894,6 +897,114 @@
     
     // Also run once on page load in case it's already visible
     mermaid.run();
+  </script>
+    <!-- Include Chart.js from CDN (only once in your <head> or before </body>) -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  
+  <script>
+  // Chart 1: Global Trust Score Trend (Smooth Line Chart)
+  const trustCtx = document.getElementById('trustTrendChart').getContext('2d');
+  new Chart(trustCtx, {
+    type: 'line',
+    data: {
+      labels: ['Nov 20', 'Nov 21', 'Nov 22', 'Nov 23', 'Nov 24', 'Nov 25', 'Nov 26', 'Nov 27', 'Today'],
+      datasets: [{
+        label: 'Global Trust Score',
+        data: [95.2, 95.8, 96.1, 96.4, 96.6, 96.9, 97.3, 97.8, 98.7],
+        borderColor: '#10b981',
+        backgroundColor: 'rgba(16, 185, 129, 0.1)',
+        fill: true,
+        tension: 0.4,
+        pointBackgroundColor: '#10b981',
+        pointBorderColor: '#fff',
+        pointBorderWidth: 3,
+        pointRadius: 6,
+        pointHoverRadius: 8,
+        borderWidth: 3
+      }]
+    },
+    options: {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          backgroundColor: 'rgba(0, 0, 0, 0.8)',
+          cornerRadius: 8,
+          displayColors: false,
+          callbacks: {
+            label: (context) => `Trust Score: ${context.parsed.y}%`
+          }
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: false,
+          min: 94,
+          max: 100,
+          ticks: { callback: (value) => value + '%' }
+        },
+        x: { grid: { display: false } }
+      }
+    }
+  });
+  
+  // Chart 2: Drift Detection Heatmap (Horizontal Bar with Color Intensity)
+  const driftCtx = document.getElementById('driftHeatmapChart').getContext('2d');
+  new Chart(driftCtx, {
+    type: 'bar',
+    data: {
+      labels: [
+        'LLM Assistant Enterprise',
+        'Transaction Fraud Detector',
+        'Credit Risk Scoring v1',
+        'Customer Churn Predictor',
+        'Loan Approval Engine'
+      ],
+      datasets: [{
+        label: 'Drift Intensity (Last 7 Days)',
+        data: [0.02, 0.18, 0.76, 0.09, 0.04],
+        backgroundColor: (context) => {
+          const value = context.parsed.x;
+          if (value < 0.1) return 'rgba(34, 197, 94, 0.8)';   // green-500
+          if (value < 0.4) return 'rgba(251, 191, 36, 0.8)';  // amber-500
+          return 'rgba(239, 68, 68, 0.9)';                    // red-500
+        },
+        borderColor: '#fff',
+        borderWidth: 2,
+        borderRadius: 8,
+        barThickness: 32
+      }]
+    },
+    options: {
+      indexAxis: 'y',
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: {
+        legend: { display: false },
+        tooltip: {
+          callbacks: {
+            label: (context) => {
+              const val = context.parsed.x;
+              const labels = ['None', 'Low', 'Moderate', 'High', 'Critical'];
+              const index = val < 0.2 ? 0 : val < 0.4 ? 1 : val < 0.6 ? 2 : val < 0.8 ? 3 : 4;
+              return `Drift Level: ${labels[index]} (${(val * 100).toFixed(1)}%)`;
+            }
+          }
+        }
+      },
+      scales: {
+        x: {
+          display: false,
+          max: 1
+        },
+        y: {
+          grid: { display: false },
+          ticks: { font: { size: 13 }, color: '#374151' }
+        }
+      }
+    }
+  });
   </script>
 </body>
 </html>
