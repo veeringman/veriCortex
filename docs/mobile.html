@@ -200,15 +200,19 @@
           </div>
 
           <!-- Responsive Table -->
+          <!-- Mobile-Friendly Responsive Table -->
           <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-indigo-100">
-            <div class="p-6 bg-gradient-to-r from-indigo-600 to-purple-600 text-white flex flex-col sm:flex-row justify-between items-start sm:items-center gap- center gap-4">
+            <div class="px-6 py-5 lg:px-8 lg:py-6 bg-gradient-to-r from-indigo-600 to-purple-600 text-white flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
               <h4 class="text-xl lg:text-2xl font-bold">Registered Models & Artifacts</h4>
-              <button class="w-full sm:w-auto px-6 py-3 bg-white/20 hover:bg-white/30 rounded-xl font-medium">Register New Model</button>
+              <button class="w-full sm:w-auto px-6 py-3 bg-white/20 hover:bg-white/30 backdrop-blur rounded-xl font-medium transition">
+                Register New Model
+              </button>
             </div>
-            <div class="overflow-x-auto">
-              <table class="w-full min-w-[800px]"> <!-- min-w ensures horizontal scroll on mobile -->
-                <!-- Table content unchanged -->
-                 <thead class="bg-gray-50 border-b">
+          
+            <!-- Desktop Table (hidden on <lg) -->
+            <div class="hidden lg:block overflow-x-auto">
+              <table class="w-full">
+                <thead class="bg-gray-50 border-b">
                   <tr>
                     <th class="px-8 py-5 text-left text-sm font-semibold text-gray-700">Model</th>
                     <th class="px-8 py-5 text-center text-sm font-semibold text-gray-700">Version</th>
@@ -219,6 +223,7 @@
                   </tr>
                 </thead>
                 <tbody class="divide-y divide-gray-200">
+                  <!-- Row 1 -->
                   <tr class="hover:bg-indigo-50 transition cursor-pointer">
                     <td class="px-8 py-6">
                       <div class="flex items-center gap-4">
@@ -235,7 +240,8 @@
                     <td class="text-center text-sm text-gray-600">Aug 15, 2025</td>
                     <td class="text-center"><span class="px-4 py-1.5 bg-emerald-100 text-emerald-800 rounded-full text-xs font-bold">VERIFIED</span></td>
                   </tr>
-      
+          
+                  <!-- Row 2 -->
                   <tr class="hover:bg-indigo-50 transition cursor-pointer">
                     <td class="px-8 py-6">
                       <div class="flex items-center gap-4">
@@ -252,7 +258,8 @@
                     <td class="text-center text-sm text-gray-600">Aug 10, 2025</td>
                     <td class="text-center"><span class="px-4 py-1.5 bg-emerald-100 text-emerald-800 rounded-full text-xs font-bold">VERIFIED</span></td>
                   </tr>
-      
+          
+                  <!-- Row 3 -->
                   <tr class="hover:bg-indigo-50 transition cursor-pointer">
                     <td class="px-8 py-6">
                       <div class="flex items-center gap-4">
@@ -270,9 +277,84 @@
                     <td class="text-center"><span class="px-4 py-1.5 bg-amber-100 text-amber-800 rounded-full text-xs font-bold">PENDING</span></td>
                   </tr>
                 </tbody>
-                      
               </table>
             </div>
+          
+            <!-- Mobile/Tablet Card View (visible on <lg) -->
+            <div class="lg:hidden divide-y divide-gray-200">
+              <!-- Card 1 -->
+              <div class="p-6 hover:bg-indigo-50 transition">
+                <div class="flex items-center gap-4 mb-4">
+                  <div class="w-14 h-14 bg-gradient-to-br from-purple-500 to-pink-500 rounded-xl flex items-center justify-center text-white text-xl font-bold">LLM</div>
+                  <div>
+                    <p class="font-bold text-lg">LLM Assistant Enterprise</p>
+                    <p class="text-sm text-gray-500">70B parameter model</p>
+                  </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4 text-sm">
+                  <div>
+                    <p class="text-gray-500">Version</p>
+                    <p class="font-mono font-semibold">v2025.08.15</p>
+                  </div>
+                  <div>
+                    <p class="text-gray-500">Artifacts</p>
+                    <p class="font-medium">Weights • Schema • WASM</p>
+                  </div>
+                  <div>
+                    <p class="text-gray-500">IPFS CID</p>
+                    <p class="font-mono text-xs break-all">bafybei...x7p2</p>
+                  </div>
+                  <div>
+                    <p class="text-gray-500">Registered</p>
+                    <p>Aug 15, 2025</p>
+                  </div>
+                </div>
+                <div class="mt-4 text-center">
+                  <span class="inline-block px-5 py-2 bg-emerald-100 text-emerald-800 rounded-full text-sm font-bold">VERIFIED</span>
+                </div>
+              </div>
+          
+              <!-- Card 2 -->
+              <div class="p-6 hover:bg-indigo-50 transition">
+                <div class="flex items-center gap-4 mb-4">
+                  <div class="w-14 h-14 bg-gradient-to-br from-amber-500 to-orange-600 rounded-xl flex items-center justify-center text-white text-xl font-bold">FD</div>
+                  <div>
+                    <p class="font-bold text-lg">Transaction Fraud Detector</p>
+                    <p class="text-sm text-gray-500">XGBoost ensemble</p>
+                  </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4 text-sm">
+                  <div><p class="text-gray-500">Version</p><p class="font-mono font-semibold">v3.2.1</p></div>
+                  <div><p class="text-gray-500">Artifacts</p><p class="font-medium">Weights • Rules • Trace</p></div>
+                  <div><p class="text-gray-500">IPFS CID</p><p class="font-mono text-xs break-all">bafybei...k9m4</p></div>
+                  <div><p class="text-gray-500">Registered</p><p>Aug 10, 2025</p></div>
+                </div>
+                <div class="mt-4 text-center">
+                  <span class="inline-block px-5 py-2 bg-emerald-100 text-emerald-800 rounded-full text-sm font-bold">VERIFIED</span>
+                </div>
+              </div>
+          
+              <!-- Card 3 -->
+              <div class="p-6 hover:bg-indigo-50 transition">
+                <div class="flex items-center gap-4 mb-4">
+                  <div class="w-14 h-14 bg-gradient-to-br from-teal-500 to-cyan-600 rounded-xl flex items-center justify-center text-white text-xl font-bold">CR</div>
+                  <div>
+                    <p class="font-bold text-lg">Credit Risk Scoring v1</p>
+                    <p class="text-sm text-gray-500">Neural net + rules engine</p>
+                  </div>
+                </div>
+                <div class="grid grid-cols-2 gap-4 text-sm">
+                  <div><p class="text-gray-500">Version</p><p class="font-mono font-semibold">v1.8.0</p></div>
+                  <div><p class="text-gray-500">Artifacts</p><p class="font-medium">Weights • Schema</p></div>
+                  <div><p class="text-gray-500">IPFS CID</p><p class="font-mono text-xs break-all">bafybei...z3q8</p></div>
+                  <div><p class="text-gray-500">Registered</p><p>Jul 28, 2025</p></div>
+                </div>
+                <div class="mt-4 text-center">
+                  <span class="inline-block px-5 py-2 bg-amber-100 text-amber-800 rounded-full text-sm font-bold">PENDING</span>
+                </div>
+              </div>
+            </div>
+          </div>
           </div>
         </div>
       </section>
