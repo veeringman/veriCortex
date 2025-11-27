@@ -567,5 +567,24 @@
     // Default active
     document.querySelector('.menu-item').click();
   </script>
+  <script>
+    // Re-initialize Mermaid every time the Explorer tab becomes visible
+    const observer = new MutationObserver((mutations) => {
+      mutations.forEach((mutation) => {
+        if (mutation.type === 'attributes' && mutation.attributeName === 'class') {
+          const explorer = document.getElementById('explorer');
+          if (explorer && !explorer.classList.contains('hidden')) {
+            setTimeout(() => mermaid.run(), 100);
+          }
+        }
+      });
+    });
+    
+    // Watch the explorer section for class changes (when it becomes visible)
+    observer.observe(document.getElementById('explorer'), { attributes: true });
+    
+    // Also run once on page load in case it's already visible
+    mermaid.run();
+  </script>
 </body>
 </html>
