@@ -382,19 +382,121 @@
       <!-- For brevity, only key responsive fixes shown. Full code below includes all. -->
 
       <!-- TRUST SCORES (example of responsive table) -->
-      <section id="trust" class="content-section hidden">
+      <section id="trust_new" class="content-section hidden">
         <!-- ... header ... -->
         <div class="overflow-x-auto -mx-6 lg:mx-0">
           <div class="inline-block min-w-full align-middle">
             <div class="overflow-hidden ring-1 ring-black ring-opacity-5 rounded-2xl">
               <table class="min-w-[900px] w-full">
-                <!-- responsive table with horizontal scroll on mobile -->
-              </table>
-            </div>
+                  <!-- responsive table with horizontal scroll on mobile -->
+                </table>
+              </div>
           </div>
         </div>
       </section>
+      <!-- TRUST SCORES SECTION – BEAUTIFUL & PROFESSIONAL -->
+<section id="trust" class="content-section hidden">
+  <div class="max-w-7xl mx-auto">
+    <div class="flex justify-between items-center mb-10">
+      <div>
+        <h3 class="text-3xl font-bold text-gray-800">Trust Scores & Model Health</h3>
+        <p class="text-gray-600 mt-2">Real-time confidence, drift detection, and historical stability across all registered models</p>
+      </div>
+      <div class="flex gap-4">
+        <button class="px-5 py-2.5 bg-white border border-gray-300 rounded-xl hover:bg-gray-50 transition">Last 24h</button>
+        <button class="px-5 py-2.5 bg-indigo-600 text-white rounded-xl shadow-md hover:bg-indigo-700 transition">Last 7 days</button>
+        <button class="px-5 py-2.5 bg-white border border-gray-300 rounded-xl hover:bg-gray-50 transition">Last 30 days</button>
+      </div>
+    </div>
 
+    <!-- Overall Network Trust -->
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-10">
+      <div class="bg-gradient-to-br from-emerald-500 to-teal-600 text-white rounded-2xl p-8 shadow-lg">
+        <p class="text-emerald-100 text-sm">Global Trust Score</p>
+        <p class="text-5xl font-bold mt-3">96.8%</p>
+        <p class="text-emerald-100 text-sm mt-2">+0.4% from yesterday</p>
+      </div>
+      <div class="bg-white rounded-2xl shadow-lg p-8 border border-gray-100">
+        <p class="text-gray-500 text-sm">Active Models</p>
+        <p class="text-4xl font-bold text-indigo-600 mt-2">12</p>
+      </div>
+      <div class="bg-white rounded-2xl shadow-lg p-8 border border-gray-100">
+        <p class="text-gray-500 text-sm">Drift Alerts</p>
+        <p class="text-4xl font-bold text-amber-600 mt-2">1</p>
+      </div>
+      <div class="bg-white rounded-2xl shadow-lg p-8 border border-gray-100">
+        <p class="text-gray-500 text-sm">Failed Proofs (7d)</p>
+        <p class="text-4xl font-bold text-red-600 mt-2">3</p>
+      </div>
+    </div>
+
+    <!-- Model Trust Leaderboard -->
+    <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-indigo-100">
+      <div class="px-8 py-6 bg-gradient-to-r from-indigo-600 to-purple-600 text-white">
+        <h4 class="text-2xl font-bold">Model Trust Leaderboard</h4>
+      </div>
+      <div class="overflow-x-auto -mx-6 lg:mx-0">
+          <div class="inline-block min-w-full align-middle">
+            <div class="overflow-hidden ring-1 ring-black ring-opacity-5 rounded-2xl">
+              <table class="min-w-[900px] w-full">
+              <thead class="bg-gray-50">
+                <tr>
+                  <th class="px-8 py-5 text-left text-sm font-semibold text-gray-700">Model</th>
+                  <th class="px-8 py-5 text-center text-sm font-semibold text-gray-700">Trust Score</th>
+                  <th class="px-8 py-5 text-center text-sm font-semibold text-gray-700">Proofs</th>
+                  <th class="px-8 py-5 text-center text-sm font-semibold text-gray-700">Drift</th>
+                  <th class="px-8 py-5 text-center text-sm font-semibold text-gray-700">Uptime</th>
+                  <th class="px-8 py-5 text-center text-sm font-semibold text-gray-700">Status</th>
+                </tr>
+              </thead>
+              <tbody class="divide-y divide-gray-200">
+                <tr class="hover:bg-indigo-50 transition">
+                  <td class="px-8 py-6 font-medium">LLM Assistant Enterprise</td>
+                  <td class="text-center"><span class="text-2xl font-bold text-emerald-600">98.7%</span></td>
+                  <td class="text-center text-gray-600">104</td>
+                  <td class="text-center"><span class="text-emerald-600 font-medium">None</span></td>
+                  <td class="text-center text-gray-600">99.99%</td>
+                  <td class="text-center"><span class="px-4 py-1.5 bg-emerald-100 text-emerald-800 rounded-full text-xs font-bold">HEALTHY</span></td>
+                </tr>
+                <tr class="hover:bg-indigo-50 transition">
+                  <td class="px-8 py-6 font-medium">Transaction Fraud Detector</td>
+                  <td class="text-center"><span class="text-2xl font-bold text-emerald-600">97.2%</span></td>
+                  <td class="text-center text-gray-600">68</td>
+                  <td class="text-center"><span class="text-amber-600 font-medium">Low</span></td>
+                  <td class="text-center text-gray-600">99.94%</td>
+                  <td class="text-center"><span class="px-4 py-1.5 bg-amber-100 text-amber-800 rounded-full text-xs font-bold">MONITOR</span></td>
+                </tr>
+                <tr class="hover:bg-indigo-50 transition">
+                  <td class="px-8 py-6 font-medium">Credit Risk Scoring v1</td>
+                  <td class="text-center"><span class="text-2xl font-bold text-red-600">89.1%</span></td>
+                  <td class="text-center text-gray-600">12</td>
+                  <td class="text-center"><span class="text-red-600 font-medium">High</span></td>
+                  <td class="text-center text-gray-600">98.2%</td>
+                  <td class="text-center"><span class="px-4 py-1.5 bg-red-100 text-red-800 rounded-full text-xs font-bold">ALERT</span></td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Trust Over Time Chart Placeholder (you can replace with Chart.js later) -->
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mt-10">
+      <div class="bg-white rounded-2xl shadow-xl p-8 border border-indigo-100">
+        <h4 class="text-xl font-bold mb-6">Global Trust Score Trend</h4>
+        <div class="h-64 bg-gradient-to-r from-emerald-50 to-teal-50 rounded-xl flex items-center justify-center border-2 border-dashed border-emerald-200">
+          <p class="text-emerald-700 font-medium">Line chart showing 96.8% with steady upward trend</p>
+        </div>
+      </div>
+      <div class="bg-white rounded-2xl shadow-xl p-8 border border-indigo-100">
+        <h4 class="text-xl font-bold mb-6">Drift Detection Heatmap</h4>
+        <div class="h-64 bg-gradient-to-br from-amber-50 to-red-50 rounded-xl flex items-center justify-center border-2 border-dashed border-amber-200">
+          <p class="text-amber-700 font-medium">One model showing elevated drift in last 48h</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
       <!-- EXPLORER (Mermaid is now responsive) -->
       <section id="explorer" class="content-section hidden">
         <div class="flex flex-col lg:flex-row justify-between items-start lg:items-center gap-4 mb-8">
