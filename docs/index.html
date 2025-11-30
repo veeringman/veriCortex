@@ -389,15 +389,11 @@
           <div class="bg-gradient-to-br from-indigo-500 to-purple-600 text-white p-8 rounded-2xl shadow-xl">
             <h4 class="text-xl font-bold mb-6">Submit New Proof</h4>
             <div class="space-y-4">
-              <button class="w-full bg-white/20 hover:bg-white/30 backdrop-blur px-5 py-3 rounded-lg transition">Upload Input/Output</button>
-	      <button 
-  onclick="document.getElementById('submit').scrollIntoView({behavior:'smooth'}); 
-           document.querySelectorAll('.content-section').forEach(s=>s.classList.add('hidden'));
-           document.getElementById('submit').classList.remove('hidden');"
-  class="w-full bg-white text-indigo-600 hover:bg-gray-100 px-5 py-3 rounded-lg font-semibold transition">
-  Submit New Proof
+              <button class="w-full bg-white/20 hover:bg-white/30 backdrop-blur px-5 py-3 rounded-lg transition"
+  onclick="document.getElementById('submit').scrollIntoView({behavior:'smooth'}); document.querySelectorAll('.content-section').forEach(s=>s.classList.add('hidden')); document.getElementById('submit').classList.remove('hidden');">
+  Generate New Proof
 </button>
-              <button class="w-full bg-white/20 hover:bg-white/30 backdrop-blur px-5 py-3 rounded-lg transition">Generate ZK Proof</button>
+              <!--button class="w-full bg-white/20 hover:bg-white/30 backdrop-blur px-5 py-3 rounded-lg transition">Generate ZK Proof</button-->
               <button class="w-full bg-white text-indigo-600 hover:bg-gray-100 px-5 py-3 rounded-lg font-semibold transition">Submit to BlockDAG</button>
             </div>
           </div>
