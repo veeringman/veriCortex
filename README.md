@@ -5,19 +5,31 @@
   <img alt="ProofCortex Logo" src="docs/assets/ProofCortex.png" width=200px>
 </picture>
 </p>
-
-**Trust Layer for AI — Verifiable Intelligence on BlockDAG**
+## ProofCortex – Verifiable AI for BlockDAG and Beyond
 
 > **⚠️ Project Notice:**
 > This project is being renamed to **ProofCortex**. At few places ProofCortex and VeriCortex names may have been used interchangebly.
 
-ProofCortex is a **modular AI verification and trust framework** designed to run first on **BlockDAG** networks.  
-It enables applications to **prove AI outputs**, **secure autonomous agents**, and **build verifiable compute pipelines**.
+ProofCortex is a modular AI verification and trust framework designed to run first
+on BlockDAG networks. It enables applications to prove AI outputs, secure
+autonomous agents, and build verifiable compute pipelines.
 
-We bring **cryptographic trust to AI** by validating computation proofs, inference attestations, and execution integrity signals.
+We bring cryptographic trust to AI by validating computation proofs, inference
+attestations, and execution integrity signals. Whether AI is running locally,
+in the cloud, within smart agent swarms, or across decentralized compute
+networks — ProofCortex allows users to verify what really happened, not just
+trust claims.
 
-Whether AI is running locally, in the cloud, within smart agent swarms, or across decentralized compute networks —  
-**ProofCortex allows users to verify what really happened, not just trust claims.**
+ProofCortex transforms AI systems from "trust-based" to "proof-based" by
+providing a universal verification layer. It anchors model integrity, proves
+inference correctness, and validates execution traces using lightweight
+cryptographic proofs. This gives enterprises, regulators, and developers a
+reliable way to trust AI outputs — even when models, data, or compute
+environments are opaque.
+
+By enabling verifiable AI pipelines, ProofCortex becomes foundational trust
+infrastructure for the next generation of decentralized systems, autonomous
+agents, and high-assurance AI applications.
 
 > Visit the full documentation at [**ProofCortex Wiki →**](https://github.com/veeringman/proofcortex/wiki)
 
