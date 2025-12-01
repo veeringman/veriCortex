@@ -306,6 +306,11 @@ The **ProofCortex** ecosystem is built using a secure, high-performance, cross-p
 - Local cache + signing utilities
 
 ---
+## Additional Documentation
+
+For detailed examples of who uses ProofCortex, why, and real-world usage scenarios, see:
+
+➡️ **[USAGE_EXAMPLES.md](./USAGE_EXAMPLES.md)**  
 ---
 
 ## Post-Buildathon Roadmap
