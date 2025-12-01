@@ -52,6 +52,19 @@
     renderDag();
   </script>
 
+  <script>
+	async function loadTemplate(id, url) {
+	  document.querySelectorAll('.content-section').forEach(s => s.classList.add('hidden'));
+	  let container = document.getElementById(id);
+	  if (!container.innerHTML.trim()) {
+	    const resp = await fetch(url);
+	    container.innerHTML = await resp.text();
+	  }
+	  container.classList.remove('hidden');
+	  lucide.createIcons();
+	  window.scrollTo({top: 0, behavior: 'smooth'});
+  	}
+  </script>
   <style>
     /* Ensure mermaid graphs are responsive */
     .mermaid svg { width: 100% !important; height: auto !important; max-width: 100%; }
