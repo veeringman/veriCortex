@@ -6,12 +6,12 @@
 </picture>
 </p>
 
-###  **ProofCortex – Verifiable AI** for BlockDAG and Beyond
+##  ProofCortex – Verifiable AI for BlockDAG and Beyond
 
 > **⚠️ Project Notice:**
 > This project is being renamed to **ProofCortex**. At few places ProofCortex and VeriCortex names may have been used interchangebly.
 
-ProofCortex is a modular AI verification and trust framework designed to run first
+**ProofCortex** is a modular AI verification and trust framework designed to run first
 on BlockDAG networks. It enables applications to prove AI outputs, secure
 autonomous agents, and build verifiable compute pipelines.
 
