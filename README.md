@@ -32,7 +32,7 @@ By enabling verifiable AI pipelines, ProofCortex becomes foundational trust
 infrastructure for the next generation of decentralized systems, autonomous
 agents, and high-assurance AI applications.
 
-> Visit the full documentation at [**ProofCortex Wiki →**](https://github.com/veeringman/proofcortex/wiki)
+> Full documentation will be available at [**ProofCortex Wiki →**](https://github.com/veeringman/proofcortex/wiki)
 
 ---
 
