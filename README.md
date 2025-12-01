@@ -94,7 +94,7 @@ In the **ProofCortex ecosystem**, BlockDAG acts as the **trust backbone** for th
 
 1. **Off-chain runtimes** (WASM warm pools) execute AI inference deterministically.  
 2. **Proofs** of these inferences (e.g., ZK or crypto attestations) are generated.  
-3. **Prooffier nodes** anchored on the BlockDAG validate and timestamp these proofs in parallel.  
+3. **Verifier nodes** anchored on the BlockDAG validate and timestamp these proofs in parallel.  
 4. Multiple verifiers can commit results without waiting on a single chain head — ensuring real-time trust for decentralized AI.
 
 ProofCortex doesn’t just record computation — it *proves* it.  
