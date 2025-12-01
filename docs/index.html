@@ -199,7 +199,7 @@
       <section id="models" class="content-section space-y-8 hidden">
         <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
           <h3 class="text-2xl lg:text-3xl font-bold">Registered Models</h3>
-	<button class="w-full sm:w-auto bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-xl font-medium shadow-md transition" onclick="loadTemplate('registerModel', 'templates/registerModel.html', 'models')">
+	<button class="w-full sm:w-auto bg-indigo-600 hover:bg-indigo-700 text-white px-6 py-3 rounded-xl font-medium shadow-md transition" onclick="showTemplate('registerModel', 'templates/registerModel.html', 'models')">
   	Register New Model
 	</button>
 
@@ -256,7 +256,7 @@
           <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-indigo-100">
             <div class="px-6 py-5 lg:px-8 lg:py-6 bg-gradient-to-r from-indigo-600 to-purple-600 text-white flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
               <h4 class="text-xl lg:text-2xl font-bold">Registered Models & Artifacts</h4>
-              <button class="w-full sm:w-auto px-6 py-3 bg-white/20 hover:bg-white/30 backdrop-blur rounded-xl font-medium transition" onclick="loadTemplate('registerModel', 'templates/registerModel.html', 'registry')">
+              <button class="w-full sm:w-auto px-6 py-3 bg-white/20 hover:bg-white/30 backdrop-blur rounded-xl font-medium transition" onclick="showTemplate('registerModel', 'templates/registerModel.html', 'registry')">
                 Register New Model
               </button>
             </div>
@@ -437,7 +437,7 @@
             <h4 class="text-xl font-bold mb-6">Submit New Proof</h4>
             <div class="space-y-4">
 	     <button class="w-full bg-white/20 hover:bg-white/30 backdrop-blur px-5 py-3 rounded-lg transition" 
-		onClick="loadTemplate('submitProof', 'templates/submitProof.html', 'proofs')">
+		onClick="showTemplate('submitProof', 'templates/submitProof.html', 'proofs')">
   		Generate Proof	
 	      </button>
               <button class="w-full bg-white text-indigo-600 hover:bg-gray-100 px-5 py-3 rounded-lg font-semibold transition">Submit to BlockDAG</button>
