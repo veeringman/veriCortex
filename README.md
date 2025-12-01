@@ -5,7 +5,8 @@
   <img alt="ProofCortex Logo" src="docs/assets/ProofCortex.png" width=200px>
 </picture>
 </p>
-## ProofCortex – Verifiable AI for BlockDAG and Beyond
+
+###  **ProofCortex – Verifiable AI** for BlockDAG and Beyond
 
 > **⚠️ Project Notice:**
 > This project is being renamed to **ProofCortex**. At few places ProofCortex and VeriCortex names may have been used interchangebly.
