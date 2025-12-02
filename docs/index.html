@@ -994,6 +994,10 @@
 
      <div id="registerModel" class="content-section hidden"></div>
      <div id="submitProof"   class="content-section hidden"></div>
+	 <!-- Proof Detail Modal Container -->
+	 <div id="proofDetailModal" class="fixed inset-0 bg-black/70 z-50 hidden flex items-center justify-center p-4">
+	   <div id="proofDetailContent"></div>
+	 </div>
     </main>
   </div>
 
@@ -1173,5 +1177,48 @@
     }
   });
   </script>
+  <script>
+// Generic proof detail loader
+async function showProofDetail(proofId) {
+  const modal = document.getElementById('proofDetailModal');
+  const content = document.getElementById('proofDetailContent');
+
+  // Mock data — replace with real API later
+  const proofs = {
+    'solana-001': { id: '#238', model: 'Image Classifier v4', type: 'Zero-Knowledge', status: 'VALID', statusColor: 'bg-emerald', chain: 'Solana', chainIcon: 'S', chainColor: 'bg-gradient-to-r from-purple-500 to-pink-500', tx: '5Kx9m...aB3f', explorer: 'https://solscan.io/tx/5Kx9...', input: '{"image": "data:..."}', output: 'cat (99.2%)', timestamp: '5 mins ago', trust: '99.2' },
+    'kaspa-234': { id: '#234', model: 'LLM Assistant Enterprise', type: 'Zero-Knowledge', status: 'VALID', statusColor: 'bg-emerald', chain: 'Kaspa BlockDAG', chainIcon: 'K', chainColor: 'bg-indigo-600', tx: 'kaspa:qr8x...9f3a', explorer: 'https://explorer.kaspa.org/txs/...', input: '{"prompt": "Explain quantum..."}', output: 'Quantum computing uses...', timestamp: '2 mins ago', trust: '98.7' },
+    'pending-235': { id: '#235', model: 'Fraud Detector v3', type: 'Trusted Execution', status: 'PENDING', statusColor: 'bg-amber', chain: '—', chainIcon: '', chainColor: '', tx: 'Anchor in progress...', explorer: '#', input: '{"tx": "..."}', output: 'fraud_score: 0.02', timestamp: '12 mins ago', trust: '97.1' }
+  };
+
+  const p = proofs[proofId];
+  if (!p) return;
+
+  const html = await fetch('templates/proofDetails.html').then(r => r.text());
+  const rendered = html
+    .replace(/{{PROOF_ID}}/g, p.id)
+    .replace(/{{MODEL_NAME}}/g, p.model)
+    .replace(/{{PROOF_TYPE}}/g, p.type)
+    .replace(/{{STATUS}}/g, bagi.status)
+    .replace(/{{STATUS_COLOR}}/g, p.statusColor)
+    .replace(/{{STATUS_TEXT}}/g, p.status === 'VALID' ? 'Verified on-chain' : 'Awaiting anchor')
+    .replace(/{{CHAIN_NAME}}/g, p.chain)
+    .replace(/{{CHAIN_ICON}}/g, p.chainIcon)
+    .replace(/{{CHAIN_COLOR}}/g, p.chainColor)
+    .replace(/{{ANCHOR_STATUS}}/g, p.chain === '—' ? 'Pending' : 'Live')
+    .replace(/{{TX_HASH}}/g, p.tx)
+    .replace(/{{EXPLORER_URL}}/g, p.explorer)
+    .replace(/{{INPUT}}/g, p.input)
+    .replace(/{{OUTPUT}}/g, p.output)
+    .replace(/{{TIMESTAMP}}/g, p.timestamp)
+    .replace(/{{TRUST_SCORE}}/g, p.trust);
+
+  content.innerHTML = rendered;
+  modal.classList.remove('hidden');
+}
+
+function closeProofDetail() {
+  document.getElementById('proofDetailModal').classList.add('hidden');
+}
+</script>
 </body>
 </html>
