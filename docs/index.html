@@ -1174,11 +1174,14 @@
       const modal = document.getElementById('proofDetailModal');
       const content = document.getElementById('proofDetailContent');
 
+      alert("Hello!");
+
       // Mock data — replace with real API later
       const proofs = {
         'solana-001': { id: '#238', model: 'Image Classifier v4', type: 'Zero-Knowledge', status: 'VALID', statusColor: 'bg-emerald', chain: 'Solana', chainIcon: 'S', chainColor: 'bg-gradient-to-r from-purple-500 to-pink-500', tx: '5Kx9m...aB3f', explorer: 'https://solscan.io/tx/5Kx9...', input: '{"image": "data:..."}', output: 'cat (99.2%)', timestamp: '5 mins ago', trust: '99.2' },
         'bdag-234': { id: '#234', model: 'LLM Assistant Enterprise', type: 'Zero-Knowledge', status: 'VALID', statusColor: 'bg-emerald', chain: 'BlockDAG', chainIcon: 'B', chainColor: 'bg-indigo-600', tx: 'bdag:qr8x...9f3a', explorer: 'https://explorer.blockdag.network/txs/...', input: '{"prompt": "Explain quantum..."}', output: 'Quantum computing uses...', timestamp: '2 mins ago', trust: '98.7' },
-        'pending-235': { id: '#235', model: 'Fraud Detector v3', type: 'Trusted Execution', status: 'PENDING', statusColor: 'bg-amber', chain: '—', chainIcon: '', chainColor: '', tx: 'Anchor in progress...', explorer: '#', input: '{"tx": "..."}', output: 'fraud_score: 0.02', timestamp: '12 mins ago', trust: '97.1' }
+        'proof-235': { id: '#235', model: 'Fraud Detector v3', type: 'Trusted Execution', status: 'PENDING', statusColor: 'bg-amber', chain: '—', chainIcon: '', chainColor: '', tx: 'Anchor in progress...', explorer: '#', input: '{"tx": "..."}', output: 'fraud_score: 0.02', timestamp: '12 mins ago', trust: '97.1' }
+        'proof-233': { id: '#233', model: 'Fraud Detector v3', type: 'Trusted Execution', status: 'PENDING', statusColor: 'bg-amber', chain: '—', chainIcon: '', chainColor: '', tx: 'Anchor in progress...', explorer: '#', input: '{"tx": "..."}', output: 'fraud_score: 0.02', timestamp: '12 mins ago', trust: '97.1' }
       };
 
       const p = proofs[proofId];
