@@ -100,60 +100,60 @@
 	  
 	  window.scrollTo({top: 0, behavior: 'smooth'});
 	}
-        // Generic proof detail loader
-        function showProofDetail(proofId) {
-          const modal = document.getElementById('proofDetailModal');
-          const content = document.getElementById('proofDetailContent');
+    // Generic proof detail loader
+    async showProofDetail(proofId) {
+      const modal = document.getElementById('proofDetailModal');
+      const content = document.getElementById('proofDetailContent');
 
-          alert("Hello!");
+      alert("Hello!");
 
-          // Mock data — replace with real API later
-          const proofs = {
-            'solana-001': { id: '#238', model: 'Image Classifier v4', type: 'Zero-Knowledge', status: 'VALID', statusColor: 'bg-emerald', chain: 'Solana', chainIcon: 'S', chainColor: 'bg-gradient-to-r from-purple-500 to-pink-500', tx: '5Kx9m...aB3f', explorer: 'https://solscan.io/tx/5Kx9...', input: '{"image": "data:..."}', output: 'cat (99.2%)', timestamp: '5 mins ago', trust: '99.2' },
-            'bdag-234': { id: '#234', model: 'LLM Assistant Enterprise', type: 'Zero-Knowledge', status: 'VALID', statusColor: 'bg-emerald', chain: 'BlockDAG', chainIcon: 'B', chainColor: 'bg-indigo-600', tx: 'bdag:qr8x...9f3a', explorer: 'https://explorer.blockdag.network/txs/...', input: '{"prompt": "Explain quantum..."}', output: 'Quantum computing uses...', timestamp: '2 mins ago', trust: '98.7' },
-            'proof-235': { id: '#235', model: 'Fraud Detector v3', type: 'Trusted Execution', status: 'PENDING', statusColor: 'bg-amber', chain: '—', chainIcon: '', chainColor: '', tx: 'Anchor in progress...', explorer: '#', input: '{"tx": "..."}', output: 'fraud_score: 0.02', timestamp: '12 mins ago', trust: '97.1' }
-            'proof-233': { id: '#233', model: 'Fraud Detector v3', type: 'Trusted Execution', status: 'PENDING', statusColor: 'bg-amber', chain: '—', chainIcon: '', chainColor: '', tx: 'Anchor in progress...', explorer: '#', input: '{"tx": "..."}', output: 'fraud_score: 0.02', timestamp: '12 mins ago', trust: '97.1' }
-          };
+      // Mock data — replace with real API later
+      const proofs = {
+        'solana-001': { id: '#238', model: 'Image Classifier v4', type: 'Zero-Knowledge', status: 'VALID', statusColor: 'bg-emerald', chain: 'Solana', chainIcon: 'S', chainColor: 'bg-gradient-to-r from-purple-500 to-pink-500', tx: '5Kx9m...aB3f', explorer: 'https://solscan.io/tx/5Kx9...', input: '{"image": "data:..."}', output: 'cat (99.2%)', timestamp: '5 mins ago', trust: '99.2' },
+        'bdag-234': { id: '#234', model: 'LLM Assistant Enterprise', type: 'Zero-Knowledge', status: 'VALID', statusColor: 'bg-emerald', chain: 'BlockDAG', chainIcon: 'B', chainColor: 'bg-indigo-600', tx: 'bdag:qr8x...9f3a', explorer: 'https://explorer.blockdag.network/txs/...', input: '{"prompt": "Explain quantum..."}', output: 'Quantum computing uses...', timestamp: '2 mins ago', trust: '98.7' },
+        'proof-235': { id: '#235', model: 'Fraud Detector v3', type: 'Trusted Execution', status: 'PENDING', statusColor: 'bg-amber', chain: '—', chainIcon: '', chainColor: '', tx: 'Anchor in progress...', explorer: '#', input: '{"tx": "..."}', output: 'fraud_score: 0.02', timestamp: '12 mins ago', trust: '97.1' }
+        'proof-233': { id: '#233', model: 'Fraud Detector v3', type: 'Trusted Execution', status: 'PENDING', statusColor: 'bg-amber', chain: '—', chainIcon: '', chainColor: '', tx: 'Anchor in progress...', explorer: '#', input: '{"tx": "..."}', output: 'fraud_score: 0.02', timestamp: '12 mins ago', trust: '97.1' }
+      };
 
-          const p = proofs[proofId];
-          if (!p) return;
+      const p = proofs[proofId];
+      if (!p) return;
 
-          const html = await fetch('templates/proofDetails.html').then(r => r.text());
-          const rendered = html
-            .replace(/{{PROOF_ID}}/g, p.id)
-            .replace(/{{MODEL_NAME}}/g, p.model)
-            .replace(/{{PROOF_TYPE}}/g, p.type)
-            .replace(/{{STATUS}}/g, bagi.status)
-            .replace(/{{STATUS_COLOR}}/g, p.statusColor)
-            .replace(/{{STATUS_TEXT}}/g, p.status === 'VALID' ? 'Verified on-chain' : 'Awaiting anchor')
-            .replace(/{{CHAIN_NAME}}/g, p.chain)
-            .replace(/{{CHAIN_ICON}}/g, p.chainIcon)
-            .replace(/{{CHAIN_COLOR}}/g, p.chainColor)
-            .replace(/{{ANCHOR_STATUS}}/g, p.chain === '—' ? 'Pending' : 'Live')
-            .replace(/{{TX_HASH}}/g, p.tx)
-            .replace(/{{EXPLORER_URL}}/g, p.explorer)
-            .replace(/{{INPUT}}/g, p.input)
-            .replace(/{{OUTPUT}}/g, p.output)
-            .replace(/{{TIMESTAMP}}/g, p.timestamp)
-            .replace(/{{TRUST_SCORE}}/g, p.trust);
+      const html = await fetch('templates/proofDetails.html').then(r => r.text());
+      const rendered = html
+        .replace(/{{PROOF_ID}}/g, p.id)
+        .replace(/{{MODEL_NAME}}/g, p.model)
+        .replace(/{{PROOF_TYPE}}/g, p.type)
+        .replace(/{{STATUS}}/g, bagi.status)
+        .replace(/{{STATUS_COLOR}}/g, p.statusColor)
+        .replace(/{{STATUS_TEXT}}/g, p.status === 'VALID' ? 'Verified on-chain' : 'Awaiting anchor')
+        .replace(/{{CHAIN_NAME}}/g, p.chain)
+        .replace(/{{CHAIN_ICON}}/g, p.chainIcon)
+        .replace(/{{CHAIN_COLOR}}/g, p.chainColor)
+        .replace(/{{ANCHOR_STATUS}}/g, p.chain === '—' ? 'Pending' : 'Live')
+        .replace(/{{TX_HASH}}/g, p.tx)
+        .replace(/{{EXPLORER_URL}}/g, p.explorer)
+        .replace(/{{INPUT}}/g, p.input)
+        .replace(/{{OUTPUT}}/g, p.output)
+        .replace(/{{TIMESTAMP}}/g, p.timestamp)
+        .replace(/{{TRUST_SCORE}}/g, p.trust);
 
-          content.innerHTML = rendered;
-          modal.classList.remove('hidden');
-        }
+      content.innerHTML = rendered;
+      modal.classList.remove('hidden');
+    }
 
-        function closeProofDetail() {
-          document.getElementById('proofDetailModal').classList.add('hidden');
-        }
+    function closeProofDetail() {
+      document.getElementById('proofDetailModal').classList.add('hidden');
+    }
 
-      </script>
+  </script>
 	
-   <style>
-           /* Ensure mermaid graphs are responsive */
-            .mermaid svg { width: 100% !important; height: auto !important; max-width: 100%; }
-	    @media (max-width: 768px) {
-	      .mermaid { overflow-x: auto; }
-	    }
-  	</style>
+  <style>
+       /* Ensure mermaid graphs are responsive */
+    .mermaid svg { width: 100% !important; height: auto !important; max-width: 100%; }
+    @media (max-width: 768px) {
+      .mermaid { overflow-x: auto; }
+    }
+  </style>
 </head>
 
 <body class="bg-gray-50 text-gray-900 min-h-screen flex flex-col lg:flex-row">
