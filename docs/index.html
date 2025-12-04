@@ -2,32 +2,49 @@
 <html lang="en" class="scroll-smooth">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="ProofCortex — Real-time dashboard for verifiable AI proofs on-chain using ZK and TEE." />
+  <meta name="theme-color" content="#6366f1" />
+
   <title>ProofCortex • Trust Verifiable AI Dashboard</title>
 
-  <!-- Tailwind CSS -->
+  <!-- Favicon (add your own later) -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
+
+  <!-- Preconnect to CDNs for faster loading -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="preconnect" href="https://unpkg.com" />
+
+  <!-- Tailwind CSS via CDN (with recommended config) -->
   <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
       darkMode: 'class',
       theme: {
         extend: {
-          animation: { 'fade-in': 'fadeIn 0.5s ease-out' },
-          keyframes: { fadeIn: { '0%': { opacity: '0', transform: 'translateY(10px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } } }
+          animation: {
+            'fade-in': 'fadeIn 0.5s ease-out forwards',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0', transform: 'translateY(10px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' }
+            }
+          }
         }
       }
     }
   </script>
 
-  <!-- Lucide Icons -->
-  <script src="https://unpkg.com/lucide@latest"></script>
+  <!-- Lucide Icons (latest) -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
 
-  <!-- Mermaid.js -->
-  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
-  
-  <script>
+  <!-- Mermaid.js (v10 + responsive) -->
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    
     mermaid.initialize({
-      startOnLoad: true,
+      startOnLoad: false,
       theme: 'base',
       themeVariables: {
         primaryColor: '#6366f1',
@@ -36,125 +53,140 @@
         secondaryColor: '#c084fc',
         tertiaryColor: '#e0e7ff'
       },
-      flowchart: { useMaxWidth: true, htmlLabels: true, curve: 'basis' },
-      securityLevel: 'loose'   // This is important for <br> and HTML tags to work
+      flowchart: { 
+        useMaxWidth: true, 
+        htmlLabels: true, 
+        curve: 'basis' 
+      },
+      securityLevel: 'loose'
     });
 
-    const renderDag = () => {
-      if (!document.querySelector('#explorer')?.classList.contains('hidden')) {
-        mermaid.contentLoaded();
+    // Re-render Mermaid diagrams when section becomes visible
+    const renderMermaid = () => {
+      const visibleSection = document.querySelector('.content-section:not(.hidden)');
+      if (visibleSection?.querySelector('.mermaid')) {
+        mermaid.run({ nodes: visibleSection.querySelectorAll('.mermaid') });
       }
     };
 
-    document.querySelectorAll('.menu-item').forEach(link => {
-      link.addEventListener('click', () => setTimeout(renderDag, 100));
+    // Run after template loads or tab switches
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.menu-item').forEach(link => {
+        link.addEventListener('click', () => setTimeout(renderMermaid, 150));
+      });
+      // Initial render if explorer is visible on load
+      if (document.getElementById('explorer') && !document.getElementById('explorer').classList.contains('hidden')) {
+        setTimeout(renderMermaid, 300);
+      }
     });
-    //renderDag();
-  
-	// Generic proof detail loader
-    async showProofDetail(proofId) {
+  </script>
+
+  <!-- Global App Logic (clean, modular, no inline alert()!) -->
+  <script type="module">
+    // Proof data (replace with API later)
+    const PROOFS = {
+      'solana-001': { id: '#238', model: 'Image Classifier v4', type: 'Zero-Knowledge', status: 'VALID', statusColor: 'bg-emerald-500', chain: 'Solana', chainIcon: 'S', chainColor: 'bg-gradient-to-r from-purple-500 to-pink-500', tx: '5Kx9m...aB3f', explorer: 'https://solscan.io/tx/5Kx9...', input: '{"image": "data:..."}', output: 'cat (99.2%)', timestamp: '5 mins ago', trust: '99.2' },
+      'bdag-234': { id: '#234', model: 'LLM Assistant Enterprise', type: 'Zero-Knowledge', status: 'VALID', statusColor: 'bg-emerald-500', chain: 'BlockDAG', chainIcon: 'B', chainColor: 'bg-indigo-600', tx: 'bdag:qr8x...9f3a', explorer: 'https://explorer.blockdag.network/txs/...', input: '{"prompt": "Explain quantum..."}', output: 'Quantum computing uses...', timestamp: '2 mins ago', trust: '98.7' },
+      'proof-235': { id: '#235', model: 'Fraud Detector v3', type: 'Trusted Execution', status: 'PENDING', statusColor: 'bg-amber-500', chain: '—', chainIcon: '', chainColor: '', tx: 'Anchor in progress...', explorer: '#', input: '{"tx": "..."}', output: 'fraud_score: 0.02', timestamp: '12 mins ago', trust: '97.1' },
+      'proof-233': { id: '#233', model: 'Fraud Detector v3', type: 'Trusted Execution', status: 'PENDING', statusColor: 'bg-amber-500', chain: '—', chainIcon: '', chainColor: '', tx: 'Anchor in progress...', explorer: '#', input: '{"tx": "..."}', output: 'fraud_score: 0.02', timestamp: '12 mins ago', trust: '97.1' }
+    };
+
+    window.showProofDetail = async (proofId) => {
+      const proof = PROOFS[proofId];
+      if (!proof) return;
+
       const modal = document.getElementById('proofDetailModal');
       const content = document.getElementById('proofDetailContent');
 
-      alert("Hello!");
+      try {
+        const template = await fetch('templates/proofDetails.html').then(r => r.text());
+        content.innerHTML = template
+          .replace(/{{PROOF_ID}}/g, proof.id)
+          .replace(/{{MODEL_NAME}}/g, proof.model)
+          .replace(/{{PROOF_TYPE}}/g, proof.type)
+          .replace(/{{STATUS}}/g, proof.status)
+          .replace(/{{STATUS_COLOR}}/g, proof.statusColor)
+          .replace(/{{STATUS_TEXT}}/g, proof.status === 'VALID' ? 'Verified on-chain' : 'Awaiting anchor')
+          .replace(/{{CHAIN_NAME}}/g, proof.chain)
+          .replace(/{{CHAIN_ICON}}/g, proof.chainIcon)
+          .replace(/{{CHAIN_COLOR}}/g, proof.chainColor)
+          .replace(/{{ANCHOR_STATUS}}/g, proof.chain === '—' ? 'Pending' : 'Live')
+          .replace(/{{TX_HASH}}/g, proof.tx)
+          .replace(/{{EXPLORER_URL}}/g, proof.explorer)
+          .replace(/{{INPUT}}/g, JSON.stringify(proof.input, null, 2))
+          .replace(/{{OUTPUT}}/g, proof.output)
+          .replace(/{{TIMESTAMP}}/g, proof.timestamp)
+          .replace(/{{TRUST_SCORE}}/g, proof.trust);
 
-      // Mock data — replace with real API later
-      const proofs = {
-        'solana-001': { id: '#238', model: 'Image Classifier v4', type: 'Zero-Knowledge', status: 'VALID', statusColor: 'bg-emerald', chain: 'Solana', chainIcon: 'S', chainColor: 'bg-gradient-to-r from-purple-500 to-pink-500', tx: '5Kx9m...aB3f', explorer: 'https://solscan.io/tx/5Kx9...', input: '{"image": "data:..."}', output: 'cat (99.2%)', timestamp: '5 mins ago', trust: '99.2' },
-        'bdag-234': { id: '#234', model: 'LLM Assistant Enterprise', type: 'Zero-Knowledge', status: 'VALID', statusColor: 'bg-emerald', chain: 'BlockDAG', chainIcon: 'B', chainColor: 'bg-indigo-600', tx: 'bdag:qr8x...9f3a', explorer: 'https://explorer.blockdag.network/txs/...', input: '{"prompt": "Explain quantum..."}', output: 'Quantum computing uses...', timestamp: '2 mins ago', trust: '98.7' },
-        'proof-235': { id: '#235', model: 'Fraud Detector v3', type: 'Trusted Execution', status: 'PENDING', statusColor: 'bg-amber', chain: '—', chainIcon: '', chainColor: '', tx: 'Anchor in progress...', explorer: '#', input: '{"tx": "..."}', output: 'fraud_score: 0.02', timestamp: '12 mins ago', trust: '97.1' },
-        'proof-233': { id: '#233', model: 'Fraud Detector v3', type: 'Trusted Execution', status: 'PENDING', statusColor: 'bg-amber', chain: '—', chainIcon: '', chainColor: '', tx: 'Anchor in progress...', explorer: '#', input: '{"tx": "..."}', output: 'fraud_score: 0.02', timestamp: '12 mins ago', trust: '97.1' }
-      };
+        modal.classList.remove('hidden');
+        lucide.createIcons();
+      } catch (err) {
+        console.error('Failed to load proof template:', err);
+      }
+    };
 
-      const p = proofs[proofId];
-      if (!p) return;
+    window.closeProofDetail = () => {
+      document.getElementById('proofDetailModal')?.classList.add('hidden');
+    };
 
-      const html = await fetch('templates/proofDetails.html').then(r => r.text());
-      const rendered = html
-        .replace(/{{PROOF_ID}}/g, p.id)
-        .replace(/{{MODEL_NAME}}/g, p.model)
-        .replace(/{{PROOF_TYPE}}/g, p.type)
-        .replace(/{{STATUS}}/g, bagi.status)
-        .replace(/{{STATUS_COLOR}}/g, p.statusColor)
-        .replace(/{{STATUS_TEXT}}/g, p.status === 'VALID' ? 'Verified on-chain' : 'Awaiting anchor')
-        .replace(/{{CHAIN_NAME}}/g, p.chain)
-        .replace(/{{CHAIN_ICON}}/g, p.chainIcon)
-        .replace(/{{CHAIN_COLOR}}/g, p.chainColor)
-        .replace(/{{ANCHOR_STATUS}}/g, p.chain === '—' ? 'Pending' : 'Live')
-        .replace(/{{TX_HASH}}/g, p.tx)
-        .replace(/{{EXPLORER_URL}}/g, p.explorer)
-        .replace(/{{INPUT}}/g, p.input)
-        .replace(/{{OUTPUT}}/g, p.output)
-        .replace(/{{TIMESTAMP}}/g, p.timestamp)
-        .replace(/{{TRUST_SCORE}}/g, p.trust);
+    // Generic template loader
+    window.showTemplate = async (templateId, url, returnTo = 'overview') => {
+      document.querySelectorAll('.content-section').forEach(s => s.classList.add('hidden'));
+      
+      const container = document.getElementById(templateId);
+      if (!container.innerHTML.trim()) {
+        const resp = await fetch(url);
+        if (!resp.ok) throw new Error(`Failed to load ${url}`);
+        container.innerHTML = await resp.text();
+      }
 
-      content.innerHTML = rendered;
-      modal.classList.remove('hidden');
-    }
+      container.dataset.returnTo = returnTo;
+      container.classList.remove('hidden');
+      lucide.createIcons();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
 
-    function closeProofDetail() {
-      document.getElementById('proofDetailModal').classList.add('hidden');
-    }
-	  
-	// Generic loader + return system
-	async function showTemplate(templateId, url, returnTo = 'overview') {
-	  // Hide all sections
-	  document.querySelectorAll('.content-section').forEach(s => s.classList.add('hidden'));
-	  
-	  const container = document.getElementById(templateId);
-	  
-	  // Load template if not already loaded
-	  if (!container.innerHTML.trim()) {
-	    const resp = await fetch(url);
-	    container.innerHTML = await resp.text();
-	  }
-	  
-	  // Store where to return when done
-	  container.dataset.returnTo = returnTo;
-	  
-	  // Show it
-	  container.classList.remove('hidden');
-	  lucide.createIcons();
-	  window.scrollTo({top: 0, behavior: 'smooth'});
-	}
+    // Universal "Done" handler with toast
+    window.doneAndReturn = (message = "Success! Action completed.") => {
+      const active = document.querySelector('.content-section:not(.hidden)');
+      if (!active) return;
 
-	// Generic "Done / Submit" button handler — works from ANY template
-	function doneAndReturn(message = "Success! Action completed.") {
-	  const activeTemplate = document.querySelector('.content-section:not(.hidden)');
-	  if (!activeTemplate) return;
-	  
-	  const returnSectionId = activeTemplate.dataset.returnTo || 'overview';
-	  
-	  // Hide current template
-	  activeTemplate.classList.add('hidden');
-	  
-	  // Show the original section
-	  const returnSection = document.getElementById(returnSectionId);
-	  if (returnSection) {
-	    returnSection.classList.remove('hidden');
-	  }
-	  
-	  // Beautiful toast
-	  const toast = document.createElement('div');
-	  toast.textContent = message;
-	  toast.className = 'fixed bottom-8 left-1/2 -translate-x-1/2 z-50 px-8 py-4 bg-emerald-600 text-white font-bold rounded-2xl shadow-2xl animate-pulse';
-	  document.body.appendChild(toast);
-	  setTimeout(() => toast.remove(), 3200);
-	  
-	  window.scrollTo({top: 0, behavior: 'smooth'});
-	}
+      const returnId = active.dataset.returnTo || 'overview';
+      active.classList.add('hidden');
+      
+      const returnSection = document.getElementById(returnId);
+      if (returnSection) returnSection.classList.remove('hidden');
 
+      const toast = Object.assign(document.createElement('div'), {
+        textContent: message,
+        className: 'fixed bottom-8 left-1/2 -translate-x-1/2 z-50 px-8 py-4 bg-emerald-600 text-white font-bold rounded-2xl shadow-2xl animate-pulse',
+      });
+      document.body.appendChild(toast);
+      setTimeout(() => toast.remove(), 3200);
+
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    };
   </script>
-	
+
+  <!-- Responsive Mermaid Styling -->
   <style>
-       /* Ensure mermaid graphs are responsive */
-    .mermaid svg { width: 100% !important; height: auto !important; max-width: 100%; }
+    .mermaid svg {
+      width: 100% !important;
+      height: auto !important;
+      max-width: 100%;
+    }
     @media (max-width: 768px) {
-      .mermaid { overflow-x: auto; }
+      .mermaid {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+    }
+    pre > code {
+      white-space: pre-wrap;
+      word-break: break-word;
     }
   </style>
 </head>
-
 <body class="bg-gray-50 text-gray-900 min-h-screen flex flex-col lg:flex-row">
 
   <!-- MOBILE HEADER (visible only on small screens) -->
