@@ -882,7 +882,48 @@
           </h4>
     
           <!-- This div will be processed by Mermaid -->
-          <img src="assets/BlockDAG_Explorer.png" width=100% />
+          <!--img src="assets/BlockDAG_Explorer.png" width=100% /-->
+			<!-- Mermaid DAG Container -->
+		    <div class="bg-white rounded-3xl shadow-2xl p-8 border border-indigo-100 overflow-x-auto">
+		      <div class="mermaid">
+		%% Recent Proofs DAG on BlockDAG – Live View (Dec 2025)
+		graph TD
+		    %% Styling
+		    classDef valid fill:#10b981,stroke:#059669,color:white
+		    classDef pending fill:#f59e0b,stroke:#d97706,color:white
+		    classDef chain fill:#4f46e5,stroke:#6366f1,color:white
+		    classDef proof fill:#6366f1,stroke:#4f46e5,color:white,rx:20px,ry:20px
+		
+		    %% Older proofs (parents)
+		    Older1[#232<br/>Credit Risk Scoring<br/>Ethereum • VALID]:::valid
+		    Older2[#231<br/>Image Classifier v3<br/>Solana • VALID]:::valid
+		
+		    %% Recent 4 proofs
+		    P238[#238<br/>Image Classifier v4<br/>Solana • VALID<br/>99.2% Trust<br/>5 mins ago]:::valid
+		    P234[#234<br/>LLM Assistant Enterprise<br/>BlockDAG • VALID<br/>98.7% Trust<br/>2 mins ago]:::valid
+		    P235[#235<br/>Fraud Detector v3<br/>Pending Anchor<br/>97.1% Trust<br/>12 mins ago]:::pending
+		    P233[#233<br/>Credit Risk Scoring<br/>Ethereum • VALID<br/>89.1% Trust<br/>1 hour ago]:::valid
+		
+		    %% DAG connections (proofs reference multiple parents)
+		    Older1 --> P238
+		    Older1 --> P234
+		    Older2 --> P238
+		    Older2 --> P235
+		    P238 --> P234
+		    P238 --> P235
+		    P234 --> P233
+		    P235 --> P233
+		
+		    %% Clickable links to real explorers
+		    click P238 "https://solscan.io/tx/5Kx9m...aB3f" "View on Solscan"
+		    click P234 "https://explorer.blockdag.network/txs/bdag:qr8x...9f3a" "View on BlockDAG Explorer"
+		    click P235 "#" "Anchor in progress..."
+		    click P233 "#" "View on Etherscan (mock)"
+		
+		    class P238,P234,P235,P233 proof
+		    class Older1,Older2 chain
+		      </div>
+		    </div>
         </div>
         <!-- Latest Proofs Table – Fully Mobile Adaptive -->
         <div class="bg-white rounded-2xl shadow-xl overflow-hidden border border-indigo-100">
