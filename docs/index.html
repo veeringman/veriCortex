@@ -873,45 +873,45 @@
   <!-- Full-width Mermaid DAG (no max-width constraint) -->
   <div class="w-full overflow-x-auto bg-white/95 backdrop-blur-xl shadow-2xl border-y-4 border-indigo-600">
     <div class="px-8 py-12 min-w-[900px]"> <!-- min-w ensures horizontal scroll on small screens -->
-      <div class="mermaid">
-%% BlockDAG Live Proof DAG – Full Width Epic View
-graph TD
-    %% Styling
-    classDef block fill:#4f46e5,stroke:#6366f1,stroke-width:5px,color:white,rx:40px,ry:40px,font-size:18px
-    classDef tip fill:#10b981,stroke:#059669,stroke-width:8px,color:white,font-weight:bold,rx:50px,ry:50px,font-size:20px
-    classDef pending fill:#f59e0b,stroke:#d97706,stroke-dasharray: 10 6,stroke-width:5px,color:white,rx:40px,ry:40px
-
-    G[Block #200<br/><small>bdag1genesis...0000</small><br/>12 Dec 2025 09:11 UTC<br/>Genesis • 1 proof]:::block
-
-    B229[Block #229<br/><small>bdag1q2w...8f3x</small><br/>14 Dec 11:42 UTC<br/>3 proofs • 98.4% avg]:::block
-    B230[Block #230<br/><small>bdag1r9t...2m7p</small><br/>14 Dec 11:44 UTC<br/>2 proofs • 97.9% avg]:::block
-    B231[Block #231<br/><small>bdag1x4k...9v1q</small><br/>14 Dec 11:46 UTC<br/>4 proofs • 99.1% avg]:::block
-    B232[Block #232<br/><small>bdag1p8m...5h2j</small><br/>14 Dec 11:50 UTC<br/>2 proofs • 96.7% avg]:::block
-    B233[Block #233<br/><small>bdag1m3n...7t9r</small><br/>14 Dec 11:52 UTC<br/>5 proofs • 98.9% avg]:::block
-    B234[Block #234<br/><small>bdag1qr8x...9f3a</small><br/>14 Dec 11:58 UTC<br/>LATEST TIP<br/>1 proof • 98.7% trust]:::tip
-    B235[Block #235<br/><small>bdag1zzz...pending</small><br/>Generating now...<br/>1 proof in progress]:::pending
-
-    %% Real BlockDAG connections
-    G --> B229 & B230
-    B229 --> B231
-    B230 --> B231 & B232
-    B231 --> B233
-    B232 --> B233
-    B233 --> B234
-    B234 --> B235
-
-    click G   "https://explorer.blockdag.network/block/200"
-    click B229 "https://explorer.blockdag.network/block/229"
-    click B230 "https://explorer.blockdag.network/block/230"
-    click B231 "https://explorer.blockdag.network/block/231"
-    click B232 "https://explorer.blockdag.network/block/232"
-    click B233 "https://explorer.blockdag.network/block/233"
-    click B234 "https://explorer.blockdag.network/block/234"
-    click B235 "#"
-
-    class G,B229,B230,B231,B232,B233,B234 block
-    class B235 pending
-      </div>
+		<div class="mermaid">
+		%% BlockDAG Live Proof DAG – December 2025
+		graph TD
+		    %% Styling (single line for safety)
+		    classDef block fill:#4f46e5,stroke:#6366f1,stroke-width:5px,color:white,rx:40px,ry:40px,font-size:18px
+		    classDef tip fill:#10b981,stroke:#059669,stroke-width:8px,color:white,font-weight:bold,rx:50px,ry:50px,font-size:20px
+		    classDef pending fill:#f59e0b,stroke:#d97706,stroke-dasharray: 10 6,stroke-width:5px,color:white,rx:40px,ry:40px
+		
+		    G[Block #200<br/>bdag1genesis...0000<br/>12 Dec 2025 09:11 UTC<br/>Genesis • 1 proof]:::block
+		
+		    B229[Block #229<br/>bdag1q2w...8f3x<br/>14 Dec 11:42 UTC<br/>3 proofs • 98.4% avg]:::block
+		    B230[Block #230<br/>bdag1r9t...2m7p<br/>14 Dec 11:44 UTC<br/>2 proofs • 97.9% avg]:::block
+		    B231[Block #231<br/>bdag1x4k...9v1q<br/>14 Dec 11:46 UTC<br/>4 proofs • 99.1% avg]:::block
+		    B232[Block #232<br/>bdag1p8m...5h2j<br/>14 Dec 11:50 UTC<br/>2 proofs • 96.7% avg]:::block
+		    B233[Block #233<br/>bdag1m3n...7t9r<br/>14 Dec 11:52 UTC<br/>5 proofs • 98.9% avg]:::block
+		    B234[Block #234<br/>bdag1qr8x...9f3a<br/>14 Dec 11:58 UTC<br/>LATEST TIP<br/>1 proof • 98.7% trust]:::tip
+		    B235[Block #235<br/>bdag1zzz...pending<br/>Generating now...<br/>1 proof in progress]:::pending
+		
+		    %% Real BlockDAG connections
+		    G --> B229 & B230
+		    B229 --> B231
+		    B230 --> B231 & B232
+		    B231 --> B233
+		    B232 --> B233
+		    B233 --> B234
+		    B234 --> B235
+		
+		    click G "https://explorer.blockdag.network/block/200"
+		    click B229 "https://explorer.blockdag.network/block/229"
+		    click B230 "https://explorer.blockdag.network/block/230"
+		    click B231 "https://explorer.blockdag.network/block/231"
+		    click B232 "https://explorer.blockdag.network/block/232"
+		    click B233 "https://explorer.blockdag.network/block/233"
+		    click B234 "https://explorer.blockdag.network/block/234"
+		    click B235 "#"
+		
+		    class G,B229,B230,B231,B232,B233,B234 block
+		    class B235 pending
+		</div>
     </div>
   </div>
 
