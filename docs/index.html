@@ -100,10 +100,8 @@
 	  
 	  window.scrollTo({top: 0, behavior: 'smooth'});
 	}
-	</script>
-    <script>
         // Generic proof detail loader
-        async function showProofDetail(proofId) {
+        function showProofDetail(proofId) {
           const modal = document.getElementById('proofDetailModal');
           const content = document.getElementById('proofDetailContent');
 
@@ -148,6 +146,7 @@
         }
 
       </script>
+	
    <style>
            /* Ensure mermaid graphs are responsive */
             .mermaid svg { width: 100% !important; height: auto !important; max-width: 100%; }
