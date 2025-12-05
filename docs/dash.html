@@ -23,6 +23,42 @@
       }
     }
   </script>
+  <script>
+  // Auto-load static templates on first visit
+  const staticTemplates = [
+    { id: 'models', url: 'templates/models.html' },
+    { id: 'registry', url: 'templates/registry.html' } // if you want it external too
+  ];
+
+  document.querySelectorAll('.menu-item').forEach(link => {
+    link.addEventListener('click', function(e) {
+      const target = this.getAttribute('href').substring(1);
+      
+      // Only auto-load if it's a static template
+      const tmpl = staticTemplates.find(t => t.id === target);
+      if (tmpl) {
+        const container = document.getElementById(tmpl.id + 'Content');
+        if (container && !container.innerHTML.trim()) {
+          fetch(tmpl.url)
+            .then(r => r.text())
+            .then(html => {
+              container.innerHTML = html;
+              lucide.createIcons();
+            });
+        }
+      }
+
+      // Normal navigation logic (your existing code)
+      document.querySelectorAll('.content-section').forEach(s => s.classList.add('hidden'));
+      document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('bg-white/10', 'text-white', 'font-medium'));
+      document.getElementById(target)?.classList.remove('hidden');
+      this.classList.add('bg-white/10', 'text-white', 'font-medium');
+      document.getElementById('sidebar').classList.add('-translate-x-full');
+      document.getElementById('sidebar-overlay').classList.add('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+</script>
 
   <!-- Global Template System -->
   <script type="module">
