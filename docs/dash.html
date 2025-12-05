@@ -5,23 +5,77 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>ProofCortex • Trust Verifiable AI Dashboard</title>
 
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script src="https://unpkg.com/lucide@latest"></script>
-  <script type="module">
-    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
-    mermaid.initialize({ startOnLoad: false, theme: 'base', securityLevel: 'loose' });
-  </script>
+  <!-- Favicon (add your own later) -->
+  <link rel="icon" href="/favicon.ico" type="image/x-icon" />
 
+  <!-- Preconnect to CDNs for faster loading -->
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+  <link rel="preconnect" href="https://unpkg.com" />
+
+  <!-- Tailwind CSS via CDN (with recommended config) -->
+  <script src="https://cdn.tailwindcss.com"></script>
   <script>
     tailwind.config = {
+      darkMode: 'class',
       theme: {
         extend: {
-          fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
-          animation: { 'fade-in': 'fadeIn 0.6s ease-out' },
-          keyframes: { fadeIn: { '0%': { opacity: '0', transform: 'translateY(12px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } } }
+          animation: {
+            'fade-in': 'fadeIn 0.5s ease-out forwards',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0', transform: 'translateY(10px)' },
+              '100%': { opacity: '1', transform: 'translateY(0)' }
+            }
+          }
         }
       }
     }
+  </script>
+
+  <!-- Lucide Icons (latest) -->
+  <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
+
+  <!-- Mermaid.js (v10 + responsive) -->
+  <script type="module">
+    import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.esm.min.mjs';
+    
+    mermaid.initialize({
+      startOnLoad: false,
+      theme: 'base',
+      themeVariables: {
+        primaryColor: '#6366f1',
+        primaryBorderColor: '#4f46e5',
+        lineColor: '#818cf8',
+        secondaryColor: '#c084fc',
+        tertiaryColor: '#e0e7ff'
+      },
+      flowchart: { 
+        useMaxWidth: true, 
+        htmlLabels: true, 
+        curve: 'basis' 
+      },
+      securityLevel: 'loose'
+    });
+
+    // Re-render Mermaid diagrams when section becomes visible
+    const renderMermaid = () => {
+      const visibleSection = document.querySelector('.content-section:not(.hidden)');
+      if (visibleSection?.querySelector('.mermaid')) {
+        mermaid.run({ nodes: visibleSection.querySelectorAll('.mermaid') });
+      }
+    };
+
+    // Run after template loads or tab switches
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.menu-item').forEach(link => {
+        link.addEventListener('click', () => setTimeout(renderMermaid, 150));
+      });
+      // Initial render if explorer is visible on load
+      if (document.getElementById('explorer') && !document.getElementById('explorer').classList.contains('hidden')) {
+        setTimeout(renderMermaid, 300);
+      }
+    });
   </script>
   <script>
 // Auto-load static external sections (Models, Registry, etc.)
