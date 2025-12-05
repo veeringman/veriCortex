@@ -24,6 +24,63 @@
     }
   </script>
   <script>
+// Auto-load static external sections (Models, Registry, etc.)
+const STATIC_SECTIONS = {
+  models: 'templates/models.html',
+  registry: 'templates/registry.html',
+  // add more later if you want
+};
+
+document.querySelectorAll('.menu-item').forEach(link => {
+  link.addEventListener('click', async function(e) {
+    e.preventDefault();
+    
+    const targetId = this.getAttribute('href').substring(1);
+    
+    // Hide all sections
+    document.querySelectorAll('.content-section').forEach(s => s.classList.add('hidden'));
+    document.querySelectorAll('.menu-item').forEach(i => {
+      i.classList.remove('bg-white/10', 'text-white', 'font-medium');
+      i.classList.add('text-indigo-100');
+    });
+    
+    // Highlight active menu item
+    this.classList.add('bg-white/10', 'text-white', 'font-medium');
+    this.classList.remove('text-indigo-100');
+    
+    // If it's a static external template → load it
+    if (STATIC_SECTIONS[targetId]) {
+      const container = document.getElementById(targetId + 'Content');
+      if (container && !container.innerHTML.trim()) {
+        try {
+          const resp = await fetch(STATIC_SECTIONS[targetId]);
+          if (resp.ok) {
+            container.innerHTML = await resp.text();
+            lucide.createIcons(); // re-init icons
+          }
+        } catch (err) {
+          container.innerHTML = `<p class="text-red-600 p-8">Failed to load section.</p>`;
+        }
+      }
+    }
+    
+    // Show the target section
+    const targetSection = document.getElementById(targetId);
+    if (targetSection) {
+      targetSection.classList.remove('hidden');
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+    
+    // Close mobile menu
+    document.getElementById('sidebar')?.classList.add('-translate-x-full');
+    document.getElementById('sidebar-overlay')?.classList.add('hidden');
+  });
+});
+
+// Load Overview on start
+document.querySelector('.menu-item')?.click();
+</script>
+  <script>
   // Auto-load static templates on first visit
   const staticTemplates = [
     { id: 'models', url: 'templates/models.html' },
@@ -91,11 +148,6 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     };
   </script>
-
-  <style>
-    .mermaid svg { width: 100% !important; height: auto !important; }
-    @media (max-width: 768px) { .mermaid { overflow-x: auto; } }
-  </style>
 </head>
 
 <body class="bg-gray-50 text-gray-900 min-h-screen flex flex-col lg:flex-row font-sans">
