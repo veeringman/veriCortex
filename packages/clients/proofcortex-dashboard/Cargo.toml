@@ -1,15 +1,17 @@
-[package]
-name = "proofcortex-dashboard"
-version = "0.1.0"
-edition = "2021"
+[workspace]
+resolver = "2"
+members = [
+    "packages/ui",
+    "packages/web",
+    "packages/desktop",
+    "packages/mobile",
+    "packages/api",
+]
 
-[dependencies]
-dioxus = { version = "0.4", features = ["web"] }
-dioxus-web = "0.4"
-serde = { version = "1.0", features = ["derive"] }
-serde_json = "1.0"
-reqwest = { version = "0.11", features = ["json", "wasm"] }
-wasm-bindgen = "0.2"
-js-sys = "0.3"
-web-sys = { version = "0.3", features = ["Window", "Request", "Response"] }
-anyhow = "1.0"
+[workspace.dependencies]
+dioxus = { version = "0.7.2" }
+
+# workspace
+web = { path = "packages/web"}
+ui = { path = "packages/ui" }
+api = { path = "packages/api" }

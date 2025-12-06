@@ -1,0 +1,11 @@
+[package]
+name = "proofcortex-dashboard"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+dioxus = { version = "0.7.2", features = ["router", "web"] }
+dioxus-heroicons = "0.4.1"
+dioxus-free-icons = { version = "0.10.0", features = ["lucide"] }
+lucide-dioxus = { version = "2.46.0", features = ["all-icons"] }
+#dioxus-web = "0.7.2"
