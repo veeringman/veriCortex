@@ -119,6 +119,7 @@
           .replace(/{{TRUST_SCORE}}/g, proof.trust);
 
         modal.classList.remove('hidden');
+		modal.classList.add('template-page');
         lucide.createIcons();
       } catch (err) {
         console.error('Failed to load proof template:', err);
@@ -139,7 +140,7 @@
         if (!resp.ok) throw new Error(`Failed to load ${url}`);
         container.innerHTML = await resp.text();
       }
-
+	  container.classList.add('template-page');
       container.dataset.returnTo = returnTo;
       container.classList.remove('hidden');
       lucide.createIcons();
@@ -185,6 +186,18 @@
       white-space: pre-wrap;
       word-break: break-word;
     }
+	/* Make modal/template pages stick to the very top */
+	.content-section.template-page {
+	  @apply pt-0 !important;
+	  margin-top: -2.5rem;     /* pulls it up to cancel the main padding */
+	  padding-top: 2rem !important;   /* your own comfortable top spacing */
+	}
+	
+	/* Optional: full bleed background for modals */
+	.content-section.template-page > div {
+	  min-height: 100vh;
+	  background: linear-gradient(to bottom, #f9fafb, #eef2ff);
+	}
   </style>
 </head>
 <body class="bg-gray-50 text-gray-900 min-h-screen flex flex-col lg:flex-row">
