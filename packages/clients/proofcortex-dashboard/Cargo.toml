@@ -1,5 +1,4 @@
 [workspace]
-resolver = "2"
 members = [
     "packages/ui",
     "packages/web",
@@ -7,7 +6,7 @@ members = [
     "packages/mobile",
     "packages/api",
 ]
-
+resolver = "2"
 [workspace.dependencies]
 dioxus = { version = "0.7.2" }
 

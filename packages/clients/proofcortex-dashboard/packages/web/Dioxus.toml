@@ -1,0 +1,42 @@
+[application]
+name = "ProofCortex"
+default_platform = "web"
+
+[web.resource.dev]
+# Favicon
+favicon = "public/favicon.ico"
+
+# Preconnect (optional, but nice)
+preconnect = [
+  "https://cdn.jsdelivr.net",
+  "https://unpkg.com"
+]
+
+# Tailwind via CDN + custom config (recommended for 2025)
+style = [
+  "https://cdn.jsdelivr.net/npm/tailwindcss@3.4.0/dist/tailwind.min.css",
+]
+script = [
+  "https://cdn.tailwindcss.com",
+]
+
+# Inline Tailwind config (same as your old one)
+[web.resource.tailwind]
+config = '''
+tailwind.config = {
+  darkMode: "class",
+  theme: {
+    extend: {
+      animation: {
+        "fade-in": "fadeIn 0.5s ease-out forwards",
+      },
+      keyframes: {
+        fadeIn: {
+          "0%": { opacity: "0", transform: "translateY(10px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" }
+        }
+      }
+    }
+  }
+}
+'''
