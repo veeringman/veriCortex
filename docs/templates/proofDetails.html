@@ -26,14 +26,14 @@
           Verification Status
         </h4>
         <div class="flex items-center gap-6">
-          <div class="relative">
-            <div class="w-28 h-28 {{STATUS_COLOR}}-200 rounded-full flex-center shadow-2xl">
-              <i data-lucide="check-circle" class="w-16 h-16 {{STATUS_COLOR}}-600" aria-hidden="true"></i>
+          <div class="relative inline-block">
+            <div class="absolute inset-0 w-28 h-28 {{STATUS_COLOR}}-400 rounded-full blur-3xl opacity-50 animate-ping"></div>
+            <div class="relative w-28 h-28 {{STATUS_COLOR}}-200/80 backdrop-blur-sm rounded-full flex items-center justify-center shadow-2xl ring-8 ring-white/30">
+              <i data-lucide="check-circle" class="w-16 h-16 {{STATUS_COLOR}}-700 drop-shadow-2xl"></i>
             </div>
-            <div class="absolute inset-0 w-28 h-28 {{STATUS_COLOR}}-400 rounded-full blur-2xl opacity-40 animate-pulse"></div>
           </div>
           <div>
-            <p class="text-4xl font-black {{STATUS_COLOR}}-700">{{STATUS}}</p>
+            <p class="text-2xl font-black {{STATUS_COLOR}}-700">{{STATUS}}</p>
             <p class="text-lg text-gray-700 mt-2">{{STATUS_TEXT}}</p>
           </div>
         </div>
