@@ -232,6 +232,9 @@ fn AppSettings() -> Element {
 #![allow(non_snake_case)]
 
 mod app;
+mod routes;
+mod components;
+
 use app::App;
 
 fn main() {

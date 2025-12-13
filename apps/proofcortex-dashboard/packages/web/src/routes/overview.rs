@@ -1,4 +1,3 @@
-// src/routes/overview.rs
 use dioxus::prelude::*;
 use dioxus_free_icons::Icon;
 use dioxus_free_icons::icons::ld_icons::{LdLayoutDashboard, LdShieldCheck, LdTrendingUp};

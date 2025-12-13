@@ -1,4 +1,3 @@
-// src/routes.rs
 use dioxus::prelude::*;
 use dioxus_router::Routable;
 use crate::components::layout::Layout;
