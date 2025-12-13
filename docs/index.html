@@ -17,6 +17,37 @@
 
   <!-- Tailwind CSS via CDN (with recommended config) -->
   <script src="https://cdn.tailwindcss.com"></script>
+   <!-- Responsive Mermaid Styling -->
+  <style>
+    .mermaid svg {
+      width: 100% !important;
+      height: auto !important;
+      max-width: 100%;
+    }
+    @media (max-width: 768px) {
+      .mermaid {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+      }
+    }
+    pre > code {
+      white-space: pre-wrap;
+      word-break: break-word;
+    }
+	/* Make modal/template pages stick to the very top */
+	.content-section.template-page {
+	  @apply pt-0 !important;
+	  margin-top: -2.5rem;     /* pulls it up to cancel the main padding */
+	  padding-top: 2rem !important;   /* your own comfortable top spacing */
+	}
+	
+	/* Optional: full bleed background for modals */
+	.content-section.template-page > div {
+	  min-height: 100vh;
+	  background: linear-gradient(to bottom, #f9fafb, #eef2ff);
+	}
+  </style>
+	
   <script>
     tailwind.config = {
       darkMode: 'class',
@@ -168,37 +199,14 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     };
   </script>
+  <script>
+	// Auto-create Lucide icons whenever new content is added
+	const lucideObserver = new MutationObserver(() => {
+	  lucide.createIcons();
+	});
+	lucideObserver.observe(document.body, { childList: true, subtree: true });
+  </script>
 
-  <!-- Responsive Mermaid Styling -->
-  <style>
-    .mermaid svg {
-      width: 100% !important;
-      height: auto !important;
-      max-width: 100%;
-    }
-    @media (max-width: 768px) {
-      .mermaid {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-      }
-    }
-    pre > code {
-      white-space: pre-wrap;
-      word-break: break-word;
-    }
-	/* Make modal/template pages stick to the very top */
-	.content-section.template-page {
-	  @apply pt-0 !important;
-	  margin-top: -2.5rem;     /* pulls it up to cancel the main padding */
-	  padding-top: 2rem !important;   /* your own comfortable top spacing */
-	}
-	
-	/* Optional: full bleed background for modals */
-	.content-section.template-page > div {
-	  min-height: 100vh;
-	  background: linear-gradient(to bottom, #f9fafb, #eef2ff);
-	}
-  </style>
 </head>
 <body class="bg-gray-50 text-gray-900 min-h-screen flex flex-col lg:flex-row">
 
